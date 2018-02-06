@@ -1,5 +1,5 @@
 # MeteorProject
-# Tracking and Development of Student Web App
+Tracking and Development of Student Web App
 
-# Contact:
-# rurikid@tutanota.com
+Contact:
+rurikid@tutanota.com
