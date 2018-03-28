@@ -1,0 +1,19 @@
+<!-- Navigation Bar at top of Screen 
+  Logic will be used to determine what a user sees
+  Can be implemented after implementation of user login -->
+<template name="nav">
+  <h2>Begin Nav</h2>
+  <button class='navButton' type='button' name='profile'>Profile</button>
+  <button class='navButton' type='button' name='myProjects'>My Projects</button>
+  <button class='navButton' type='button' name='myTimesheet'>My Timesheet</button>
+  <button class='navButton' type='button' name='myTeam'>My Team</button>
+  <button class='navButton' type='button' name='myTeamTimesheet'>My Team's Timesheets</button>
+  <button class='navButton' type='button' name='reports'>Reports</button>
+  <button class='navButton' type='button' name='employees'>Employees</button>
+  {{#if currentUser}}
+    <a href='#' class='logout'>Logout</a>
+    <button class='navButton' type='button' name='logout'>Logout</button>
+  {{else}}
+    <button class='navButton' type='button' name='login'>Login</button>
+  {{/if}}
+</template>
