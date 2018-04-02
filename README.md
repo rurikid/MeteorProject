@@ -32,7 +32,8 @@ Tracking and Development of Student Web App
 
 **02Apr2018** - mwight
 ```
-> NOTE: edited the installation instructions - I needed to include addition of flow-router and blaze-layout for full functionality
+> NOTE: edited the installation instructions 
+         - I needed to include addition of flow-router and blaze-layout for full functionality
 > Added Bootstrap via CDN(Content Delivery Network): Link coded to 'client/head.html'
 > Reorganized file structure: Added Myrline's new html pages w/ subfolders to 'imports/ui/pages' 
 > Cleaned up buttons code for nav.html
