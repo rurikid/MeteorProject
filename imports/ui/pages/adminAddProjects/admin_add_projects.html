@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeteorWeb</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body style="height:990px;">
+    <div class="card" style="height:795px;">
+        <div class="card-header" style="background-image:url(&quot;assets/img/background.png&quot;);">
+            <h1 class="text-left" style="color:rgba(255,255,255,0.9);height:116px;padding-top:25px;font-family:'Advent Pro', sans-serif;font-size:53px;"><strong>Time Management System</strong></h1>
+            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link" href="profile.html" id="item-1-1-tab" data-toggle="tab" role="tab" aria-controls="item-1-1" aria-selected="true" style="background-color:rgba(52,58,64,0.54);color:#ffffff;">Profile</a></li>
+                <li class="nav-item"><a class="nav-link active" href="index.html" style="color:#ffffff;background-color:#d3a944;">Nav Item</a></li>
+                <li class="nav-item"><a class="nav-link" href="my_projects.html">Nav Item</a></li>
+            </ul>
+        </div>
+        <div class="card-body" style="height:1500px;">
+            <div style="background-color:rgba(52,58,64,0.14);width:949px;">
+                <div class="row" style="margin-top:29px;">
+                    <div class="col">
+                        <h4 class="text-center" style="background-color:rgba(211,169,68,0.7);font-family:'Advent Pro', sans-serif;font-size:33px;padding-left:321px;"><strong>Add New Project&nbsp;</strong><button class="btn btn-primary btn-lg" type="button" style="margin-left:160px;width:119px;background-color:#417505;font-size:22px;">Add</button></h4>
+                    </div>
+                </div>
+                <div class="row" style="height:280px;">
+                    <div class="col" style="width:514px;"><label class="col-form-label" style="font-size:18px;margin-right:10px;margin-left:213px;padding-left:10px;"><strong>Title</strong></label><input type="text" style="width:485px;margin-left:93px;height:40px;"><label class="col-form-label"
+                            style="font-size:18px;margin-right:10px;margin-left:211px;padding-left:10px;margin-top:10px;"><strong>Customer</strong></label><input type="text" style="width:485px;margin-left:48px;height:40px;"><label class="col-form-label" style="font-size:18px;margin-right:10px;margin-left:211px;padding-left:10px;margin-top:10px;"><strong>Supervisor</strong></label>
+                        <input
+                            type="text" style="width:485px;margin-left:36px;height:40px;"><label class="col-form-label" style="font-size:18px;margin-right:10px;margin-left:213px;padding-left:10px;margin-top:10px;"><strong>Budget</strong></label><input type="text" style="width:485px;margin-left:67px;height:40px;">
+                            <label
+                                class="col-form-label" style="font-size:18px;margin-right:10px;margin-left:211px;padding-left:10px;margin-top:10px;"><strong>Employees</strong></label><input type="text" style="width:485px;margin-left:35px;height:40px;">
+                                <div>
+                                    <div class="row" style="margin-top:49px;">
+                                        <div class="col" style="background-color:rgba(52,58,64,0.14);">
+                                            <div class="row" style="background-color:#d3a944;">
+                                                <div class="col" style="height:16px;">
+                                                    <h1></h1>
+                                                </div>
+                                            </div>
+                                            <h1>Project List<a class="btn btn-primary" role="button" href="#" style="margin-left:515px;width:110px;font-size:22px;margin-right:6px;background-color:rgba(52,58,64,0.54);">Edit</a><button class="btn btn-danger"
+                                                    type="button" style="margin-left:0px;width:110px;font-size:22px;">Delete</button></h1>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:53px;">Select</th>
+                                                    <th style="margin:0px;width:62px;">#</th>
+                                                    <th>Title</th>
+                                                    <th>Budget</th>
+                                                    <th>Customer</th>
+                                                    <th style="padding-right:-16px;">Supervisor</th>
+                                                    <th style="padding-right:-16px;">Employee Names</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="height:90px;margin-top:0px;">
+                                                    <td><input type="checkbox" style="margin-left:15px;"></td>
+                                                    <td>&nbsp;1</td>
+                                                    <td>Airplane Fly</td>
+                                                    <td>$100,000</td>
+                                                    <td>Lab Inc.</td>
+                                                    <td>John Smith</td>
+                                                    <td>John Smith, Adam Sandler, Joe Doe</td>
+                                                </tr>
+                                                <tr style="height:90px;">
+                                                    <td><input type="checkbox" style="margin-left:15px;"></td>
+                                                    <td>2</td>
+                                                    <td>Ground Zoro</td>
+                                                    <td>$130,849</td>
+                                                    <td>Cooporate Inc.</td>
+                                                    <td>Joe Doe</td>
+                                                    <td>John Smith, Adam Sandler, Joe Doe</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div><button class="btn btn-primary btn-lg" type="button" style="width:175px;background-color:#575d6b;margin-top:15px;">Cancel</button><button class="btn btn-primary btn-lg" type="submit" style="margin-left:599px;background-color:#d3a944;width:175px;">Save</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
