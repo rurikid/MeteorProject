@@ -11,6 +11,12 @@
   float:left;
 }
 
+.navBar {
+  width: 95%;
+  padding: 10px 40px;
+  background-color: gray;
+}
+
 .splashButton {
   background-color: #4CAF50;
   border: none;
