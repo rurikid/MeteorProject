@@ -1,0 +1,54 @@
+<!-- This will eventually be a popup accessible by admins from the 'employees' template. 
+  TODO:
+    Integrate further with Database
+    Apply stylization to page
+-->
+<template name="newEmployee">
+  <center>
+    <h2>Create New Employee</h2>
+    <form id="employeeData">
+      <p>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" placeholder="First Name">
+      </p>
+      <p>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" placeholder="Last Name">
+      </p>
+      <p>
+        <label for="position">Position:</label>
+        <select id="position">
+          <option value="administrator">Administrator</option>
+          <option value="supervisor">Supervisor</option>
+          <option value="employee">Employee</option>
+        </select>
+      </p>
+      <p>
+        <label for="username">User Name:</label>
+        <input type="text" id="username" placeholder="username">
+      </p>
+      <p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Password">
+      </p>
+      <p>
+        <label for="confPassword">Confirm Password:</label>
+        <input type="password" id="confPassword" placeholder="Confirm Password">
+      </p>
+      <p>
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" min="0" placeholder="Salary">
+      </p>
+      <p>
+        <label for="payData">Pay Data:</label>
+        <textarea id="payData"></textarea>
+      </p>
+      <p>
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Email">
+      </p>
+      <input type="reset" value="Clear">
+      <input id="createEmployee" type="submit" value="Create User">
+    </form>
+  </center>
+</template>

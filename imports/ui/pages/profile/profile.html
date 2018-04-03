@@ -1,108 +1,97 @@
-<!DOCTYPE html>
-<html>
+<!-- This is accessible by all and displays one's own profile. 
+	TODO:
+		Integrate with Database
+    Revise & Simplify Stylization
+-->
+<template name="profile">
+	{{> nav}}
+	<center>
+	  <div class="card">
+			<div class="card-body" style="height:1500px;">
+	    	<div>
+	      	<div class="row" style="height:1475px;">
+	        	<div class="col-4"><img style="background-image:url(&quot;assets/img/pexels-photo-614810.jpg&quot;);width:293px;height:240px;background-color:#d3a944;"></div>
+	          	<div class="col" style="color:#040000;background-color:#d3a944;font-size:28px;height:81px;margin:0px;">
+		            <h1 style="font-size:52px;font-family:'Advent Pro', sans-serif;"><strong>John Smith</strong></h1>
+		            <h2 style="margin:0px;padding-top:39px;padding-bottom:15px;"><strong>Personal Information</strong></h2>
+			            <div class="row">
+			            	<div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Date of Birth:</label></div>
+			              <div class="col"><label class="col-form-label" style="padding-left:55px;">July 17, 1970</label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Address:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">5136 West Street<br>Dekalb, IL&nbsp; 60234<br></label></div>
+			            <div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Email:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">email@yahoo.com<br></label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Sex/Gender:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">Unknown<br></label></div>
+									</div>
+			            <div class="row">
+			            	<div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Marital Status:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">Single<br></label></div>
+			            </div>
+			            <h2 style="margin:0px;padding-top:39px;padding-bottom:15px;"><strong>Work Information</strong></h2>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Employee Number:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">938478392727289<br></label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Position:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">Supervisor<br></label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Department:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">Traveling<br></label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Report To:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">Jane Doelle<br></label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Status:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">Active<br></label></div>
+			            </div>
+			            <h2 style="margin:0px;padding-top:39px;padding-bottom:15px;"><strong>Pay Information</strong></h2>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Salary (Yearly):</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">$ 123,000</label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Pay Group:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">Bi-Weekly<br></label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Pay Type:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">Payroll Bank<br></label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Payment Method:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">Direct Deposit<br></label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Bank:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">Chase<br></label></div>
+			            </div>
+			            <div class="row">
+			              <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Routing Number:</label></div>
+			            	<div class="col"><label class="col-form-label" style="padding-left:55px;">38347749387447<br></label></div>
+			          	</div>
+			        	</div>
+			      	</div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</center>
+</template>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MeteorWeb</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro">
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-
-<body style="height:1800px;">
-    <div></div>
-    <div class="card">
-        <div class="card-header" style="background-image:url(&quot;assets/img/background.png&quot;);">
-            <h1 class="text-left" style="color:rgba(255,255,255,0.9);height:116px;padding-top:25px;font-family:'Advent Pro', sans-serif;font-size:53px;"><strong>Time Management System</strong></h1>
-            <ul class="nav nav-tabs card-header-tabs" role="tablist">
-                <li class="nav-item"><a class="nav-link active" href="profile.html" id="item-1-1-tab" data-toggle="tab" role="tab" aria-controls="item-1-1" aria-selected="true" style="background-color:#d3a944;color:#ffffff;">Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.html" style="color:#ffffff;">Nav Item</a></li>
-                <li class="nav-item"><a class="nav-link" href="my_projects.html">Nav Item</a></li>
-            </ul>
-        </div>
-        <div class="card-body" style="height:1500px;">
-            <div>
-                <div class="row" style="height:1475px;">
-                    <div class="col-4"><img style="background-image:url(&quot;assets/img/pexels-photo-614810.jpg&quot;);width:293px;height:240px;background-color:#d3a944;"></div>
-                    <div class="col" style="color:#040000;background-color:#d3a944;font-size:28px;height:81px;margin:0px;">
-                        <h1 style="font-size:52px;font-family:'Advent Pro', sans-serif;"><strong>John Smith</strong></h1>
-                        <h2 style="margin:0px;padding-top:39px;padding-bottom:15px;"><strong>Personal Information</strong></h2>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Date of Birth:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">July 17, 1970</label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Address:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">5136 West Street<br>Dekalb, IL&nbsp; 60234<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Email:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">email@yahoo.com<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Sex/Gender:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">Unknown<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Marital Status:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">Single<br></label></div>
-                        </div>
-                        <h2 style="margin:0px;padding-top:39px;padding-bottom:15px;"><strong>Work Information</strong></h2>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Employee Number:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">938478392727289<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Position:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">Supervisor<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Department:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">Traveling<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Report To:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">Jane Doelle<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Status:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">Active<br></label></div>
-                        </div>
-                        <h2 style="margin:0px;padding-top:39px;padding-bottom:15px;"><strong>Pay Information</strong></h2>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Salary (Yearly):</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">$ 123,000</label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Pay Group:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">Bi-Weekly<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Pay Type:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">Payroll Bank<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Payment Method:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">Direct Deposit<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Bank:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">Chase<br></label></div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><label class="col-form-label" style="margin:2px;padding-top:0px;">Routing Number:</label></div>
-                            <div class="col"><label class="col-form-label" style="padding-left:55px;">38347749387447<br></label></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-</body>
-
-</html>
+<!-- 	<ul>
+		{{#each user in Users}}
+			<li>{{emails.email}}</li>
+		{{/each}}
+	</ul> -->

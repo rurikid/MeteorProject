@@ -6,28 +6,40 @@ Tracking and Development of Student Web App
 > Install Meteor & NPM
 > meteor create MeteorProject --full
 > cd MeteorProject
-> meteor add kadira:Flow-Router
-> meteor add kadira:Blaze-Layout
-> meteor add accounts-password
 > move GitHub files to MeteorProject directory
 > meteor
+```
+
+**Notes**
+```
+> To access unimplemented components
+> localhost:3000/templateName
 ```
 
 **TODO**
 ```
 > Implement Employees Collection
 > Implement Timesheets Collection
-> Further work on createUsers
-> Further work on login
-> Further work on routing and navigation
-> Basic Stylization
+> Further work on createEmployee
+> Improve Stylization
+> Implement most .js functionality
+```
 
-> updated 4/2/2018
-> Newly added html pages needs further css and html editing customization
-> Newly added html pages require functioning .js pages
-> Newly added html pages require routing functionality
-> nav.js: update inoperable Router calls containing placeholders '#' 
-         - (waiting on updated pages directory for newly added html pages)
+**02Apr2018** - rurikid
+```
+> integrated style from msylveus into proper site file structure
+> began consolidating myslveus's style into main.css
+> created routes for all new pages and components
+> implemented nav component for all pages
+> created components for adding and editing employees/projects/members for future implementation
+> began .js files for new pages for future use
+> removed deprecated files
+> login and logout functional
+> newEmployee functional; needs further work
+> added comments on each page detailing needed work
+> added api/timesheets/Timesheets.js to hold Timesheets collection
+> updated .meteor/packages to automatically include required packages
+> updated Installation Guide to remove packages included in .meteor/packages
 ```
 
 **02Apr2018** - mwight
@@ -40,6 +52,11 @@ Tracking and Development of Student Web App
 > Added routing events functions to nav.js 
 > Added div class for navbar
 > Added css to correct page format of navbar and form
+```
+
+**01Apr2018** - msylveus
+```
+> Uploaded general application style
 ```
 
 **27Mar2018** - rurikid

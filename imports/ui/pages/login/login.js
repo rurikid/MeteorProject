@@ -4,11 +4,29 @@ import { Users } from '../../../api/users/Users.js';
 
 import './login.html';
 
+// I don't think this needs any work
+
 Template.login.events({
-  'submit form': function(event){
-    event.preventDefault();
-    var username = $('[name=username]').val();
-    var password = $('[name=password]').val();
-    Meteor.loginWithPassword(email, password);
-  }
+  'click #login': function(e, t) {
+     e.preventDefault();
+     // Getting values from fields on page
+     var email = $('#email').val(),
+         password = $('#password').val();
+     // Calling the loginWithPassword function on the user
+     Meteor.loginWithPassword(email, password, function(error) {
+         if (error) {
+          // Returning a sweetAlert
+          return swal({
+                title: "Email or password incorrect",
+                text: "Please try again",
+                timer: 1700,
+                showConfirmButton: false,
+                type: "error"
+            });
+         } else {
+           FlowRouter.go('/');
+         }
+     });
+     return false;
+   }
 });
