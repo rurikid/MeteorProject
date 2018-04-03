@@ -7,50 +7,121 @@ import '../../ui/pages/home/home.js';
 import '../../ui/pages/not-found/not-found.js';
 
 // Set up all routes in the app
+// New routes follow the same pattern
 FlowRouter.route('/', {
-  name: 'App.home',
+  name: 'home',
   action() {
-    BlazeLayout.render('App_body', { main: 'App_home' });
+    BlazeLayout.render('mainLayout', { main: 'home' });
   },
 });
 
 FlowRouter.route('/nav', {
   name: 'nav',
   action() {
-    BlazeLayout.render('App_body', { main: 'nav' });
+    BlazeLayout.render('mainLayout', { main: 'nav' });
   },
 });
 
-FlowRouter.route('/createUser', {
-  name: 'createUser',
+FlowRouter.route('/employees', {
+  name: 'employees',
   action() {
-    BlazeLayout.render('App_body', { main: 'createUser' });
+    BlazeLayout.render('mainLayout', { main: 'employees' });
+  },
+});
+
+FlowRouter.route('/newEmployee', {
+  name: 'newEmployee',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'newEmployee' });
   },
 });
 
 FlowRouter.route('/login', {
   name: 'login',
   action() {
-    BlazeLayout.render('App_body', { main: 'login' });
+    BlazeLayout.render('mainLayout', { main: 'login' });
   },
 });
 
 FlowRouter.route('/timesheet', {
   name: 'timesheet',
   action() {
-    BlazeLayout.render('App_body', { main: 'timesheet' });
+    BlazeLayout.render('mainLayout', { main: 'timesheet' });
+  },
+});
+
+FlowRouter.route('/editTimesheet', {
+  name: 'editTimesheet',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'editTimesheet' });
   },
 });
 
 FlowRouter.route('/teamTimesheet', {
   name: 'teamTimesheet',
   action() {
-    BlazeLayout.render('App_body', { main: 'teamTimesheet' });
+    BlazeLayout.render('mainLayout', { main: 'teamTimesheet' });
+  },
+});
+
+FlowRouter.route('/profile', {
+  name: 'profile',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'profile' });
+  },
+});
+
+FlowRouter.route('/projects', {
+  name: 'projects',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'projects' });
+  },
+});
+
+FlowRouter.route('/newMember', {
+  name: 'newMember',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'newMember' });
+  },
+});
+
+FlowRouter.route('/newProject', {
+  name: 'newProject',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'newProject' });
+  },
+});
+
+FlowRouter.route('/editProject', {
+  name: 'editProject',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'editProject' });
+  },
+});
+
+FlowRouter.route('/team', {
+  name: 'team',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'team' });
+  },
+});
+
+FlowRouter.route('/reports', {
+  name: 'reports',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'reports' });
+  },
+});
+
+FlowRouter.route('/team', {
+  name: 'team',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'team' });
   },
 });
 
 FlowRouter.notFound = {
   action() {
-    BlazeLayout.render('App_body', { main: 'App_notFound' });
+    BlazeLayout.render('mainLayout', { main: 'App_notFound' });
   },
 };

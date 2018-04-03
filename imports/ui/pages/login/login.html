@@ -1,15 +1,19 @@
-<!-- Login Page -->
+<!-- This is the user login page 
+  TODO:
+    Implement Stylization
+-->
 <template name="login">
-  <h2>Begin Login</h2>
-  <form>
-    <p>
-      <label for="username">User Name:</label>
-      <input type="text" name="username" placeholder="User Name">
-    </p>
-    <p>
-      <label for="password">Password:</label>
-      <input type="password" name="password" placeholder="Password">
-    </p>
-    <input type="submit" value="Login">
-  </form>
+  <center>
+    <form>
+      <p>
+        <label for="email">Email:</label>
+        <input type="text" id="email" placeholder="Email">
+      </p>
+      <p>
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Password">
+      </p>
+      <input id="login" type="submit" value="Login">
+    </form>
+  </center>
 </template>

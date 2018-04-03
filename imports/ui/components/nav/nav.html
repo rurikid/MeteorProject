@@ -1,19 +1,25 @@
-<!-- Navigation Bar at top of Screen 
-  Logic will be used to determine what a user sees
-  Can be implemented after implementation of user login -->
-<template name="nav">
-  <h2>Begin Nav</h2>
-  <button class='navButton' type='button' name='profile'>Profile</button>
-  <button class='navButton' type='button' name='myProjects'>My Projects</button>
-  <button class='navButton' type='button' name='myTimesheet'>My Timesheet</button>
-  <button class='navButton' type='button' name='myTeam'>My Team</button>
-  <button class='navButton' type='button' name='myTeamTimesheet'>My Team's Timesheets</button>
-  <button class='navButton' type='button' name='reports'>Reports</button>
-  <button class='navButton' type='button' name='employees'>Employees</button>
-  {{#if currentUser}}
-    <a href='#' class='logout'>Logout</a>
-    <button class='navButton' type='button' name='logout'>Logout</button>
-  {{else}}
-    <button class='navButton' type='button' name='login'>Login</button>
-  {{/if}}
+<!-- Navigation Bar at Top of Screen 
+  TODO:
+    Implement User Role Display Logic (after database integration)
+    Revise and Simplify Stylization
+-->
+ <template name='nav'>
+  <div class='card-header' style='background-image:url(&quot;assets/img/background.png&quot;);'>
+    <h1 class='text-left' style='color:rgba(0,0,0,0.9);height:116px;padding-top:25px;font-family:Advent Pro, sans-serif;font-size:53px;'><strong>Time Management System</strong></h1>
+    <ul class='nav nav-tabs card-header-tabs' role='tablist'>
+      <li><a class='profile' href='#' style='color:#ffffff;background-color:rgba(52,58,64,0.54);'>Profile</a></li>
+      <li><a class='projects' href='#' style='color:#ffffff;background-color:#d3a944;'>My Projects</a></li>
+      <li><a class='timesheet' href='#' style='color:#ffffff;background-color:#d3a944;'>My Timesheets</a></li>
+      <li><a class='team' href='#' style='color:#ffffff;background-color:#d3a944;'>My Team</a></li>
+      <li><a class='teamTimesheet' href='#' style='color:#ffffff;background-color:#d3a944;'>Team Timesheets</a></li>
+      <li><a class='employees' href='#' style='color:#ffffff;background-color:#d3a944;'>Employees</a></li>
+      <li><a class='projects' href='#' style='color:#ffffff;background-color:#d3a944;'>Projects</a></li>
+      <li><a class='report' href='#' style='color:#ffffff;background-color:#d3a944;'>Reports</a></li>
+      {{#if currentUser}}
+        <li><a class='logout' href='#' style='color:#ffffff;background-color:#d3a944;'>Logout</a></li>
+      {{else}}
+        <li><a class='login' href='#' style='color:#ffffff;background-color:#d3a944;'>Login</a></li>
+      {{/if}}
+    </ul>
+  </div>
 </template>
