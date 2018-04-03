@@ -6,9 +6,6 @@ Tracking and Development of Student Web App
 > Install Meteor & NPM
 > meteor create MeteorProject --full
 > cd MeteorProject
-> meteor add kadira:Flow-Router
-> meteor add kadira:Blaze-Layout
-> meteor add accounts-password
 > move GitHub files to MeteorProject directory
 > meteor
 ```
@@ -41,6 +38,8 @@ Tracking and Development of Student Web App
 > newEmployee functional; needs further work
 > added comments on each page detailing needed work
 > added api/timesheets/Timesheets.js to hold Timesheets collection
+> updated .meteor/packages to automatically include required packages
+> updated Installation Guide to remove packages included in .meteor/packages
 ```
 
 **02Apr2018** - mwight
