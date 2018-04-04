@@ -10,6 +10,24 @@ Tracking and Development of Student Web App
 > meteor
 ```
 
+**Important Reading**
+
+[Install Mongo](https://docs.mongodb.com/manual/administration/install-community/)
+
+[MongoDB Tutorial](https://www.tutorialspoint.com/mongodb/index.htm)
+
+[Application Structure](https://guide.meteor.com/structure.html)
+
+[Official Meteor Tutorial](https://www.meteor.com/tutorials/blaze/creating-an-app)
+
+[Getting Started with Meteor](https://themeteorchef.com/tutorials/getting-started-with-meteor)
+
+[Your First Meteor Application](http://meteortips.com/first-meteor-tutorial/)
+
+[Your Second Meteor Application](http://meteortips.com/second-meteor-tutorial/)
+
+[SweetAlert Documentation](https://sweetalert.js.org/docs/)
+
 **Notes**
 ```
 > To access unimplemented components
@@ -25,8 +43,13 @@ Tracking and Development of Student Web App
 > Implement most .js functionality
 ```
 
-**02Apr2018** - rurikid
+**03Apr2018** - rurikid
 ```
+> included list of useful reference material
+```
+
+```
+**02Apr2018** - rurikid
 > integrated style from msylveus into proper site file structure
 > began consolidating myslveus's style into main.css
 > created routes for all new pages and components
