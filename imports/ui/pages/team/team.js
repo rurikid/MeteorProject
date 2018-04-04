@@ -1,5 +1,5 @@
-import { Users } from '../../../api/users/Users.js';
-import { Projects } from '../../../api/projects/Projects.js'
+import { Users } from '../../../api/users/users.js';
+import { Projects } from '../../../api/projects/projects.js'
 
 import './team.html'
 

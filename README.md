@@ -16,11 +16,11 @@ Tracking and Development of Student Web App
 
 [MongoDB Tutorial](https://www.tutorialspoint.com/mongodb/index.htm)
 
+[Blaze Tutorial](http://blazejs.org/guide/introduction.html)
+
 [Application Structure](https://guide.meteor.com/structure.html)
 
 [Official Meteor Tutorial](https://www.meteor.com/tutorials/blaze/creating-an-app)
-
-[Blaze Tutorial](http://blazejs.org/guide/introduction.html)
 
 [Getting Started with Meteor](https://themeteorchef.com/tutorials/getting-started-with-meteor)
 
@@ -40,9 +40,16 @@ Tracking and Development of Student Web App
 ```
 > Implement Employees Collection
 > Implement Timesheets Collection
-> Further work on createEmployee
 > Improve Stylization
 > Implement most .js functionality
+```
+
+**04Apr2018** - rurikid
+```
+> completed newEmployee integration w/ database 
+> completed newProject integration w/ database
+> introduced basic publications and tests
+> set up basic employee and project query
 ```
 
 **03Apr2018** - rurikid
@@ -50,8 +57,8 @@ Tracking and Development of Student Web App
 > included list of useful reference material
 ```
 
-```
 **02Apr2018** - rurikid
+```
 > integrated style from msylveus into proper site file structure
 > began consolidating myslveus's style into main.css
 > created routes for all new pages and components

@@ -1,34 +1,33 @@
-import { Users } from '../../../api/users/Users.js';
-
+import { Users } from '/imports/api/users/users.js';
+import { Meteor } from 'meteor/meteor';
 import './newEmployee.html';
 
-// currently only inserts email and password to database
-// logs user into newly created role
+Template.newEmployee.onCreated(function () {
+  Meteor.subscribe('users.all');
+});
 
-// TODO
-//   Implement full functionality
-//   Disable auto-login
+Template.newEmployee.helpers({
+  users() {
+    return Meteor.users.find({});
+  },
+});
 
 Template.newEmployee.events({
-  'click #createEmployee': function(e, t) {
-    e.preventDefault();
-    // Retrieve the input field values
-    var email = $('#email').val(),
-        firstName = $('#firstName').val(),
-        lastName = $('#lastName').val(),
-        position = $('#position').val(),
-        salary = $('#salary').val(),
-        password = $('#password').val(),
-        payData = $('#payData').val(),
-        username = $('#username').val(),
-        confPassword = $('#confPassword').val();
+  'submit .newEmployee'(event) {
+    // Prevent default browser form submit
+    event.preventDefault();
 
-    // Trim Helper
-//    var trimInput = function(val) {
-//      return val.replace(/^\s*|\s*$/g, "");
-//    }
-//    var email = trimInput(email);
-  
+    // Get value from form element
+    const target = event.target;
+    const firstName = target.firstName;
+    const lastName = target.lastName;
+    const position = target.position;
+    const salary = target.salary;
+    const payData = target.payData;
+    const username = target.username;
+    const password = target.password;
+    const confPassword = target.confPassword;
+
     // Check password is at least 6 chars long
     var isValidPassword = function(pwd, pwd2) {
       if (pwd === pwd2) {
@@ -44,21 +43,13 @@ Template.newEmployee.events({
         });
       }
     }
-    
+
     // If validation passes, supply the appropriate fields to the
     // Accounts.createUser function.
     if (isValidPassword(password, confPassword)) {
-      Accounts.createUser({
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        position: position,
-        salary: salary,
-        password: password,
-        payData: payData,
-        username: username
-      }, function(error) {
+      Meteor.call('createUserFromAdmin', firstName.value, lastName.value, position.value, salary.value, payData.value, email.value, password.value, username.value, function(error) {
         if (error) {
+          // error alert
           return swal({
             title: error.reason,
             text: "Please try again",
@@ -68,7 +59,27 @@ Template.newEmployee.events({
             icon: "error"
           });
         } else {
-          FlowRouter.go('/');
+
+          // Clear form
+          firstName.value = '';
+          lastName.value = '';
+          position.value = '';
+          salary.value = '';
+          payData.value = '';
+          email.value = '';
+          username.value = '';
+          password.value = '';
+          confPassword.value = '';
+
+          // success alert
+          return swal({
+            title: "Success",
+            text: "New Employee Added",
+            button: {
+              text: "Close",
+            },
+            icon: "success"
+          });
         }
       });
     }

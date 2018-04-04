@@ -1,28 +1,71 @@
-import { Users } from '../../../api/users/Users.js';
-import { Projects } from '../../../api/projects/Projects.js'
+import { Projects } from '/imports/api/projects/projects.js';
+import { Users } from '/imports/api/users/users.js';
+import { Meteor } from 'meteor/meteor';
+import './newProject.html';
 
-import './newProject.html'
+Template.newProject.onCreated(function () {
+  Meteor.subscribe('projects.all');
+  Meteor.subscribe('users.all');
+});
 
-// TODO
-//   Integrate with Database
-//   Create New Project Logic
+Template.newProject.helpers({
+	// returns all projects
+	projects() {
+		return Projects.find({});
+	},
+	// returns all users
+	users() {
+		return Meteor.users.find({});
+	},
+	// evaluates for supervisors
+	isSupervisor: function(position) {
+		return ((position === 'Supervisor') || (position === 'Administrator'));
+	},
+	// finds and retrieves supervisor name
+	getSupervisor: function(supervisor) {
+		// search for supervisorID
+		var result = Meteor.users.findOne({"_id": supervisor});
 
-// // this isn't entirely functional yet
-// Template.newProject.events({
-//   'click #createProject': function(e, t) {
-//     e.preventDefault();
-//     // Retrieve the input field values
-//     var name = $('#name').val(),
-//         supervisor = $('#supervisor').val();
-//         customer = $('#customer').val();
-//         budget = $('#budget').val();
-//         employee = $('#employee').val();
+		// known as guarding (are we finding anything in the query)
+		var firstName = result && result.profile && result.profile.firstName;
+		var lastName = result && result.profile && result.profile.lastName;
 
-//   }
-// });
+		return (firstName + " " + lastName);
+	},
+});
 
-// Template.newProject.helpers({
-// 	project() {
-// 		return Projects.find();
-// 	},
-// });
+Template.newProject.events({
+	'submit .newProject'(event) {
+		// Prevent default browser form submit
+		event.preventDefault();
+
+		// Get value from form element
+		const target = event.target;
+		const name = target.name;
+		const supervisor = target.supervisor;
+		const client = target.client;
+		const budget = target.budget;
+
+		Meteor.call('projects.insert', name.value, supervisor.value, client.value, budget.value, (error) => {
+			if (error) {
+				alert(error.error);
+			} else {
+				// Clear form
+				name.value = '';
+				supervisor.value = '';
+				client.value = '';
+				budget.value = '';
+
+				// success alert
+				return swal({
+    			title: "Success",
+    			text: "New Project Added",
+    			button: {
+    				text: "Close",
+    			},
+    			icon: "success"
+    		});
+			}
+		});
+	},
+});
