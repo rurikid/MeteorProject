@@ -16,6 +16,8 @@ Tracking and Development of Student Web App
 
 [MongoDB Tutorial](https://www.tutorialspoint.com/mongodb/index.htm)
 
+[Blaze Tutorial](http://blazejs.org/guide/introduction.html)
+
 [Application Structure](https://guide.meteor.com/structure.html)
 
 [Official Meteor Tutorial](https://www.meteor.com/tutorials/blaze/creating-an-app)
