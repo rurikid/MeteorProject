@@ -1,62 +1,23 @@
-<!-- This displays all projects and is accessible by Admins only. 
+<!-- This page shows a supervisor's team. 
   TODO:
     Integrate with Database
     Revise & Simplify Stylization
 -->
 <template name="projects">
-  {{> nav}}
-  <div class="card">
-
-    <div class="card-body" style="height:1500px;">
-      <div>
-        <div class="row" style="height:144px;">
-          <div class="col">
-            <h1 style="width:878px;font-family:'Advent Pro', sans-serif;font-size:43px;"><i class="fa fa-search" style="padding-right:38px;width:73px;"></i>Search Project</h1><input type="text" style="width:463px;height:50px;"><button class="btn btn-dark" type="button" style="margin-left:32px;width:131px;height:50px;font-size:22px;">Filter</button></div>
-          </div>
-          <div class="row">
-            <div class="col" style="background-color:rgba(52,58,64,0.14);">
-              <div class="row" style="background-color:#d3a944;">
-                <div class="col" style="height:16px;">
-                  <h1></h1>
-                </div>
-              </div>
-              <h1>Project List<button class="btn btn-danger" type="button" style="margin-left:570px;width:110px;font-size:22px;">Delete</button></h1>
-            </div>
-          </div>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th style="width:77px;">Select</th>
-                <th style="margin:0px;width:60px;">#</th>
-                <th>Project Name</th>
-                <th>Supervisor</th>
-                <th style="padding-right:-16px;">Role</th>
-                <th style="width:198px;margin:0px;">Customer</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="margin-left:0px;"><input type="checkbox" style="margin-left:15px;"></td>
-                <td>&nbsp;1</td>
-                <td>Tesing Project 1</td>
-                <td>John Smith</td>
-                <td>Supervisor</td>
-                <td>Danger Inc.</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" style="margin-left:15px;"></td>
-                <td>2</td>
-                <td>Testing Project 2</td>
-                <td>Jane adam</td>
-                <td>Programmer</td>
-                <td>Travel Cooporate</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
+	<div class="container">
+		{{> nav}}
+		<div>
+			<h2>Projects</h2>
+			<table>
+				<tr>
+					<th>Name</th><th>Supervisor</th><th>Client</th><th>Budget</th>
+				</tr>
+				{{#each project in projects}}
+					<tr>
+						<td>{{project.name}}</td><td>{{getSupervisor project.supervisor}}</td><td>{{project.client}}</td><td>{{project.budget}}</td>
+					</tr>
+				{{/each}}
+			</table>
+		</div>
+	</div>
 </template>

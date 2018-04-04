@@ -1,6 +1,4 @@
-import { Template } from 'meteor/templating';
-
-import { Users } from '../../../api/users/Users.js';
+import { Users } from '../../../api/users/users.js';
 
 import './profile.html';
 
