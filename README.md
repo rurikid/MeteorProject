@@ -20,6 +20,8 @@ Tracking and Development of Student Web App
 
 [Official Meteor Tutorial](https://www.meteor.com/tutorials/blaze/creating-an-app)
 
+[Blaze Tutorial](http://blazejs.org/guide/introduction.html)
+
 [Getting Started with Meteor](https://themeteorchef.com/tutorials/getting-started-with-meteor)
 
 [Your First Meteor Application](http://meteortips.com/first-meteor-tutorial/)
