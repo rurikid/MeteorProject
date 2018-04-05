@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeteorWeb</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Advent+Pro">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode.css">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode1.css">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode10.css">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode2.css">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode3.css">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode4.css">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode5.css">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode6.css">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode7.css">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode8.css">
+    <link rel="stylesheet" href="assets/css/Calendar-JavaScript-Can-only-see-in-browser-preview-mode9.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/untitled-1.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body style="height:800px;">
+    <div class="card" style="height:800px;">
+        <div class="card-header" style="background-image:url(&quot;assets/img/background.png&quot;);height:195px;">
+            <h1 class="text-left" style="color:rgba(255,255,255,0.9);height:116px;padding-top:25px;font-family:'Advent Pro', sans-serif;font-size:53px;"><strong>Time Management System</strong></h1>
+            <ul class="nav nav-tabs nav-fill card-header-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link" href="profile.html" style="color:#ffffff;background-color:rgba(52,58,64,0.73);">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="my_projects.html" style="background-color:rgba(52,58,64,0.73);color:#ffffff;">My Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="my_timesheets.html" style="background-color:rgba(52,58,64,0.73);color:#ffffff;">My Timesheets</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" style="background-color:rgba(52,58,64,0.73);color:#ffffff;">Reports</a></li>
+                <li class="nav-item"><a class="nav-link" href="team.html" style="background-color:#d3a944;color:#ffffff;">My Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="team_timesheet.html" style="background-color:rgba(52,58,64,0.73);color:#ffffff;">Team Timesheets</a></li>
+                <li class="nav-item"><a class="nav-link" href="admin_employees.html" style="background-color:rgba(52,58,64,0.73);color:#ffffff;">Employees</a></li>
+                <li class="nav-item"><a class="nav-link active" href="admin_projects.html" style="color:#ffffff;background-color:rgba(52,58,64,0.73);">Projects</a></li>
+            </ul>
+        </div>
+        <div class="card-body" style="height:800px;">
+            <div>
+                <div class="row" style="margin-top:26px;">
+                    <div class="col-3 align-self-center">
+                        <h1 style="width:878px;font-family:'Advent Pro', sans-serif;font-size:43px;margin-top:-4px;"><i class="fa fa-search" style="padding-right:38px;width:73px;"></i>Search Project</h1>
+                    </div>
+                    <div class="col align-self-center"><input type="text" style="width:463px;height:50px;"></div>
+                    <div class="col align-self-center"><button class="btn btn-dark" type="button" style="margin-left:101px;width:131px;height:50px;font-size:22px;">Filter</button><a class="btn btn-primary" role="button" href="add_team_member.html" style="width:259px;height:50px;margin-left:10px;background-color:#d3a944;font-size:22px;">+ New Team Member</a></div>
+                </div>
+                <div class="row" style="margin-top:-12px;">
+                    <div class="col" style="background-color:rgba(52,58,64,0.14);margin-top:35px;height:86px;">
+                        <div class="row" style="background-color:#d3a944;">
+                            <div class="col" style="height:16px;">
+                                <h1></h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h1 style="margin-top:-7px;">Employee List</h1><button class="btn btn-danger" type="button" style="margin-left:606px;width:110px;font-size:22px;margin-bottom:0px;margin-top:-22px;">Delete</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width:53px;">Select</th>
+                                <th style="margin:0px;width:60px;">#</th>
+                                <th>Full Name</th>
+                                <th>Start Date</th>
+                                <th style="padding-right:-16px;">Role</th>
+                                <th style="width:198px;margin:0px;">Project Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" style="margin-left:15px;"></td>
+                                <td>&nbsp;1</td>
+                                <td>John Smith</td>
+                                <td>5/20/18</td>
+                                <td>Supervisor</td>
+                                <td>Test Project 1</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" style="margin-left:15px;"></td>
+                                <td>2</td>
+                                <td>Jane Doe</td>
+                                <td>4/8/17</td>
+                                <td>Programmer</td>
+                                <td>Test Project 2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode1.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode10.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode11.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode12.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode13.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode14.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode2.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode3.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode4.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode5.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode6.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode7.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode8.js"></script>
+    <script src="assets/js/Calendar-JavaScript-Can-only-see-in-browser-preview-mode9.js"></script>
+</body>
+
+</html>
