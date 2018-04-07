@@ -5,66 +5,84 @@
 -->
 <template name="employees">
 	{{> nav}}
-	<div class="card" style="height:800px;">
-  	<div class="card-body" style="height:800px;">
-    	<div>
-      	<div class="row" style="height:144px;">
+	<div class="card">
+		<div class="card-body">
+    	<div style="padding: 0px 10px 0px 10px; ">
+      	<div class="row">
         	<div class="col">
-          	<h1 style="width:878px;font-family:'Advent Pro', sans-serif;font-size:43px;"><i class="fa fa-search" style="padding-right:38px;width:73px;"></i>Search Employee</h1><input type="text" style="width:463px;height:50px;"><button class="btn btn-dark" type="button" style="margin-left:32px;width:131px;height:50px;font-size:22px;">Filter</button>
-            <a class="btn btn-primary" role="button" href="#" style="width:244px;height:50px;margin-left:79px;background-color:#d3a944;font-size:22px;"><i class="icon ion-android-add" style="margin-right:18px;margin-left:-6px;"></i>Add New Member</a>
+          	<h1 id="headerText">
+							
+							<strong>Search Employee</strong>
+						</h1>
+
+						<i class="fa fa-search" style="margin-left:20px;width:73px;">
+						</i>
+
+						<input type="text" style="width:463px;height:50px;">
+						
+							<button class="btn btn-dark" type="button" style="margin-left:15px;width:131px;height:50px;font-size:22px;">
+								Filter
+							</button>
+
+            <a class="btn btn-primary, addnewmember" role="button" href="#" style="color:white;width:244px;height:50px;margin-left:60px;background-color:#d3a944;font-size:22px;">
+							<i class="icon ion-android-add" style="margin-right:18px;margin-left:-6px;">	
+							</i>
+							Add New Member
+						</a>
+
 					</div>
         </div>
 	      <div class="row">
-	      	<div class="col" style="background-color:rgba(52,58,64,0.14);">
-	        	<div class="row" style="background-color:#d3a944;">
+	      	<div class="col">
+	        	<div class="row">
 	          	<div class="col" style="height:16px;">
-	            	<h1></h1>
 	            </div>
-	          </div>
-	          <h1>Employee List<a class="btn btn-primary" role="button" href="#" style="margin-left:465px;width:110px;font-size:22px;margin-right:6px;background-color:rgba(52,58,64,0.54);">Edit</a><button class="btn btn-danger" type="button" style="margin-left:0px;width:110px;font-size:22px;">Delete</button></h1>
+						</div>
+						<div style="padding-bottom:20px;">
+						<h1 id="headerText">Employee List</h1>
+							<div id="editDelete">
+								<a class="btn btn-primary" id="editButton" role="button" href="#" style="margin-left:70%;width:110px;font-size:22px;margin-right:6px;background-color:rgba(52,58,64,0.54);">
+									Edit
+								</a>
+								<button class="btn btn-danger" id="deleteButton" type="button" style="margin-left:0px;width:110px;font-size:22px;">
+									Delete
+								</button>
+							</div>
+						</div>
 	        </div>
-	      </div>
+				</div>
+				
+
+
 	      <div class="table-responsive">
 	      	<table class="table">
-	        	<thead>
+	        	<thead style="background-color:#d3a944">
 	          	<tr>
-	            	<th style="width:53px;">Select</th>
-	              <th style="margin:0px;width:85px;">User Id</th>
-	              <th>Password</th>
-	              <th>Full Name</th>
-	              <th>Address</th>
+								<th style="width:53px;">Select</th>
+								<th>First Name</th>
+								<th>Last Name</th>
 	              <th style="padding-right:-16px;">Email</th>
 	              <th style="padding-right:-16px;">Job Title</th>
-	              <th style="padding-right:-16px;">Salary</th>
-	              <th style="width:65px;margin:0px;">W4</th>
+								<th style="padding-right:-16px;">Salary</th>
+								<th style="padding-right:-16px;">Pay Data</th>
 	            </tr>
 	          </thead>
 	          <tbody>
-	          	<tr style="height:90px;margin-top:0px;">
-	            	<td><input type="checkbox" style="margin-left:15px;"></td>
-	              <td>&nbsp;1</td>
-	              <td>.................</td>
-	              <td>John Smith</td>
-	              <td>5136 West Street<br>Dekalb, IL&nbsp; 60234<br></td>
-	              <td>email1@gmail.com</td>
-	              <td>Supervisor</td>
-	              <td>$110,000</td>
-	              <td></td>
-	            </tr>
-	            <tr style="height:90px;">
-	            	<td><input type="checkbox" style="margin-left:15px;"></td>
-	              <td>2</td>
-	              <td>.................</td>
-	              <td>Jane Doe</td>
-	              <td>5139 West Street<br>Dekalb, IL&nbsp; 60234</td>
-	              <td>email2@gmail.com</td>
-	              <td>Programmer</td>
-	              <td>$95,000</td>
-	              <td></td>
-	            </tr>
+
+							{{#each users}}
+							<tr style="height:90px;margin-top:0px;">
+								<td><input class="selectemployee" type="radio" style="margin-left:15px;"></td>
+								<td>{{profile.firstName}}</td>
+								<td>{{profile.lastName}}</td>
+								<td>{{emails.[0].address}}</td>
+								<td>{{profile.position}}</td>
+								<td>${{profile.salary}}</td>
+								<td>{{profile.payData}}</td>
+							</tr>
+							{{/each}}
 	          </tbody>
 	        </table>
-	      </div>
+				</div>
     	</div>
   	</div>
 	</div>
