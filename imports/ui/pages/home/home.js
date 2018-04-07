@@ -17,6 +17,7 @@ import '../profile/profile.js';
 import '../projects/projects.js';
 import '../team/team.js';
 import '../employees/employees.js';
+import '../reports/reports.js';
 
 Template.home.events({
   'click .logout': function(event){
