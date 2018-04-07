@@ -44,6 +44,17 @@ Tracking and Development of Student Web App
 > Implement most .js functionality
 ```
 
+**06Apri2018** - mwight
+```
+> starter page for reports.html added
+> reports tab on nav routes to starter page for reports.html
+> Login.html css - done
+> employees page populates tables
+> edit/delete functionality still not functional
+> basic css and nav component added to newemployee
+> edits to main.css
+```
+
 **04Apr2018** - rurikid
 ```
 > completed newEmployee integration w/ database 
