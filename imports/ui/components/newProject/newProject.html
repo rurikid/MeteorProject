@@ -4,43 +4,40 @@
     Revise & Simplify Stylization
 -->
 <template name="newProject">
-  <div class="container">
-    <div>
-      <h2>New Project</h2>
-      <form class="newProject">
-        <label>Project Name:</label> 
-          <input type="text" name="name" placeholder="Project Name" />
-          <br />
-        <label>Supervisor Name:</label>
-          <select id="supervisor">
-            {{#each user in users}}
-              {{#if isSupervisor user.profile.position}}
-                <option value="{{user._id}}">{{user.profile.firstName}} {{user.profile.lastName}}</option>
-              {{/if}}
-            {{/each}}
-          </select>
-          <br />
-        <label>Client Name:</label> 
-          <input type="text" name="client" placeholder="Client Name" />
-          <br />
-        <label>Budget:</label> 
-          <input type="number" name="budget" placeholder="Budget" />
-          <br />
-        <input type="submit" name="submit" value="Add new project">
+  <div class="new-container" style="padding: 20px">
+    <h2><strong>New Project</strong></h2>
+      <form class="newProject" style="padding: 20px;">
+        <div style="padding-bottom: 10px;">
+          <div>
+            <label>Project Name:</label>
+              <input type="text" name="name" placeholder="Project Name" />
+              <br />
+          </div>
+          <div>
+            <label>Supervisor Name:</label>
+              <select id="supervisor">
+                {{#each user in users}}
+                  {{#if isSupervisor user.profile.position}}
+                    <option value="{{user._id}}">{{user.profile.firstName}} {{user.profile.lastName}}</option>
+                  {{/if}}
+                {{/each}}
+              </select>
+              <br />
+          </div>
+          <div>
+            <label>Client Name:</label> 
+              <input type="text" name="client" placeholder="Client Name" />
+              <br />
+          </div>
+          <div>
+            <label>Budget:</label> 
+              <input type="number" name="budget" placeholder="Budget" />
+              <br />
+          </div>
+          <a href="#" class="back"><input type="button" name="back" value="Cancel"></a>
+          <input type="reset" value="Clear">
+          <input type="submit" name="submit" value="Add New Project">
+        </div>
       </form>
     </div>
-    <div>
-      <h2>Projects</h2>
-      <table>
-        <tr>
-          <th>Name</th><th>Supervisor</th><th>Client</th><th>Budget</th>
-        </tr>
-        {{#each project in projects}}
-          <tr>
-            <td>{{project.name}}</td><td>{{getSupervisor project.supervisor}}</td><td>{{project.client}}</td><td>{{project.budget}}</td>
-          </tr>
-        {{/each}}
-      </table>
-    </div>
-  </div>
 </template>

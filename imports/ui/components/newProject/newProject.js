@@ -35,6 +35,11 @@ Template.newProject.helpers({
 });
 
 Template.newProject.events({
+  'click .back': function(event){
+    event.preventDefault();
+    FlowRouter.go('/projects');
+  },
+
 	'submit .newProject'(event) {
 		// Prevent default browser form submit
 		event.preventDefault();

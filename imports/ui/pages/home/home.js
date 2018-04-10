@@ -19,6 +19,17 @@ import '../team/team.js';
 import '../employees/employees.js';
 import '../reports/reports.js';
 
+Template.home.helpers({
+  // finds and retrieves supervisor name
+  getUsersName: function() {
+    return (Meteor.user().profile.firstName + " " + Meteor.user().profile.lastName);
+  },
+  // evaluates for supervisors & admins
+  isSupervisor: function() {
+    return (Meteor.user().profile.position === 'Administrator' || Meteor.user().profile.position === 'Supervisor');
+  }
+});
+
 Template.home.events({
   'click .logout': function(event){
     event.preventDefault();

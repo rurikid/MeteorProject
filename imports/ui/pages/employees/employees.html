@@ -24,11 +24,13 @@
 								Filter
 							</button>
 
-            <a class="btn btn-primary, addnewmember" role="button" href="#" style="color:white;width:244px;height:50px;margin-left:60px;background-color:#d3a944;font-size:22px;">
-							<i class="icon ion-android-add" style="margin-right:18px;margin-left:-6px;">	
-							</i>
-							Add New Member
-						</a>
+						{{#if isAdmin}}
+	            <a class="btn btn-primary, newEmployee" role="button" href="#" style="color:white;width:244px;height:50px;margin-left:60px;background-color:#d3a944;font-size:22px;">
+								<i class="icon ion-android-add" style="margin-right:18px;margin-left:-6px;">	
+								</i>
+								Add New Employee
+							</a>
+						{{/if}}
 
 					</div>
         </div>
@@ -40,25 +42,29 @@
 						</div>
 						<div style="padding-bottom:20px;">
 						<h1 id="headerText">Employee List</h1>
-							<div id="editDelete">
-								<a class="btn btn-primary" id="editButton" role="button" href="#" style="margin-left:70%;width:110px;font-size:22px;margin-right:6px;background-color:rgba(52,58,64,0.54);">
-									Edit
-								</a>
-								<button class="btn btn-danger" id="deleteButton" type="button" style="margin-left:0px;width:110px;font-size:22px;">
-									Delete
-								</button>
-							</div>
+
+							{{#if isAdmin}}
+								<div id="editDelete">
+									<a class="btn btn-primary" id="editButton" role="button" href="#" style="margin-left:70%;width:110px;font-size:22px;margin-right:6px;background-color:rgba(52,58,64,0.54);">
+										Edit
+									</a>
+									<button class="btn btn-danger" id="deleteButton" type="button" style="margin-left:0px;width:110px;font-size:22px;">
+										Delete
+									</button>
+								</div>
+							{{/if}}
+
 						</div>
 	        </div>
 				</div>
 				
-
-
 	      <div class="table-responsive">
 	      	<table class="table">
 	        	<thead style="background-color:#d3a944">
 	          	<tr>
-								<th style="width:53px;">Select</th>
+	          		{{#if isAdmin}}
+									<th style="width:53px;">Select</th>
+								{{/if}}
 								<th>First Name</th>
 								<th>Last Name</th>
 	              <th style="padding-right:-16px;">Email</th>
@@ -70,15 +76,17 @@
 	          <tbody>
 
 							{{#each users}}
-							<tr style="height:90px;margin-top:0px;">
-								<td><input class="selectemployee" type="radio" style="margin-left:15px;"></td>
-								<td>{{profile.firstName}}</td>
-								<td>{{profile.lastName}}</td>
-								<td>{{emails.[0].address}}</td>
-								<td>{{profile.position}}</td>
-								<td>${{profile.salary}}</td>
-								<td>{{profile.payData}}</td>
-							</tr>
+								<tr style="height:90px;margin-top:0px;">
+									{{#if isAdmin}}
+										<td><input class="select-radio" type="radio" id="{{_id}}"></td>
+									{{/if}}
+									<td>{{profile.firstName}}</td>
+									<td>{{profile.lastName}}</td>
+									<td>{{emails.[0].address}}</td>
+									<td>{{profile.position}}</td>
+									<td>${{profile.salary}}</td>
+									<td>{{profile.payData}}</td>
+								</tr>
 							{{/each}}
 	          </tbody>
 	        </table>

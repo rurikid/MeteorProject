@@ -13,6 +13,11 @@ Template.newEmployee.helpers({
 });
 
 Template.newEmployee.events({
+  'click .back': function(event){
+    event.preventDefault();
+    FlowRouter.go('/employees');
+  },
+
   'submit .newEmployee'(event) {
     // Prevent default browser form submit
     event.preventDefault();

@@ -11,15 +11,19 @@ Template.employees.onCreated(function () {
   });
 
 Template.employees.helpers({
-    users() {
-      return Meteor.users.find({});
-    },
-  });
+  // returns all users
+  users() {
+    return Meteor.users.find({});
+  },
+  // returns true for admin
+  isAdmin() {
+    return (Meteor.user().profile.position === 'Administrator');
+  },
+});
 
-  Template.employees.events({
-    'click .addnewmember': function(event){
-      event.preventDefault();
-      FlowRouter.go('/newEmployee');
-    }
-  });
-
+Template.employees.events({
+  'click .newEmployee': function(event){
+    event.preventDefault();
+    FlowRouter.go('/newEmployee');
+  }
+});

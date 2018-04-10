@@ -2,6 +2,16 @@ import { Users } from '../../../api/users/users.js';
 
 import './nav.html';
 
+  // evaluates for supervisors
+Template.nav.helpers({
+  isSupervisor: function(position) {
+    return ((Meteor.user().profile.position === 'Supervisor') || (Meteor.user().profile.position === 'Administrator'));
+  },
+  isAdmin: function(position) {
+    return ((position === 'Administrator'));
+  },
+});
+
 Template.nav.events({
   'click .logout': function(event){
     event.preventDefault();
