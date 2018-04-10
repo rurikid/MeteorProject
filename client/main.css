@@ -21,9 +21,13 @@
   margin: 3px 0px 0px 0px;
   font-family: 'Advent Pro', sans-serif;
   background-color:rgba(52, 58, 64, 0.73);
-  color: #000000;
+  color: #ffffff;
 }
 
+body .body {
+  background-image:url('/img/body-background.png');
+  background-size: 100% auto;
+}
 
 .table-responsive {
   margin: 0 auto;
@@ -40,6 +44,7 @@
   margin-top: 0px;
   overflow: hidden;
 }
+
 .loginBox {
   background-color: #444343;
   border-radius: 10px;
@@ -52,7 +57,7 @@
 
 .pleaselogin {
   color: #fff;
-  font-family:Advent Pro, sans-serif;
+  font-family: 'Advent Pro', sans-serif;
   font-size: 50px;
   padding-top: 20px;
 }
@@ -66,9 +71,26 @@
 input[type=submit] {
   background-color: #d3a944;
   color: #FFF;
+  padding: 5px 10px 5px 10px;
 }
 
-.newemployee {
+input[type=reset] {
+  background-color: rgba(52, 58, 64, 0.73);
+  color: #FFF;
+  padding: 5px 10px 5px 10px;
+}
+
+input[type=button] {
+  background-color: rgba(52, 58, 64, 0.73);
+  color: #FFF;
+  padding: 5px 10px 5px 10px;
+}
+
+input #select-radio {
+  margin-left:15px;
+}
+
+.new-container {
   width: 600px;
   margin: auto;
   color:#000;
@@ -77,16 +99,15 @@ input[type=submit] {
 table {
   border-collapse: collapse;
 }
+
 td, th {
   border: 1px solid black;
 }
 
 #headerText {
-  margin-left:20px;
-  color:#303030;
-  width:876px;
-  font-family:'Advent Pro', sans-serif;
-  font-size:38px;
+  margin-left: 20px;
+  color: #303030;
+  width: 876px;
+  font-family: 'Advent Pro', sans-serif;
+  font-size: 38px;
 }
-
-

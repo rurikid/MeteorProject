@@ -5,19 +5,14 @@ import { check } from 'meteor/check';
 import { Users } from './users.js';
 
 Meteor.methods({
-  'users.update'(email, firstName, lastName, position, salary, payData) {
-    check(firstName, String);
-    check(lastName, String);
-    check(position, String);
-    check(payData, String);
+  getCurrentUsersName: function() {
+    // search for current user
+    var result = Meteor.user();
 
-    return Users.update(email, {
-      $set: { firstName: firstName,
-              lastName: lastName,
-              position: position,
-              salary: salary,
-              payData: payData,
-            }
-    });
+    // known as guarding (are we finding anything in the query)
+    var firstName = result && result.profile && result.profile.firstName;
+    var lastName = result && result.profile && result.profile.lastName;
+
+    return (firstName + " " + lastName);
   },
 });

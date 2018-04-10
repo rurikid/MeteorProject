@@ -3,21 +3,103 @@
     Integrate with Database
     Revise & Simplify Stylization
 -->
+<!-- This page displayes employees and is accessible by Admins only. 
+	TODO:
+		Integrate with Database
+    Revise & Simplify Stylization
+-->
 <template name="projects">
-	<div class="proj">
-		{{> nav}}
-		<div>
-			<h2>Projects</h2>
-			<table>
-				<tr>
-					<th>Name</th><th>Supervisor</th><th>Client</th><th>Budget</th>
-				</tr>
-				{{#each project in projects}}
-					<tr>
-						<td>{{project.name}}</td><td>{{getSupervisor project.supervisor}}</td><td>{{project.client}}</td><td>{{project.budget}}</td>
-					</tr>
-				{{/each}}
-			</table>
-		</div>
+	{{> nav}}
+	<div class="card">
+		<div class="card-body">
+    	<div style="padding: 0px 10px 0px 10px; ">
+      	<div class="row">
+        	<div class="col">
+          	<h1 id="headerText">
+							
+							<strong>Search Projects</strong>
+						</h1>
+
+						<i class="fa fa-search" style="margin-left:20px;width:73px;">
+						</i>
+
+						<input type="text" style="width:463px;height:50px;">
+						
+							<button class="btn btn-dark" type="button" style="margin-left:15px;width:131px;height:50px;font-size:22px;">
+								Filter
+							</button>
+
+						{{#if isAdmin}}
+
+	            <a class="btn btn-primary, newProject" role="button" href="#" style="color:white;width:244px;height:50px;margin-left:60px;background-color:#d3a944;font-size:22px;">
+								<i class="icon ion-android-add" style="margin-right:18px;margin-left:-6px;"></i>
+								Add New Project
+							</a>
+
+						{{/if}}
+
+					</div>
+        </div>
+	      <div class="row">
+	      	<div class="col">
+	        	<div class="row">
+	          	<div class="col" style="height:16px;">
+	            </div>
+						</div>
+						<div style="padding-bottom:20px;">
+						<h1 id="headerText">Project List</h1>
+							{{#if isSupervisor}}
+								<div id="editDelete">
+									<a class="btn btn-primary" id="editButton" role="button" href="#" style="margin-left:70%;width:110px;font-size:22px;margin-right:6px;background-color:rgba(52,58,64,0.54);">
+										Edit
+									</a>
+									{{#if isAdmin}}
+										<button class="btn btn-danger" id="deleteButton" type="button" style="margin-left:0px;width:110px;font-size:22px;">
+											Delete
+										</button>
+									{{/if}}
+								</div>
+							{{/if}}
+						</div>
+	        </div>
+				</div>
+				
+	      <div class="table-responsive">
+	      	<table class="table">
+	        	<thead style="background-color:#d3a944">
+	          	<tr>
+	          		{{#if isSupervisor}}
+									<th style="width:53px;">Select</th>
+								{{/if}}
+								<th>Project Name</th>
+								<th>Supervisor Name</th>
+								<th>Client</th>
+								<th>Budget</th>
+								<th>Your Role</th>
+								<th>Number of Employees</th>
+	            </tr>
+	          </thead>
+	          <tbody>
+
+							{{#each project in projects}}
+								{{#if isMember project._id}}
+									<tr style="height:90px;margin-top:0px;">
+										{{#if isSupervisor}}
+											<td><input class="select-radio" type="radio" id="{{project._id}}"></td>
+										{{/if}}
+										<td>{{project.name}}</td>
+										<td>{{getProjectSupervisor project.supervisor}}</td>
+										<td>{{project.client}}</td>
+										<td>{{project.budget}}</td>
+										<td>{{getUserRole}}</td>
+										<td>{{getNumEmployees}}</td>
+									</tr>
+								{{/if}}
+							{{/each}}
+	          </tbody>
+	        </table>
+				</div>
+    	</div>
+  	</div>
 	</div>
 </template>

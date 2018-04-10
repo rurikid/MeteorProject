@@ -1,6 +1,8 @@
 # MeteorProject
 Tracking and Development of Student Web App
 
+**[Live Preview](http://www.rurikid.com/meteor.html)**
+
 **Installation**
 ```
 > Install Meteor & NPM
@@ -44,7 +46,21 @@ Tracking and Development of Student Web App
 > Implement most .js functionality
 ```
 
-**06Apri2018** - mwight
+**09Apr2018** - rurikid
+```
+> hosted live version of the current build, manually updated
+> fixed nav background
+> called nav in remaining unimplemented locations
+> removed 'Projects' option from nav and home
+> introduced newEmployee css to newProject
+> implemented projects.html
+> added back and reset buttons to newEmployee and newProject
+> added background image to home and fixed login background
+> added user role logic to projects, employees, nav, and body
+> removed some deprecated files
+```
+
+**06Apr2018** - mwight
 ```
 > starter page for reports.html added
 > reports tab on nav routes to starter page for reports.html
