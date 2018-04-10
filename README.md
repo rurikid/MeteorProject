@@ -1,8 +1,7 @@
 # MeteorProject
 Tracking and Development of Student Web App
 
-**Live Preview**
-[Try Live](http://www.rurikid.com/meteor.html)
+**[Live Preview](http://www.rurikid.com/meteor.html)**
 
 **Installation**
 ```
