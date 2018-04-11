@@ -1,14 +1,15 @@
 # MeteorProject
 Tracking and Development of Student Web App
 
-**[Live Preview](http://www.rurikid.com/meteor.html)**
+**Live Preview**
+[Try Live](http://www.rurikid.com/meteor.html)
 
 **Installation**
 ```
 > Install Meteor & NPM
-> meteor create MeteorProject --full
-> cd MeteorProject
-> move GitHub files to MeteorProject directory
+> git clone https://github.com/rurikid/meteorproject
+> cd meteorproject
+> npm install --sweetalert
 > meteor
 ```
 
@@ -40,10 +41,17 @@ Tracking and Development of Student Web App
 
 **TODO**
 ```
-> Implement Employees Collection
+> Handlebar Guarding Against Logged Out Users & Wrong Roles
 > Implement Timesheets Collection
+> Implement Timesheet Management and Rendering
 > Improve Stylization
-> Implement most .js functionality
+> Implement Add Member to Project
+> Design Report View
+```
+
+**11Apr2018** - rurikid
+```
+> implemented delete functionality to projects and employees
 ```
 
 **09Apr2018** - rurikid

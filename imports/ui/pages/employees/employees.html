@@ -45,12 +45,12 @@
 
 							{{#if isAdmin}}
 								<div id="editDelete">
-									<a class="btn btn-primary" id="editButton" role="button" href="#" style="margin-left:70%;width:110px;font-size:22px;margin-right:6px;background-color:rgba(52,58,64,0.54);">
+									<a class="btn btn-primary" id="editEmployee" role="button" href="#" style="margin-left:70%;width:110px;font-size:22px;margin-right:6px;background-color:rgba(52,58,64,0.54);">
 										Edit
 									</a>
-									<button class="btn btn-danger" id="deleteButton" type="button" style="margin-left:0px;width:110px;font-size:22px;">
+									<a href="#" class="deleteEmployee"><button class="btn btn-danger" id="deleteEmployee" type="button" style="margin-left:0px;width:110px;font-size:22px;">
 										Delete
-									</button>
+									</button></a>
 								</div>
 							{{/if}}
 
@@ -78,7 +78,7 @@
 							{{#each users}}
 								<tr style="height:90px;margin-top:0px;">
 									{{#if isAdmin}}
-										<td><input class="select-radio" type="radio" id="{{_id}}"></td>
+										<td><input class="select-radio" type="radio" name="employeeID" value="{{_id}}"></td>
 									{{/if}}
 									<td>{{profile.firstName}}</td>
 									<td>{{profile.lastName}}</td>

@@ -25,5 +25,36 @@ Template.employees.events({
   'click .newEmployee': function(event){
     event.preventDefault();
     FlowRouter.go('/newEmployee');
-  }
+  },
+
+  'click .deleteEmployee'(event) {
+    // Prevent default browser form submit
+    event.preventDefault();
+
+    // Get value from form element
+    const ids = document.getElementsByName('employeeID');
+    var id;
+    for (i = 0; i < ids.length; i++) {
+      if (ids[i].checked){
+        id = ids[i].value; 
+      }
+    }
+
+    Meteor.call('deleteEmployee', id, (error) => {
+      if (error) {
+        alert(error.error);
+      } else {
+
+        // success alert
+        return swal({
+          title: "Removed!",
+          text: "Employee Removed",
+          button: {
+            text: "Close",
+          },
+          icon: "success"
+        });
+      }
+    });
+  },
 });

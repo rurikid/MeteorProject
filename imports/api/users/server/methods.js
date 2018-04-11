@@ -29,5 +29,17 @@ Meteor.methods({
 			password: password,
 			username: username
 		})
-	}
+	},
+
+	deleteEmployee(id) {
+    check(id, String);
+
+    return Meteor.users.remove({ _id: id }, function (error, result) {
+    	if (error) {
+    		console.log("Error removing user: ", error);
+    	} else {
+    		console.log("User removed: " + result);
+    	}
+    });
+  },
 })

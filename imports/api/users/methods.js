@@ -15,4 +15,5 @@ Meteor.methods({
 
     return (firstName + " " + lastName);
   },
+
 });

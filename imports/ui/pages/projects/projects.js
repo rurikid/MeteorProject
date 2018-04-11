@@ -53,4 +53,35 @@ Template.projects.events({
     event.preventDefault();
     FlowRouter.go('/newProject');
   },
+
+  'click .deleteProject'(event) {
+    // Prevent default browser form submit
+    event.preventDefault();
+
+    // Get value from form element
+    const ids = document.getElementsByName('projectID');
+    var id;
+    for (i = 0; i < ids.length; i++) {
+      if (ids[i].checked){
+        id = ids[i].value; 
+      }
+    }
+
+    Meteor.call('deleteProject', id, (error) => {
+      if (error) {
+        alert(error.error);
+      } else {
+
+        // success alert
+        return swal({
+          title: "Removed!",
+          text: "Project Removed",
+          button: {
+            text: "Close",
+          },
+          icon: "success"
+        });
+      }
+    });
+  },
 });

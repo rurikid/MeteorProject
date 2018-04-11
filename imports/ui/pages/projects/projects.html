@@ -54,9 +54,9 @@
 										Edit
 									</a>
 									{{#if isAdmin}}
-										<button class="btn btn-danger" id="deleteButton" type="button" style="margin-left:0px;width:110px;font-size:22px;">
+										<a class="deleteProject" href="#"><button class="btn btn-danger" id="deleteButton" type="button" style="margin-left:0px;width:110px;font-size:22px;">
 											Delete
-										</button>
+										</button></a>
 									{{/if}}
 								</div>
 							{{/if}}
@@ -85,7 +85,7 @@
 								{{#if isMember project._id}}
 									<tr style="height:90px;margin-top:0px;">
 										{{#if isSupervisor}}
-											<td><input class="select-radio" type="radio" id="{{project._id}}"></td>
+											<td><input class="select-radio" type="radio" name="projectID" value="{{project._id}}"></td>
 										{{/if}}
 										<td>{{project.name}}</td>
 										<td>{{getProjectSupervisor project.supervisor}}</td>
