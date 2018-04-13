@@ -6,6 +6,24 @@ import { Projects } from '../projects.js';
 
 Meteor.methods({
 
+  insertProject: function(project) {
+    check(project.name, String);
+    check(project.supervisor, String);
+    check(project.client, String);
+
+    var name = project.name;
+    var supervisor = project.supervisor;
+    var client = project.client;
+    var budget = project.budget;
+
+    return Projects.insert({
+      name,
+      supervisor,
+      client,
+      budget,
+    });
+  },
+
 	deleteProject(id) {
     check(id, String);
 
@@ -16,5 +34,18 @@ Meteor.methods({
     		console.log("Project removed: " + result);
     	}
     });
+  },
+
+  editProject(project) {
+    check(project.name, String);
+    check(project.supervisor, String);
+    check(project.client, String);
+
+    return Projects.update(project.id, {$set: {
+      name: project.name,
+      supervisor: project.supervisor,
+      client: project.client,
+      budget: project.budget
+    }})
   },
 })

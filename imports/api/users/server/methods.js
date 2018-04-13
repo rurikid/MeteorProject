@@ -31,6 +31,28 @@ Meteor.methods({
 		})
 	},
 
+  editEmployee(employee) {
+    check(employee.firstName, String);
+    check(employee.lastName, String);
+    check(employee.position, String);
+    check(employee.salary, String);
+    check(employee.payData, String);
+
+    var newProfile = {
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      position: employee.position,
+      salary: employee.salary,
+      payData: employee.payData,
+    }
+
+    return Meteor.users.update(employee.id, {$set: {
+      username: employee.username,
+      password: employee.password,
+      profile: newProfile,
+    }})
+  },
+
 	deleteEmployee(id) {
     check(id, String);
 

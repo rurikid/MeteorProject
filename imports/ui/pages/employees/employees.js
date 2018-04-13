@@ -56,6 +56,22 @@ Template.employees.events({
   'click .newEmployee'(event) {
     // Prevent default browser behavior
     event.preventDefault();
-    $('#newEmployeeModal').modal('show');
+    Meteor.call('editEmployeeModal', null);
   },
+
+  'click .editEmployee'(event) {
+    // Prevent default browser behavior
+    event.preventDefault();
+
+    // Get value from form element
+    const ids = document.getElementsByName('employeeID');
+    var id;
+    for (i = 0; i < ids.length; i++) {
+      if (ids[i].checked){
+        id = ids[i].value; 
+      }
+    }
+
+    Meteor.call('editEmployeeModal', id);
+  }
 });

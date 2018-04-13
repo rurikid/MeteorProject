@@ -9,9 +9,21 @@ Template.newProject.onCreated(function () {
 });
 
 Template.newProject.helpers({
-	// returns all projects
-	projects() {
-		return Projects.find({});
+	project: function() {
+		var projectID = Session.get('selectedProjectID');
+
+		if (typeof projectID !== "undefined") {
+			var project = Projects.findOne(projectID);
+			return project;
+		} else {
+			return {
+				name:'', 
+				supervisor:'', 
+				client:'',
+				budget:''
+			}
+		}
+
 	},
 	// returns all users
 	users() {
@@ -32,6 +44,28 @@ Template.newProject.helpers({
 
 		return (firstName + " " + lastName);
 	},
+	isEdit: function(userID) {
+		var projectID = Session.get('selectedProjectID');
+		
+		if (projectID !== null) {
+			var project = Projects.findOne(projectID);
+
+				if (project.supervisor === userID) {
+					return "selected";
+				} else {
+					return "";
+				}
+		}
+	},
+	isNew: function() {
+		var projectID = Session.get('selectedProjectID');
+
+		if (projectID === null) {
+			return "Add New Project";
+		} else {
+			return "Update Project";
+		}
+	},
 });
 
 Template.newProject.events({
@@ -45,7 +79,7 @@ Template.newProject.events({
 		budget.value = '';
 
 		// close modal
-		$('#newProjectModal').modal('hide');
+		Modal.hide('newProject');
   },
 
   'click #clear': function(event){
@@ -62,6 +96,8 @@ Template.newProject.events({
 		// Prevent default browser form submit
 		event.preventDefault();
 
+		var projectID = Session.get('selectedProjectID');
+
 		// Get value from form element
     var project = {
       name: $('#projectName').val(),
@@ -70,29 +106,50 @@ Template.newProject.events({
       budget: $('#budget').val()
     }
 
-		Meteor.call('insertProject', project, (error) => {
-			if (error) {
-				alert(error.error);
-			} else {
-				// Clear form
-				projectName.value = '';
-				supervisor.value = '';
-				client.value = '';
-				budget.value = '';
+    if (!projectID) {
+			Meteor.call('insertProject', project, (error) => {
+				if (error) {
+					alert(error.error);
+				} else {
 
-				// dismiss modal
-				$('#newProjectModal').modal('hide');
+					// success alert
+					return swal({
+	    			title: "Success",
+	    			text: "New Project Added",
+	    			button: {
+	    				text: "Close",
+	    			},
+	    			icon: "success"
+	    		});
+				}
+			});
+		} else {
+			_.extend(project, {id: projectID});
+			Meteor.call('editProject', project, (error) => {
+				if (error) {
+					alert(error.error);
+				} else {
 
-				// success alert
-				return swal({
-    			title: "Success",
-    			text: "New Project Added",
-    			button: {
-    				text: "Close",
-    			},
-    			icon: "success"
-    		});
-			}
-		});
+					// success alert
+					return swal({
+	    			title: "Success",
+	    			text: "Project Updated",
+	    			button: {
+	    				text: "Close",
+	    			},
+	    			icon: "success"
+					});
+				}
+			});
+		}
+
+		// Clear form
+		projectName.value = '';
+		supervisor.value = '';
+		client.value = '';
+		budget.value = '';
+
+		// dismiss modal
+	  Modal.hide('newProject');
 	},
 });
