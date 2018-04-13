@@ -5,9 +5,14 @@
 -->
  <template name='nav'>
   <div class='card-header' style='background-color: rgba(52, 58, 64, 0.73); background-image: url("/img/nav-background.png"); min-height: 100%; background-size: 100% auto'>
-    <h1 class='text-left' style='color: #fff; height: 116px; padding-top: 25px; font-family:Advent Pro, sans-serif; font-size:53px;'><strong>Time Management System</strong></h1>
-    <ul class='nav nav-tabs card-header-tabs' role='tablist'>
+    <h1 class='text-left' style='color: #fff; height: 116px; padding-top: 25px;margin-left: 5%; font-family:Advent Pro, sans-serif; font-size:53px;'>
+      <strong>Time Management System</strong>
+    </h1>
+    <ul class='nav nav-tabs card-header-tabs' role='tablist' style="margin-left: 5%;">
+
+<!-- Profile Functionality Not Currently Priority
       <li><a class='profile' href='#' style='color:#ffffff;background-color:#808080;'>Profile</a></li>
+-->
       <li><a class='projects' href='#' style='color:#ffffff;background-color:#d3a944;'>My Projects</a></li>
       <li><a class='timesheet' href='#' style='color:#ffffff;background-color:#d3a944;'>My Timesheets</a></li>
       {{#if isSupervisor}}

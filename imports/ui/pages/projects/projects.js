@@ -36,7 +36,7 @@ Template.projects.helpers({
 
 		return (firstName + " " + lastName);
 	},
-	// determins if a user belongs to a project
+	// determines if a user belongs to a project
 	isMember: function(projectID) {
 		// search Projects for ProjectID
 		var result = Projects.findOne({"_id": projectID});
@@ -49,13 +49,8 @@ Template.projects.helpers({
 });
 
 Template.projects.events({
-  'click .newProject': function(event){
-    event.preventDefault();
-    FlowRouter.go('/newProject');
-  },
-
   'click .deleteProject'(event) {
-    // Prevent default browser form submit
+    // Prevent default browser behavior
     event.preventDefault();
 
     // Get value from form element
@@ -84,4 +79,27 @@ Template.projects.events({
       }
     });
   },
+
+  'click .newProject'(event) {
+  	// Prevent default browser behavior
+  	event.preventDefault();
+  	$('#newProjectModal').modal('show');
+  },
+
+  // Still working on this
+  // 'click .editProject'(event) {
+  // 	// Prevent default browser behavior
+  // 	event.preventDefault();
+
+  // 	// get value from form element
+  // 	const ids = document.getElementsByName('projectID');
+  // 	var id;
+  // 	for (i = 0; i < ids.length; i++) {
+  // 		if (ids[i].checked){
+  // 			id = ids[i].value;
+  // 		}
+  // 	}
+
+  // 	$('#newProjectModal').modal('show');
+  // },
 });

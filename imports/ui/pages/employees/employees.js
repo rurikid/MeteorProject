@@ -22,11 +22,6 @@ Template.employees.helpers({
 });
 
 Template.employees.events({
-  'click .newEmployee': function(event){
-    event.preventDefault();
-    FlowRouter.go('/newEmployee');
-  },
-
   'click .deleteEmployee'(event) {
     // Prevent default browser form submit
     event.preventDefault();
@@ -56,5 +51,11 @@ Template.employees.events({
         });
       }
     });
+  },
+
+  'click .newEmployee'(event) {
+    // Prevent default browser behavior
+    event.preventDefault();
+    $('#newEmployeeModal').modal('show');
   },
 });

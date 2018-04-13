@@ -1,17 +1,18 @@
 <!-- This page displayes employees and is accessible by Admins only. 
 	TODO:
-		Integrate with Database
-    Revise & Simplify Stylization
+		Edit Employee Functionality
 -->
 <template name="employees">
 	{{> nav}}
+	{{> newEmployee}}
 	<div class="card">
 		<div class="card-body">
     	<div style="padding: 0px 10px 0px 10px; ">
+
+<!-- Search Function Not Implemented
       	<div class="row">
         	<div class="col">
           	<h1 id="headerText">
-							
 							<strong>Search Employee</strong>
 						</h1>
 
@@ -20,44 +21,41 @@
 
 						<input type="text" style="width:463px;height:50px;">
 						
-							<button class="btn btn-dark" type="button" style="margin-left:15px;width:131px;height:50px;font-size:22px;">
+							<a href="#"><button class="btn btn-dark" type="button" style="margin-left:15px;width:131px;height:50px;font-size:22px;">
 								Filter
-							</button>
-
-						{{#if isAdmin}}
-	            <a class="btn btn-primary, newEmployee" role="button" href="#" style="color:white;width:244px;height:50px;margin-left:60px;background-color:#d3a944;font-size:22px;">
-								<i class="icon ion-android-add" style="margin-right:18px;margin-left:-6px;">	
-								</i>
-								Add New Employee
-							</a>
-						{{/if}}
-
+							</button></a>
 					</div>
         </div>
+-->
 	      <div class="row">
 	      	<div class="col">
-	        	<div class="row">
-	          	<div class="col" style="height:16px;">
-	            </div>
-						</div>
-						<div style="padding-bottom:20px;">
-						<h1 id="headerText">Employee List</h1>
+						<div style="padding-bottom:10px;padding-top:10px;font-size:32px;margin-left:10%;">
+						<strong>Employee Directory</strong>
 
+							<!-- Admin Controls -->
 							{{#if isAdmin}}
-								<div id="editDelete">
-									<a class="btn btn-primary" id="editEmployee" role="button" href="#" style="margin-left:70%;width:110px;font-size:22px;margin-right:6px;background-color:rgba(52,58,64,0.54);">
-										Edit
+									<!-- Edit Employee Button -->
+									<a href="#" class="btn btn-dark, editEmployee" style="margin-left:30%;"><button class="btn btn-dark" id="editEmployee" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
 									</a>
-									<a href="#" class="deleteEmployee"><button class="btn btn-danger" id="deleteEmployee" type="button" style="margin-left:0px;width:110px;font-size:22px;">
-										Delete
-									</button></a>
-								</div>
+									<!-- Delete Employee Button -->
+									<a href="#" class="btn btn-danger, deleteEmployee">
+										<button class="btn btn-danger" id="deleteEmployee" type="button" style="margin-left:0px;width:110px;font-size:22px;">
+											Delete
+										</button>
+									</a>
+									<!-- Add New Employee Button -->
+			            	<button class="btn btn-primary, newEmployee" id="newEmployee" type="button" style="color:white;background-color:#d3a944;font-size:22px;margin-left:10px;border:none;">
+										<i class="icon ion-android-add" style="margin-left:0px;">
+										</i>
+											Add New Employee
+										</button>
 							{{/if}}
 
 						</div>
 	        </div>
 				</div>
 				
+				<!-- Begin Employee Table -->
 	      <div class="table-responsive">
 	      	<table class="table">
 	        	<thead style="background-color:#d3a944">

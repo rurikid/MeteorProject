@@ -1,22 +1,18 @@
-<!-- This page shows a supervisor's team. 
-  TODO:
-    Integrate with Database
-    Revise & Simplify Stylization
--->
 <!-- This page displayes employees and is accessible by Admins only. 
 	TODO:
-		Integrate with Database
-    Revise & Simplify Stylization
+		Edit Project Functionality
 -->
 <template name="projects">
 	{{> nav}}
+	{{> newProject}}
 	<div class="card">
 		<div class="card-body">
     	<div style="padding: 0px 10px 0px 10px; ">
+
+<!-- Search Function Not Implemented
       	<div class="row">
         	<div class="col">
           	<h1 id="headerText">
-							
 							<strong>Search Projects</strong>
 						</h1>
 
@@ -28,42 +24,42 @@
 							<button class="btn btn-dark" type="button" style="margin-left:15px;width:131px;height:50px;font-size:22px;">
 								Filter
 							</button>
-
-						{{#if isAdmin}}
-
-	            <a class="btn btn-primary, newProject" role="button" href="#" style="color:white;width:244px;height:50px;margin-left:60px;background-color:#d3a944;font-size:22px;">
-								<i class="icon ion-android-add" style="margin-right:18px;margin-left:-6px;"></i>
-								Add New Project
-							</a>
-
-						{{/if}}
-
 					</div>
         </div>
+-->
 	      <div class="row">
 	      	<div class="col">
-	        	<div class="row">
-	          	<div class="col" style="height:16px;">
-	            </div>
-						</div>
-						<div style="padding-bottom:20px;">
-						<h1 id="headerText">Project List</h1>
+						<div style="padding-bottom:10px;padding-top:10px;font-size:32px;margin-left:10%;">
+						<strong>Project Directory</strong>
+
+							<!-- Supervisor Controls -->
 							{{#if isSupervisor}}
-								<div id="editDelete">
-									<a class="btn btn-primary" id="editButton" role="button" href="#" style="margin-left:70%;width:110px;font-size:22px;margin-right:6px;background-color:rgba(52,58,64,0.54);">
-										Edit
+									<!-- Edit Project Button -->
+									<a href="#" class="btn btn-dark, editProject" style="margin-left:30%;"><button class="btn btn-dark" id="editProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
 									</a>
+									<!-- Admin Controls -->
 									{{#if isAdmin}}
-										<a class="deleteProject" href="#"><button class="btn btn-danger" id="deleteButton" type="button" style="margin-left:0px;width:110px;font-size:22px;">
+										<!-- Delete Project Button -->
+									<a href="#" class="btn btn-danger, deleteProject">
+										<button class="btn btn-danger" id="deleteProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">
 											Delete
-										</button></a>
+										</button>
+									</a>
+									<!-- Add New Project Button -->
+			            <a class="newProject" href="#">
+			            	<button class="btn btn-primary" id="newProject" type="button" style="color:white;background-color:#d3a944;font-size:22px;margin-left:10px;border:none;">
+										<i class="icon ion-android-add" style="margin-left:0px;">
+										</i>
+											Add New Project
+										</button>
+									</a>
 									{{/if}}
-								</div>
 							{{/if}}
 						</div>
 	        </div>
 				</div>
 				
+				<!-- Begin Project Table -->
 	      <div class="table-responsive">
 	      	<table class="table">
 	        	<thead style="background-color:#d3a944">
@@ -81,16 +77,16 @@
 	          </thead>
 	          <tbody>
 
-							{{#each project in projects}}
-								{{#if isMember project._id}}
+							{{#each projects}}
+								{{#if isMember _id}}
 									<tr style="height:90px;margin-top:0px;">
 										{{#if isSupervisor}}
-											<td><input class="select-radio" type="radio" name="projectID" value="{{project._id}}"></td>
+											<td><input class="select-radio" type="radio" name="projectID" value="{{_id}}"></td>
 										{{/if}}
-										<td>{{project.name}}</td>
-										<td>{{getProjectSupervisor project.supervisor}}</td>
-										<td>{{project.client}}</td>
-										<td>{{project.budget}}</td>
+										<td>{{name}}</td>
+										<td>{{getProjectSupervisor supervisor}}</td>
+										<td>{{client}}</td>
+										<td>{{budget}}</td>
 										<td>{{getUserRole}}</td>
 										<td>{{getNumEmployees}}</td>
 									</tr>

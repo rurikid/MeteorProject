@@ -35,31 +35,53 @@ Template.newProject.helpers({
 });
 
 Template.newProject.events({
-  'click .back': function(event){
+  'click #back': function(event){
     event.preventDefault();
-    FlowRouter.go('/projects');
+
+		// Clear form
+		projectName.value = '';
+		supervisor.value = '';
+		client.value = '';
+		budget.value = '';
+
+		// close modal
+		$('#newProjectModal').modal('hide');
   },
 
-	'submit .newProject'(event) {
+  'click #clear': function(event){
+    event.preventDefault();
+    
+		// Clear form
+		projectName.value = '';
+		supervisor.value = '';
+		client.value = '';
+		budget.value = '';
+  },
+
+	'click #submit'(event){
 		// Prevent default browser form submit
 		event.preventDefault();
 
 		// Get value from form element
-		const target = event.target;
-		const name = target.name;
-		const supervisor = target.supervisor;
-		const client = target.client;
-		const budget = target.budget;
+    var project = {
+      name: $('#projectName').val(),
+      supervisor: $('#supervisor').val(),
+      client: $('#client').val(),
+      budget: $('#budget').val()
+    }
 
-		Meteor.call('projects.insert', name.value, supervisor.value, client.value, budget.value, (error) => {
+		Meteor.call('insertProject', project, (error) => {
 			if (error) {
 				alert(error.error);
 			} else {
 				// Clear form
-				name.value = '';
+				projectName.value = '';
 				supervisor.value = '';
 				client.value = '';
 				budget.value = '';
+
+				// dismiss modal
+				$('#newProjectModal').modal('hide');
 
 				// success alert
 				return swal({

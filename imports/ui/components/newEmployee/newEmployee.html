@@ -4,64 +4,75 @@
     Apply stylization to page
 -->
 <template name="newEmployee">
-  {{> nav}}
-  <div class="new-container" style="padding: 20px">
-    <h2><strong>New Employee</strong></h2>
-    <form class="newEmployee" style="padding: 20px;">
-      <div style="padding-bottom: 10px;">
-        <div>
-          <label>First Name:</label> 
-            <input type="text" id="firstName" placeholder="First Name" />
-            <br />
+  <div class="modal fade" id="newEmployeeModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Employee</h4>
         </div>
-        <div>
-          <label>Last Name:</label> 
-            <input type="text" id="lastName" placeholder="Last Name" />
-            <br />
+
+        <div class="modal-body">
+          <div style="padding-bottom: 10px;">
+            <div>
+              <label>First Name:</label> 
+                <input type="text" id="firstName" placeholder="First Name" />
+                <br />
+            </div>
+            <div>
+              <label>Last Name:</label> 
+                <input type="text" id="lastName" placeholder="Last Name" />
+                <br />
+            </div>
+            <div>
+              <label>Position:</label> 
+                <select id="position">
+                  <option value="Employee">Employee</option>
+                  <option value="Supervisor">Supervisor</option>
+                  <option value="Administrator">Administrator</option>
+                </select>
+                <br />
+            </div>
+            <div>
+              <label>Salary:</label> 
+                <input type="number" id="salary" placeholder="Salary" />
+                <br />
+            </div>
+            <div>
+              <label>Pay Data:</label> 
+                <textarea id="payData"></textarea>
+                <br />
+            </div>
+            <div>
+              <label>Email:</label> 
+                <input type="email" id="email" placeholder="Email" />
+                <br />
+            </div>
+            <div>
+              <label>User Name:</label> 
+                <input type="text" id="username" placeholder="User Name" />
+                <br />
+            </div>
+            <div>
+              <label>Password:</label> 
+                <input type="password" id="password" placeholder="Password" />
+                <br />
+            </div>
+            <div>
+              <label>Confirm Password:</label> 
+                <input type="password" id="confPassword" placeholder="Confirm Password" />
+                <br />
+            </div>
+          </div>
         </div>
-        <div>
-          <label>Position:</label> 
-            <select id="position">
-              <option value="Employee">Employee</option>
-              <option value="Supervisor">Supervisor</option>
-              <option value="Administrator">Administrator</option>
-            </select>
-            <br />
+
+        <div class="modal-footer">
+          <input type="button" id="back" value="Cancel">
+          <input type="reset" id="clear" value="Clear">
+          <input type="submit" id="submit" value="Add New Employee">
         </div>
-        <div>
-          <label>Salary:</label> 
-            <input type="number" id="salary" placeholder="Salary" />
-            <br />
-        </div>
-        <div>
-          <label>Pay Data:</label> 
-            <textarea id="payData"></textarea>
-            <br />
-        </div>
-        <div>
-          <label>Email:</label> 
-            <input type="email" id="email" placeholder="Email" />
-            <br />
-        </div>
-        <div>
-          <label>User Name:</label> 
-            <input type="text" id="username" placeholder="User Name" />
-            <br />
-        </div>
-        <div>
-          <label>Password:</label> 
-            <input type="password" id="password" placeholder="Password" />
-            <br />
-        </div>
-        <div>
-          <label>Confirm Password:</label> 
-            <input type="password" id="confPassword" placeholder="Confirm Password" />
-            <br />
-        </div>
+
       </div>
-      <a href="#" class="back"><input type="button" value="Cancel"></a>
-      <input type="reset" value="Clear">
-      <input type="submit" id="submit" value="Add New Employee" style="padding: 5px 10px 5px 10px;">
-    </form>
+    </div>
   </div>
 </template>

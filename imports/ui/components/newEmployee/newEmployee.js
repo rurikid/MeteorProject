@@ -13,25 +13,55 @@ Template.newEmployee.helpers({
 });
 
 Template.newEmployee.events({
-  'click .back': function(event){
+  'click #back': function(event){
     event.preventDefault();
-    FlowRouter.go('/employees');
+
+    // Clear form
+    firstName.value = '';
+    lastName.value = '';
+    position.value = '';
+    salary.value = '';
+    payData.value = '';
+    email.value = '';
+    username.value = '';
+    password.value = '';
+    confPassword.value = '';
+
+    // close modal
+    $('#newEmployeeModal').modal('hide');
   },
 
-  'submit .newEmployee'(event) {
-    // Prevent default browser form submit
+  'click #clear': function(event){
+    event.preventDefault();
+
+    // Clear form
+    firstName.value = '';
+    lastName.value = '';
+    position.value = '';
+    salary.value = '';
+    payData.value = '';
+    email.value = '';
+    username.value = '';
+    password.value = '';
+    confPassword.value = '';
+  },
+
+  'click #submit': function(event) {
+    // Prevent default browser behavior
     event.preventDefault();
 
     // Get value from form element
-    const target = event.target;
-    const firstName = target.firstName;
-    const lastName = target.lastName;
-    const position = target.position;
-    const salary = target.salary;
-    const payData = target.payData;
-    const username = target.username;
-    const password = target.password;
-    const confPassword = target.confPassword;
+    var employee = {
+      firstName: $('#firstName').val(),
+      lastName: $('#lastName').val(),
+      position: $('#position').val(),
+      salary: $('#salary').val(),
+      payData: $('#payData').val(),
+      email: $('#email').val(),
+      username: $('#username').val(),
+      password: $('#password').val(),
+      confPassword: $('#confPassword').val(),
+    }
 
     // Check password is at least 6 chars long
     var isValidPassword = function(pwd, pwd2) {
@@ -51,8 +81,8 @@ Template.newEmployee.events({
 
     // If validation passes, supply the appropriate fields to the
     // Accounts.createUser function.
-    if (isValidPassword(password, confPassword)) {
-      Meteor.call('createUserFromAdmin', firstName.value, lastName.value, position.value, salary.value, payData.value, email.value, password.value, username.value, function(error) {
+    if (isValidPassword(employee.password, employee.confPassword)) {
+      Meteor.call('createUserFromAdmin', employee, function(error) {
         if (error) {
           // error alert
           return swal({

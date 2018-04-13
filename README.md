@@ -32,6 +32,8 @@ Tracking and Development of Student Web App
 
 [SweetAlert Documentation](https://sweetalert.js.org/docs/)
 
+[Meteor Modal Dialogs](https://experimentingwithcode.com/modal-dialogs-part-2/)
+
 **Notes**
 ```
 > To access unimplemented components
@@ -46,6 +48,15 @@ Tracking and Development of Student Web App
 > Improve Stylization
 > Implement Add Member to Project
 > Design Report View
+```
+
+**12Apr2018** - rurikid
+```
+> implemented modal dialogues for adding new employee/project
+> commented out search functions for employees and projects pages
+> rearranged buttons and header for employees and projects pages
+> added a left margin to the nav component
+> dropped the profile page from navigation; simply not currently a priority
 ```
 
 **11Apr2018** - rurikid

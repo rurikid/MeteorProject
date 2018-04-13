@@ -18,16 +18,16 @@ Accounts.onCreateUser(function(options, user) {
 });
 
 Meteor.methods({
-	createUserFromAdmin:function(firstName, lastName, position, salary, payData, email, password, username){
+	createUserFromAdmin:function(employee){
 		Accounts.createUser({
-			firstName: firstName,
-			lastName: lastName,
-			position: position,
-			salary: salary,
-			payData: payData,
-			email: email,
-			password: password,
-			username: username
+			firstName: employee.firstName,
+			lastName: employee.lastName,
+			position: employee.position,
+			salary: employee.salary,
+			payData: employee.payData,
+			email: employee.email,
+			password: employee.password,
+			username: employee.username
 		})
 	},
 
@@ -43,3 +43,5 @@ Meteor.methods({
     });
   },
 })
+
+// Meteor.users.update({_id:Meteor.user()._id}, {$set:{"profile.name":"Carlos"}})

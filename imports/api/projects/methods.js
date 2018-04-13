@@ -5,10 +5,15 @@ import { check } from 'meteor/check';
 import { Projects } from './projects.js';
 
 Meteor.methods({
-  'projects.insert'(name, supervisor, client, budget) {
-    check(name, String);
-    check(supervisor, String);
-    check(client, String);
+  insertProject: function(project) {
+    check(project.name, String);
+    check(project.supervisor, String);
+    check(project.client, String);
+
+    var name = project.name;
+    var supervisor = project.supervisor;
+    var client = project.client;
+    var budget = project.budget;
 
     return Projects.insert({
       name,
