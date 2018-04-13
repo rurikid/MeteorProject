@@ -48,6 +48,18 @@ Tracking and Development of Student Web App
 > Improve Stylization
 > Implement Add Member to Project
 > Design Report View
+> Implement update password/email for users
+```
+
+**13Apr2018** - rurikid
+```
+> implemented update functionality for projects
+> implemented update functionality for employees
+> removed deprecated editEmployee/editProject files
+> reworked how modals are called
+> included bootstrap modals to meteor packages
+> included sessions to meteor packages
+> removed CDN calls to bootstrap
 ```
 
 **12Apr2018** - rurikid

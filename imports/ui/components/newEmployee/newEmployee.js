@@ -7,6 +7,51 @@ Template.newEmployee.onCreated(function () {
 });
 
 Template.newEmployee.helpers({
+  employee: function() {
+    var employeeID = Session.get('selectedEmployeeID');
+
+    if (typeof employeeID !== "undefined") {
+      var employee = Meteor.users.findOne({"_id": employeeID});
+      return employee;
+    } else {
+      return {
+        firstName: '',
+        lastName: '',
+        position: '',
+        salary: '',
+        payData: '',
+        email: '',
+        username: '',
+        password: '',
+        confPassword: ''
+      }
+    }
+  },
+
+  isNew: function() {
+    return ((Session.get('selectedEmployeeID') === null) ? true : false);
+  },
+
+  positionCheck: function(position) {
+    var employeeID = Session.get('selectedEmployeeID');
+    if (employeeID === null) {
+      return '';
+    } else {
+      var employee = Meteor.users.findOne({"_id": employeeID});
+      return ((employee.profile.position === position) ? "selected" : ''); 
+    }
+  },
+
+  label: function() {
+    var employeeID = Session.get('selectedEmployeeID');
+
+    if (employeeID === null) {
+      return "Add New Employee";
+    } else {
+      return "Update Employee";
+    }
+  },
+
   users() {
     return Meteor.users.find({});
   },
@@ -22,13 +67,15 @@ Template.newEmployee.events({
     position.value = '';
     salary.value = '';
     payData.value = '';
-    email.value = '';
-    username.value = '';
-    password.value = '';
-    confPassword.value = '';
+    if (Session.get('selectedEmployeeID') === null) {
+      email.value = '';
+      username.value = '';
+      password.value = '';
+      confPassword.value = '';
+    }
 
     // close modal
-    $('#newEmployeeModal').modal('hide');
+    Modal.hide('newEmployee');
   },
 
   'click #clear': function(event){
@@ -49,6 +96,8 @@ Template.newEmployee.events({
   'click #submit': function(event) {
     // Prevent default browser behavior
     event.preventDefault();
+
+    var employeeID = Session.get('selectedEmployeeID');
 
     // Get value from form element
     var employee = {
@@ -79,45 +128,73 @@ Template.newEmployee.events({
       }
     }
 
+    if (!employeeID) {
+
     // If validation passes, supply the appropriate fields to the
     // Accounts.createUser function.
-    if (isValidPassword(employee.password, employee.confPassword)) {
-      Meteor.call('createUserFromAdmin', employee, function(error) {
-        if (error) {
-          // error alert
-          return swal({
-            title: error.reason,
-            text: "Please try again",
-            button: {
-              text: "Confirm",
-            },
-            icon: "error"
-          });
-        } else {
+      if (isValidPassword(employee.password, employee.confPassword)) {
+        Meteor.call('createUserFromAdmin', employee, function(error) {
+          if (error) {
+            // error alert
+            return swal({
+              title: error.reason,
+              text: "Please try again",
+              button: {
+                text: "Confirm",
+              },
+              icon: "error"
+            });
+          } else {
 
-          // Clear form
-          firstName.value = '';
-          lastName.value = '';
-          position.value = '';
-          salary.value = '';
-          payData.value = '';
-          email.value = '';
-          username.value = '';
-          password.value = '';
-          confPassword.value = '';
+            // success alert
+            return swal({
+              title: "Success",
+              text: "New Employee Added",
+              button: {
+                text: "Close",
+              },
+              icon: "success"
+            });
+          }
+        });
+      }
 
-          // success alert
-          return swal({
-            title: "Success",
-            text: "New Employee Added",
-            button: {
-              text: "Close",
-            },
-            icon: "success"
-          });
-        }
-      });
+    } else {
+      // if (isValidPassword(employee.password, employee.confPassword)) {
+        _.extend(employee, {id: employeeID});
+        Meteor.call('editEmployee', employee, (error) => {
+          if (error) {
+            alert(error.error);
+          } else {
+
+            // success alert
+            return swal({
+              title: "Success",
+              text: "Employee Updated",
+              button: {
+                text: "Close",
+              },
+              icon: "success"
+            });
+          }
+        });
+      // }
     }
-    return false;
+
+    // Clear form
+    firstName.value = '';
+    lastName.value = '';
+    position.value = '';
+    salary.value = '';
+    payData.value = '';
+    if (Session.get('selectedEmployeeID') === null) {
+      email.value = '';
+      username.value = '';
+      password.value = '';
+      confPassword.value = '';
+    }
+
+    // dismiss modal
+    Modal.hide('newEmployee');
   }
 });

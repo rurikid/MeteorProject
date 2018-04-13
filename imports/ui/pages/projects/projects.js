@@ -1,6 +1,7 @@
 import { Projects } from '/imports/api/projects/projects.js';
 import { Users } from '/imports/api/users/users.js';
 import { Meteor } from 'meteor/meteor';
+import '/imports/api/helpers/modal.js';
 import './projects.html';
 
 Template.projects.onCreated(function () {
@@ -83,23 +84,22 @@ Template.projects.events({
   'click .newProject'(event) {
   	// Prevent default browser behavior
   	event.preventDefault();
-  	$('#newProjectModal').modal('show');
+    Meteor.call('editProjectModal', null);
   },
 
-  // Still working on this
-  // 'click .editProject'(event) {
-  // 	// Prevent default browser behavior
-  // 	event.preventDefault();
+  'click .editProject'(event) {
+  	// Prevent default browser behavior
+  	event.preventDefault();
 
-  // 	// get value from form element
-  // 	const ids = document.getElementsByName('projectID');
-  // 	var id;
-  // 	for (i = 0; i < ids.length; i++) {
-  // 		if (ids[i].checked){
-  // 			id = ids[i].value;
-  // 		}
-  // 	}
+  	// get value from form element
+  	const ids = document.getElementsByName('projectID');
+  	var id;
+  	for (i = 0; i < ids.length; i++) {
+  		if (ids[i].checked){
+  			id = ids[i].value;
+  		}
+  	}
 
-  // 	$('#newProjectModal').modal('show');
-  // },
+    Meteor.call('editProjectModal', id);
+  },
 });

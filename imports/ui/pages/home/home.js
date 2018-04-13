@@ -1,12 +1,12 @@
-import { Users } from '../../../api/users/users.js';
-import { Projects } from '../../../api/projects/projects.js';
+import { Users } from '/imports/api/users/users.js';
+import { Projects } from '/imports/api/projects/projects.js';
+import { ModalHelper } from '/imports/api/helpers/modal.js';
 
 import './home.html';
 
 import '../../components/nav/nav.js';
 import '../../components/newEmployee/newEmployee.js';
 import '../../components/newProject/newProject.js';
-import '../../components/editProject/editProject.js';
 import '../../components/newMember/newMember.js';
 import '../../components/editTimesheet/editTimesheet.js';
 
