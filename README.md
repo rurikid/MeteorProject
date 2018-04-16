@@ -45,13 +45,19 @@ Tracking and Development of Student Web App
 > Handlebar Guarding Against Logged Out Users & Wrong Roles
 > Implement Timesheet Management and Rendering
 > Improve Stylization
-> Implement Add Member to Project
 > Design Report View
 > Implement update password/email for users
 > Set required fields
 > Catch issues when changing employee roles leaving project without supervisor
 > Validate timesheet insertions (no time overlaps, only 15 minute intervals, only time inputs, no inverted times)
 > Streamline timesheet input (currently throws an error when creating first instance)
+```
+
+**15Apr2018** - mwight
+```
+> Implemented ability to dynamically add employees to a new project
+> Correctly displays employees involved in projects on projects.html
+> Beginning feature to existing employees in a project
 ```
 
 **15Apr2018** - rurikid
