@@ -1,3 +1,8 @@
+<!-- This will eventually be a popup accessible by admins from the 'projects' template. 
+  TODO:
+    Integrate with Database
+    Revise & Simplify Stylization
+-->
 <template name="newProject">
   <div class="modal fade">
     <div class="modal-dialog modal-sm">
@@ -26,6 +31,25 @@
                   {{/each}}
                 </select>
                 <br />
+            </div>
+
+            <div>
+              <label>Employee Name:</label>
+              <button class="add_employee_field"> + </button>
+              <div class="employee_container">
+                <select id="employee" class="employee">
+                  {{#each user in users}}
+                    <!-- {{#unless isSupervisor user.profile.position}} -->
+                      <option value="{{user._id}}" {{isEdit user._id}}>
+                        {{user.profile.firstName}} {{user.profile.lastName}}
+                      </option>
+                      
+                    <!--{{/unless}}-->
+                  {{/each}}
+                </select>
+                <br />
+              </div>
+                
             </div>
             <div>
               <label>Client Name:</label> 
