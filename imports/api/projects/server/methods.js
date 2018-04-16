@@ -1,7 +1,5 @@
 // Methods related to users
 
-// Methods related to users
-
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Projects } from '../projects.js';
@@ -12,17 +10,23 @@ Meteor.methods({
     check(project.name, String);
     check(project.supervisor, String);
     check(project.client, String);
+    //employee
+    //check(project.employees, String);
 
     var name = project.name;
     var supervisor = project.supervisor;
     var client = project.client;
     var budget = project.budget;
+    //var employee = project.employee;
+    var employees = project.employees;
+    employees.push(supervisor);
 
     return Projects.insert({
       name,
       supervisor,
       client,
       budget,
+      employees,
     });
   },
 
