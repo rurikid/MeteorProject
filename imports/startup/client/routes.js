@@ -44,7 +44,7 @@ FlowRouter.route('/login', {
 });
 
 FlowRouter.route('/timesheets', {
-  name: 'timeshees',
+  name: 'timesheets',
   action() {
     BlazeLayout.render('mainLayout', { main: 'timesheets' });
   },

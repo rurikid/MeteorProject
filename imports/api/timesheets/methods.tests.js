@@ -4,21 +4,22 @@
 
 import { Meteor } from 'meteor/meteor';
 import { assert } from 'chai';
-import { Projects } from './projects.js';
+import { Timesheets } from './timesheets.js';
+import { Timechunks } from './timesheets.js';
 import './methods.js';
 
-if (Meteor.isServer) {
-  describe('projects methods', function () {
-    beforeEach(function () {
-      Projects.remove({});
-    });
+// if (Meteor.isServer) {
+//   describe('timesheets methods', function () {
+//     beforeEach(function () {
+//       Timesheets.remove({});
+//     });
 
-    it('can add a new project', function () {
-      const addProject = Meteor.server.method_handlers['projects.insert'];
+//     it('can add a new timesheets', function () {
+//       const addTimesheet = Meteor.server.method_handlers['timesheets.insert'];
 
-      addProject.apply({}, ['FireBird', 'Rurikid', 'Varangian Studios', 1000000]);
+//       addTimesheet.apply({}, ['FireBird', 'Rurikid', 'Varangian Studios', 1000000]);
 
-      assert.equal(Projects.find().count(), 1);
-    });
-  });
-}
+//       assert.equal(Timesheets.find().count(), 1);
+//     });
+//   });
+// }
