@@ -10,22 +10,31 @@ Template.projects.onCreated(function () {
 });
 
 Template.projects.helpers({
+
 	// returns all projects
 	projects() {
 		return Projects.find({});
 	},
+
+
 	// returns all users
 	users() {
 		return Meteor.users.find({});
 	},
+
+
 	// evaluates for admins
 	isAdmin() {
 		return Meteor.user().profile.position === 'Administrator';
 	},
+
+
 	// evaluates for supervisors
 	isSupervisor() {
 		return (Meteor.user().profile.position === 'Administrator' || Meteor.user().profile.position === 'Supervisor');
 	},
+
+
 	// finds and retrieves supervisor name
 	getProjectSupervisor: function(supervisor) {
 		// search for supervisorID
@@ -37,6 +46,7 @@ Template.projects.helpers({
 
 		return (firstName + " " + lastName);
 	},
+
 	// determines if a user belongs to a project
 	isMember: function(projectID) {
 		// search Projects for ProjectID
@@ -46,7 +56,18 @@ Template.projects.helpers({
 		var supervisor = result && result.supervisor;
 
 		return (Meteor.user().profile.position === 'Administrator' || Meteor.user()._id === result.supervisor);
-	}
+	},
+
+  // finds and retrieves employee name
+	getProjectEmployee: function(employee) {
+		var result = Meteor.users.findOne({"_id": employee});
+
+		// known as guarding (are we finding anything in the query)
+		var firstName = result && result.profile && result.profile.firstName;
+		var lastName = result && result.profile && result.profile.lastName;
+
+		return (firstName + " " + lastName);
+	},
 });
 
 Template.projects.events({
