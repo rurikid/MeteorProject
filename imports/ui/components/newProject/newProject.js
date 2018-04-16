@@ -21,7 +21,7 @@ Template.newProject.helpers({
 				supervisor:'', 
 				client:'',
 				budget:'',
-				employee:'',
+				employees:'',
 			}
 		}
 
@@ -101,29 +101,25 @@ Template.newProject.events({
 		event.preventDefault();
 
 		var projectID = Session.get('selectedProjectID');
+		
+		//create NodeList of employee _ids from select form tags
 		var employeesNodeList = document.getElementsByClassName("employee");
 		var employeeList = [];
+		
+		//push form values for "_id" into new employeeList string array
 		for(index = 0; index < employeesNodeList.length; index++)
 		{
 			employeeList.push(employeesNodeList[index].value);
-			console.log(employeeList[index]);
 		}
-
-		console.log("employeeList:");
-		console.log(employeeList);
-
-		
-
 
 		// Get value from form element
     var project = {
       name: $('#projectName').val(),
       supervisor: $('#supervisor').val(),
       client: $('#client').val(),
-	  budget: $('#budget').val(),
-	  //add functionality for multiple employee values dynamically here
-      employees: employeeList,//$('#employee').val(),
-	  //
+      budget: $('#budget').val(),
+      employees: employeeList,
+	  
     }
 
     if (!projectID) {
@@ -176,10 +172,10 @@ Template.newProject.events({
 	//adds new dropdown menu on click of '+'
 	'click .add_employee_field':function(users) {
 		event.preventDefault;
-
 		var userList = Meteor.users.find({}).fetch();
- 
 		var wrapper = $(".employee_container");
+		
+		//appends html for wrapper.append
 		var html = '';
 		html += '<div><select id="employee" class="employee">';
 
@@ -189,9 +185,6 @@ Template.newProject.events({
 			var userFirstName = userList[index].profile.firstName;
 			var userLastName = userList[index].profile.lastName;
 			var userID = userList[index]._id;
-			
-			//append select id to reflect index Number
-			//html += '<div><select id="employee' + index + '">';
 
 			//if not a supervisor/admin
 			if(!(userList[index].profile.position == 'Supervisor') || !(userList[index].profile.position == 'Administrator' ))
@@ -200,7 +193,6 @@ Template.newProject.events({
 				html +='<option value="'+ userID + '">';
 				html += userFirstName + ' ' + userLastName;
 				html +='</option>';
-				//console.log(userList[index].profile.position);
 			}
 			
 		}
