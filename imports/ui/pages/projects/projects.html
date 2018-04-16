@@ -6,7 +6,7 @@
 	{{> nav}}
 	<div class="card">
 		<div class="card-body">
-    	<div style="padding: 0px 10px 0px 10px;">
+    	<div style="padding: 0px 10px 0px 10px; ">
 
 <!-- Search Function Not Implemented
       	<div class="row">
@@ -71,7 +71,7 @@
 								<th>Client</th>
 								<th>Budget</th>
 								<th>Your Role</th>
-								<th>Number of Employees</th>
+								<th>Employees in project</th>
 	            </tr>
 	          </thead>
 	          <tbody>
@@ -87,7 +87,14 @@
 										<td>{{client}}</td>
 										<td>{{budget}}</td>
 										<td>{{getUserRole}}</td>
-										<td>{{getNumEmployees}}</td>
+										
+										<td>
+										{{#each value in employees}}
+											{{getProjectEmployee value}}
+											<br>
+										{{/each}}
+										
+										</td>
 									</tr>
 								{{/if}}
 							{{/each}}
