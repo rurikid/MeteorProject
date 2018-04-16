@@ -1,5 +1,7 @@
 // Methods related to users
 
+// Methods related to users
+
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Projects } from '../projects.js';

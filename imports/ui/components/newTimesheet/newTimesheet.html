@@ -1,26 +1,26 @@
-<template name="newProject">
+<template name="newTimesheet">
   <div class="modal fade">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">{{isNew}}</h4>
+          <h4 class="modal-title">Add New Timesheet</h4>
         </div>
 
         <div class="modal-body">
           <div style="padding-bottom: 10px;">
             <div>
-              <label>Project Name:</label>
-                <input type="text" id="projectName" placeholder="Project Name" value={{project.name}} />
+              <label>Date:</label>
+                <input type="date" id="date" />
                 <br />
             </div>
             <div>
-              <label>Supervisor Name:</label>
-                <select id="supervisor">
-                  {{#each user in users}}
-                    {{#if isSupervisor user.profile.position}}
-                      <option value="{{user._id}}" {{isEdit user._id}}>
-                        {{user.profile.firstName}} {{user.profile.lastName}}
+              <label>Project Name:</label>
+                <select id="project">
+                  {{#each projects}}
+                    {{#if isMember _id}}
+                      <option value="{{_id}}">
+                        {{name}}
                       </option>
                     {{/if}}
                   {{/each}}
@@ -28,13 +28,13 @@
                 <br />
             </div>
             <div>
-              <label>Client Name:</label> 
-                <input type="text" id="client" placeholder="Client Name" value={{project.client}} />
+              <label>Start Time:</label> 
+              	<input type="text" id="startTime" placeholder="HH:mm" />
                 <br />
             </div>
             <div>
-              <label>Budget:</label> 
-                <input type="number" id="budget" placeholder="Budget" value={{project.budget}} />
+              <label>End Time:</label> 
+              	<input type="text" id="endTime" placeholder="HH:mm" />
                 <br />
             </div>
           </div>

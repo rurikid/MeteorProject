@@ -70,6 +70,7 @@ Template.newProject.helpers({
 
 Template.newProject.events({
   'click #back': function(event){
+		// Prevent default browser behavior
     event.preventDefault();
 
 		// Clear form
@@ -83,6 +84,7 @@ Template.newProject.events({
   },
 
   'click #clear': function(event){
+		// Prevent default browser behavior
     event.preventDefault();
     
 		// Clear form
@@ -92,8 +94,8 @@ Template.newProject.events({
 		budget.value = '';
   },
 
-	'click #submit'(event){
-		// Prevent default browser form submit
+	'click #submit': function(event){
+		// Prevent default browser behavior
 		event.preventDefault();
 
 		var projectID = Session.get('selectedProjectID');

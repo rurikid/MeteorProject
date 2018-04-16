@@ -1,4 +1,4 @@
-// Tests for projects methods
+// Tests for timesheets methods
 //
 // https://guide.meteor.com/testing.html
 

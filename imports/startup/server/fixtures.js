@@ -3,6 +3,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Users } from '../../api/users/users.js';
 import { Projects } from '../../api/projects/projects.js';
+import { Timesheets } from '../../api/timesheets/timesheets.js';
 
 Meteor.startup(() => {
   // if the Users collection is empty
