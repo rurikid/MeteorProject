@@ -30,9 +30,9 @@ Template.nav.events({
     event.preventDefault();
     FlowRouter.go('/projects');
   },
-  'click .timesheet': function(event){
+  'click .timesheets': function(event){
     event.preventDefault();
-    FlowRouter.go('/timesheet');
+    FlowRouter.go('/timesheets');
   },
   'click .team': function(event){
     event.preventDefault();

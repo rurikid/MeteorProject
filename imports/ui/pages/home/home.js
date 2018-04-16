@@ -9,10 +9,11 @@ import '../../components/newEmployee/newEmployee.js';
 import '../../components/newProject/newProject.js';
 import '../../components/newMember/newMember.js';
 import '../../components/editTimesheet/editTimesheet.js';
+import '../../components/newTimesheet/newTimesheet.js';
 
 import '../login/login.js';
 import '../teamTimesheet/teamTimesheet.js';
-import '../timesheet/timesheet.js';
+import '../timesheet/timesheets.js';
 import '../profile/profile.js';
 import '../projects/projects.js';
 import '../team/team.js';
@@ -48,9 +49,9 @@ Template.home.events({
     event.preventDefault();
     FlowRouter.go('/projects');
   },
-  'click .timesheet': function(event){
+  'click .timesheets': function(event){
     event.preventDefault();
-    FlowRouter.go('/timesheet');
+    FlowRouter.go('/timesheets');
   },
   'click .team': function(event){
     event.preventDefault();

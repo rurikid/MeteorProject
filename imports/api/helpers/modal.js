@@ -11,4 +11,9 @@ Meteor.methods({
 		Session.set('selectedEmployeeID', id);
 		Modal.show('newEmployee');
 	},
+
+	editTimesheetModal: function(id) {
+		Session.set('selectedTimesheetID', id);
+		Modal.show('newTimesheet');
+	},
 });

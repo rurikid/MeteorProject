@@ -6,3 +6,6 @@ import '../../api/projects/server/methods.js';
 import '../../api/users/methods.js';
 import '../../api/users/server/publications.js';
 import '../../api/users/server/methods.js';
+import '../../api/timesheets/methods.js';
+import '../../api/timesheets/server/publications.js';
+import '../../api/timesheets/server/methods.js';

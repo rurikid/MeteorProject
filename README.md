@@ -43,12 +43,23 @@ Tracking and Development of Student Web App
 **TODO**
 ```
 > Handlebar Guarding Against Logged Out Users & Wrong Roles
-> Implement Timesheets Collection
 > Implement Timesheet Management and Rendering
 > Improve Stylization
 > Implement Add Member to Project
 > Design Report View
 > Implement update password/email for users
+> Set required fields
+> Catch issues when changing employee roles leaving project without supervisor
+> Validate timesheet insertions (no time overlaps, only 15 minute intervals, only time inputs, no inverted times)
+> Streamline timesheet input (currently throws an error when creating first instance)
+```
+
+**15Apr2018** - rurikid
+```
+> implemented timesheets and timechunks collection
+> implemented add/edit modal dialogue for new timesheets
+> started timesheet rendering (not yet tied to database)
+> started user position logic for timesheets
 ```
 
 **13Apr2018** - rurikid

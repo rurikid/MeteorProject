@@ -1,4 +1,4 @@
-// Tests for links methods
+// Tests for projects methods
 //
 // https://guide.meteor.com/testing.html
 
