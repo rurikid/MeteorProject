@@ -13,13 +13,13 @@ Template.login.events({
      // Calling the loginWithPassword function on the user
      Meteor.loginWithPassword(email, password, function(error) {
          if (error) {
-          // Returning a sweetAlert
+          // return login failed alert
           return swal({
                 title: "Email or password incorrect",
                 text: "Please try again",
                 timer: 1700,
                 showConfirmButton: false,
-                type: "error"
+                icon: "error"
             });
          } else {
            FlowRouter.go('/');

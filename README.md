@@ -34,6 +34,12 @@ Tracking and Development of Student Web App
 
 [Meteor Modal Dialogs](https://experimentingwithcode.com/modal-dialogs-part-2/)
 
+[Moment.js](http://momentjs.com/)
+
+[RegExr](https://regexr.com/)
+
+[Handlebars.js](http://handlebarsjs.com/)
+
 **Notes**
 ```
 > To access unimplemented components
@@ -42,15 +48,25 @@ Tracking and Development of Student Web App
 
 **TODO**
 ```
-> Handlebar Guarding Against Logged Out Users & Wrong Roles
-> Implement Timesheet Management and Rendering
-> Improve Stylization
-> Design Report View
-> Implement update password/email for users
-> Set required fields
-> Catch issues when changing employee roles leaving project without supervisor
-> Validate timesheet insertions (no time overlaps, only 15 minute intervals, only time inputs, no inverted times)
-> Streamline timesheet input (currently throws an error when creating first instance)
+> Implement Timesheet Management and Rendering (rurikid)(Required Use Case)
+> Improve add/edit member in project functionality (mwight)(Required Use Case)
+> Design Report View (EASY)(Required Use Case)
+> Implement Reports (MODERATE)(Required Use Case)
+> Validate project fields (MODERATE)(Required Use Case)
+> Catch issues when changing employee roles leaving project without supervisor (MODERATE)(Required Use Case)
+> Improve Stylization (EASY)(Would Be Nice)
+> Handlebar Guarding Against Logged Out Users & Wrong Roles (EASY)(Necessary)
+> Implement update password/email for users (HARD)(Would Be Nice)
+> Implement sort for columns (HARD)(Would Be Nice)
+```
+
+**16Apr2018** - rurikid
+```
+> reworked how timesheets are stored; now contain a timechunks array, instead of using timechunks collection
+> included Moment.js to help manage timesheet validation and rendering
+> implemented timesheet validation
+> implemented employee validation
+> sorted TODO by necessity and difficulty
 ```
 
 **15Apr2018** - mwight

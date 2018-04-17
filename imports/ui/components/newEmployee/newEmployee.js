@@ -2,6 +2,23 @@ import { Users } from '/imports/api/users/users.js';
 import { Meteor } from 'meteor/meteor';
 import './newEmployee.html';
 
+// enforces form completeness and proper standards
+function validateEmployee(employee) {
+
+  // evaluates for void fields
+  if (employee.firstName === '' ||
+      employee.lastName === '' ||
+      employee.position === '' ||
+      employee.salary === '' ||
+      employee.payData === '' ||
+      employee.email === '' ||
+      employee.username === '' ||
+      employee.password === '' ||
+      employee.confPassword === '') {
+    return "Please complete all fields!";
+  }
+}
+
 Template.newEmployee.onCreated(function () {
   Meteor.subscribe('users.all');
 });
@@ -126,6 +143,18 @@ Template.newEmployee.events({
           icon: "error"
         });
       }
+    }
+
+    var checkEmployee = validateEmployee(employee);
+    if (checkEmployee) {
+      return swal({
+        title: "Error",
+        text: checkEmployee,
+        button: {
+          text: "Confirm",
+        },
+        icon: "error"
+      });
     }
 
     if (!employeeID) {

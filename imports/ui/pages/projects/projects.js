@@ -10,31 +10,26 @@ Template.projects.onCreated(function () {
 });
 
 Template.projects.helpers({
-
 	// returns all projects
 	projects() {
 		return Projects.find({});
 	},
-
 
 	// returns all users
 	users() {
 		return Meteor.users.find({});
 	},
 
-
 	// evaluates for admins
 	isAdmin() {
 		return Meteor.user().profile.position === 'Administrator';
 	},
 
-
 	// evaluates for supervisors
 	isSupervisor() {
 		return (Meteor.user().profile.position === 'Administrator' || Meteor.user().profile.position === 'Supervisor');
 	},
-
-
+  
 	// finds and retrieves supervisor name
 	getProjectSupervisor: function(supervisor) {
 		// search for supervisorID
