@@ -68,8 +68,6 @@ Template.newProject.helpers({
 		}
 	},
 	//dynamic employee add
-
-
 });
 
 Template.newProject.events({
@@ -96,8 +94,8 @@ Template.newProject.events({
 		budget.value = '';
   },
 
-	'click #submit'(event){
-		// Prevent default browser form submit
+	'click #submit': function(event){
+		// Prevent default browser behavior
 		event.preventDefault();
 
 		var projectID = Session.get('selectedProjectID');
@@ -107,8 +105,7 @@ Template.newProject.events({
 		var employeeList = [];
 		
 		//push form values for "_id" into new employeeList string array
-		for(index = 0; index < employeesNodeList.length; index++)
-		{
+		for (index = 0; index < employeesNodeList.length; index++)	{
 			employeeList.push(employeesNodeList[index].value);
 		}
 
@@ -169,38 +166,38 @@ Template.newProject.events({
 	  Modal.hide('newProject');
 	},
 
-	//adds new dropdown menu on click of '+'
-	'click .add_employee_field':function(users) {
+	// adds new dropdown menu on click of '+'
+	'click .add_employee_field': function(event) {
 		event.preventDefault;
 		var userList = Meteor.users.find({}).fetch();
 		var wrapper = $(".employee_container");
 		
-		//appends html for wrapper.append
+		// appends html for wrapper.append
 		var html = '';
 		html += '<div><select id="employee" class="employee">';
 
-		//for each user in users
-		for (index = 0 ;index < userList.length; index++ )
-		{
+		// for each user in users
+		for (index = 0; index < userList.length; index++) {
+
 			var userFirstName = userList[index].profile.firstName;
 			var userLastName = userList[index].profile.lastName;
 			var userID = userList[index]._id;
 
-			//if not a supervisor/admin
-			if(!(userList[index].profile.position == 'Supervisor') || !(userList[index].profile.position == 'Administrator' ))
-			{
+			// if not a supervisor/admin
+			if (!(userList[index].profile.position == 'Supervisor') || 
+				  !(userList[index].profile.position == 'Administrator' )) {
 				
 				html +='<option value="'+ userID + '">';
 				html += userFirstName + ' ' + userLastName;
 				html +='</option>';
 			}
-			
 		}
+
 		html += '</select><a href="#" class="delete">Delete</a></div>';
 		$(wrapper).append(html);
 		console.log (html);
 
-		$(wrapper).on("click", ".delete", function(e){
+		$(wrapper).on("click", ".delete", function(e) {
 			e.preventDefault();
 			$(this).parent('div').remove();
 		})

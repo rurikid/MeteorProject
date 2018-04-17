@@ -3,43 +3,33 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Timesheets } from '../timesheets.js';
-import { Timechunks } from '../timesheets.js';
 
 Meteor.methods({
 
 	insertTimesheet: function(timesheet) {
-		// check(timesheet.date, String);
+		check(timesheet.date, String);
 		check(timesheet.employee, String);
+		check(timesheet.timechunk.project, String);
+		check(timesheet.timechunk.startTime, String);
+		check(timesheet.timechunk.endTime, String);
 
 		var date = timesheet.date;
 		var employee = timesheet.employee;
+		var timechunk = [timesheet.timechunk];
 
-		var timesheetCheck = Timesheets.findOne({'date': date, 'employee': employee});
-
-		if (!timesheetCheck) {
-			return Timesheets.insert({
-				date,
-				employee,
-			});
-		}
+		return Timesheets.insert({'date': date,'employee': employee,'timechunks': timechunk});
 	},
 
-	insertTimechunk: function(timechunk) {
+	insertTimechunk: function(timechunk, date, memberID) {
+
 		check(timechunk.project, String);
-		// check(timechunk.startTime, String);
-		// check(timechunk.endTime, String);
-		check(timechunk.timesheet, String);
+		check(timechunk.startTime, String);
+		check(timechunk.endTime, String);
 
-		var project = timechunk.project;
-		var startTime = timechunk.startTime;
-		var endTime = timechunk.endTime;
-		var timesheet = timechunk.timesheet;
+		var timesheet = Timesheets.findOne({'date': date, 'employee': memberID});
 
-		return Timechunks.insert({
-			timesheet,
-			project,
-			startTime,
-			endTime,
-		});
+		return Timesheets.update(timesheet._id, {$push: {
+			'timechunks': timechunk,
+		}});
 	},
 })

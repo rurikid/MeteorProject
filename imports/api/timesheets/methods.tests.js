@@ -5,7 +5,6 @@
 import { Meteor } from 'meteor/meteor';
 import { assert } from 'chai';
 import { Timesheets } from './timesheets.js';
-import { Timechunks } from './timesheets.js';
 import './methods.js';
 
 // if (Meteor.isServer) {

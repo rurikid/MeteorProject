@@ -71,7 +71,7 @@
 								<th>Client</th>
 								<th>Budget</th>
 								<th>Your Role</th>
-								<th>Employees in project</th>
+								<th>Employees in Project</th>
 	            </tr>
 	          </thead>
 	          <tbody>
@@ -87,13 +87,11 @@
 										<td>{{client}}</td>
 										<td>{{budget}}</td>
 										<td>{{getUserRole}}</td>
-										
 										<td>
-										{{#each value in employees}}
-											{{getProjectEmployee value}}
-											<br>
-										{{/each}}
-										
+											{{#each value in employees}}
+												{{getProjectEmployee value}}
+												<br>
+											{{/each}}
 										</td>
 									</tr>
 								{{/if}}
