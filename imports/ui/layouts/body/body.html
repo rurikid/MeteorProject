@@ -1,3 +1,7 @@
 <template name="mainLayout">
-	{{> Template.dynamic template=main}}
+	{{#if currentUser}}
+		{{> Template.dynamic template=main}}
+	{{else}}
+		{{> login}}
+	{{/if}}
 </template>

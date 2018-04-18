@@ -18,7 +18,7 @@
               <label>Project Name:</label>
                 <select id="project">
                   {{#each project in projects}}
-                    {{#if isMember _id}}
+                    {{#if isMember project._id}}
                       <option value="{{project._id}}" {{isEdit project._id}}>
                         {{project.name}}
                       </option>
@@ -28,12 +28,12 @@
                 <br />
             </div>
             <div>
-              <label>Start Time:</label> 
+              <label>Start Time:</label>
               	<input type="text" id="startTime" maxlength="5" placeholder="HH:mm" value="{{timechunk.startTime}}" />
                 <br />
             </div>
             <div>
-              <label>End Time:</label> 
+              <label>End Time:</label>
               	<input type="text" id="endTime" maxlength="5" placeholder="HH:mm" value="{{timechunk.endTime}}" />
                 <br />
             </div>
