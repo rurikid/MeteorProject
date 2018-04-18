@@ -9,3 +9,6 @@ import '../../api/users/server/methods.js';
 import '../../api/timesheets/methods.js';
 import '../../api/timesheets/server/publications.js';
 import '../../api/timesheets/server/methods.js';
+import '../../api/timechunks/methods.js';
+import '../../api/timechunks/server/publications.js';
+import '../../api/timechunks/server/methods.js';

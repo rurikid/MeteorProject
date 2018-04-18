@@ -1,5 +1,5 @@
-// Methods related to timesheets
+// Methods related to timechunks
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Timesheets } from './timesheets.js';
+import { Timechunks } from './timechunks.js';

@@ -1,5 +1,6 @@
 import { Users } from '/imports/api/users/users.js';
 import { Projects } from '/imports/api/projects/projects.js';
+import { Timesheets } from '/imports/api/timesheets/timesheets.js';
 import { ModalHelper } from '/imports/api/helpers/modal.js';
 
 import './home.html';

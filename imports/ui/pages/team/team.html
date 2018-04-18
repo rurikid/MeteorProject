@@ -3,69 +3,7 @@
     Integrate with Database
     Revise & Simplify Stylization
 -->
-
 <template name="team">
-    {{> nav}}
-    <div>
-        <select id="project-select">
-            <option value="select_project" selected>Select a Project</option>
-            {{#each projects}}
-              <option name = "projects" value="{{_id}}">{{name}}</option>
-            {{/each}}
-          </select>
-    </div>
-
-    {{#if showMembers}}
-      {{> TeamTableHeader}}
-    {{/if}}        
-           
-</template>
-
-<template name="TeamTableHeader">  
-    <div>
-        <h2 id="component-title">
-            Team Members
-          </h2>
-
-        <table id="dataview-table" class="table table-striped">
-            <thead id="dataview-table-header" style="background-color:#d3a944">
-              <tr id="dataview-table-header-row" style="width:53px;">
-                <th class="th-sortable" data-sort="user.profile.name">
-                  First Name
-                </th>
-                <th class="th-sortable" data-sort="user.profile.nameL">
-                  Last Name
-                </th>
-                <th class="th-sortable" data-sort="user.profile.email">
-                  Email
-                </th>
-              </tr>
-            </thead>
-            <tbody id="dataview-table-items">
-              {{#each tableItems}} 
-                {{> TeamMemberTableItems}} 
-              {{/each}}
-            </tbody>
-          </table>
-    </div>
-</template>
-
-<template name="TeamMemberTableItems">
-    <tr id="dataview-table-items-row">
-      <td>
-        {{profile.firstName}}
-      </td>
-      <td>
-        {{profile.lastName}}
-      </td>
-      <td>
-        {{emails.[0].address}}
-      </td>
-    </tr>
-  </template>
-
-
-<!-- <template name="team">
   {{> nav}}
   <div class="card-body" style="height:800px;">
     <div>
@@ -119,4 +57,4 @@
       </div>
     </div>
   </div>
-</template> -->
+</template>

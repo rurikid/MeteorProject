@@ -62,6 +62,16 @@ Tracking and Development of Student Web App
 > Implement sort for columns (HARD)(Would Be Nice)
 ```
 
+**17Apr2018** - rurikid
+```
+> implemented timesheet view
+> implemented timesheet edit and delete
+> some stylization changes
+> allowed sysadmin creation on startup at /startup/server/fixtures.js
+> reverted to timechunk collections
+> implemented timesheet user validation
+```
+
 **16Apr2018** - rurikid
 ```
 > reworked how timesheets are stored; now contain a timechunks array, instead of using timechunks collection

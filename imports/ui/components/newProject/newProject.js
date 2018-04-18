@@ -45,6 +45,7 @@ Template.newProject.helpers({
 
 		return (firstName + " " + lastName);
 	},
+	// returns selected for appropriate supervisor
 	isEdit: function(userID) {
 		var projectID = Session.get('selectedProjectID');
 		
@@ -58,6 +59,7 @@ Template.newProject.helpers({
 				}
 		}
 	},
+	// returns appropriate text for edit/new
 	isNew: function() {
 		var projectID = Session.get('selectedProjectID');
 
@@ -119,6 +121,7 @@ Template.newProject.events({
 	  
     }
 
+    // if not in edit mode
     if (!projectID) {
 			Meteor.call('insertProject', project, (error) => {
 				if (error) {

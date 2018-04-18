@@ -1,11 +1,6 @@
-<!-- This page allows an employee to update and view their timesheets
-  TODO:
-    Integrate with Database
-    Implement stylization
--->
 <template name="timesheets">
   {{> nav}}
-  <div class="card">
+  <div class="card container">
     <div class="card-body">
       <div style="padding: 0px 10px 0px 10px;">
         <div class="row">
@@ -13,11 +8,11 @@
             <div style="padding-bottom:10px;padding-top:10px;font-size:32px;margin-left:10%;">
             <strong>Your Timesheets</strong>
                   <!-- Week Select Buttons -->
-                  <button class="btn btn-dark" style="margin-left:10%;" name="previousWeek">&lt;-</button>
+                  <button class="btn btn-dark" style="margin-left:5%;" name="previousWeek">&lt;-</button>
                   Current Week
                   <button class="btn btn-dark" name="previousWeek">-&gt;</button>
                   <!-- Edit Timesheet Button -->
-                  <a href="#" class="btn btn-dark, editTimesheet" style="margin-left:10%;"><button class="btn btn-dark" id="editTimesheet" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
+                  <a href="#" class="btn btn-dark editTimesheet" style="margin-left:5%;"><button class="btn btn-dark" id="editTimesheet" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
                   </a>
                   <!-- Delete Timesheet Button -->
                   <a href="#" class="btn btn-danger, deleteTimesheet">
@@ -27,7 +22,7 @@
                   </a>
                   <!-- Add New Timesheet Button -->
                   <a class="newTimesheet" href="#">
-                    <button class="btn btn-primary" id="newTimesheet" type="button" style="color:white;background-color:#d3a944;font-size:22px;margin-left:10px;border:none;">
+                    <button class="btn btn-primary" id="newTimesheet" type="button" style="color: white; background-color: #d3a944; font-size: 22px;margin-left: 10px; border: none;">
                     <i class="icon ion-android-add" style="margin-left:0px;">
                     </i>
                       Add New Timesheet
@@ -39,81 +34,57 @@
 
         <!-- Begin Timesheet Table -->
         <div class="table-responsive">
-          <table class="table">
-            <thead style="background-color:#d3a944">
-              <tr>
-                {{#if isTimely}}
-                  <th style="width:53px;">Select</th>
-                {{/if}}
-                <th>Date</th>
-                <th>Total Hours</th>
-                <th colspan="4">00:00</th>
-                <th colspan="4">01:00</th>
-                <th colspan="4">02:00</th>
-                <th colspan="4">03:00</th>
-                <th colspan="4">04:00</th>
-                <th colspan="4">05:00</th>
-                <th colspan="4">06:00</th>
-                <th colspan="4">07:00</th>
-                <th colspan="4">08:00</th>
-                <th colspan="4">09:00</th>
-                <th colspan="4">10:00</th>
-                <th colspan="4">11:00</th>
-                <th colspan="4">12:00</th>
-                <th colspan="4">13:00</th>
-                <th colspan="4">14:00</th>
-                <th colspan="4">15:00</th>
-                <th colspan="4">16:00</th>
-                <th colspan="4">17:00</th>
-                <th colspan="4">18:00</th>
-                <th colspan="4">19:00</th>
-                <th colspan="4">20:00</th>
-                <th colspan="4">21:00</th>
-                <th colspan="4">22:00</th>
-                <th colspan="4">23:00</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>4/15/2018</td>
-                <td>7.5</td>
-                <td colspan="40"></td>
-                <td colspan="13" bgcolor="d8d8d8">Project Alpha</td>
-                <td colspan="2"></td>
-                <td colspan="8" bgcolor="d8d8d8">Project Beta</td>
-                <td colspan="5"></td>
-                <td colspan="13" bgcolor="d8d8d8">Project Delta</td>
-                <td colspan="12"></td>
-              </tr>
-            </tbody>
-          </table>
+          {{#each timesheet in timesheets}}
+            {{#if isOwner timesheet.employee}}
+              <table class="table" style="font-size: 12px;">
+                <thead style="background-color: #d3a944">
+                    <tr>
+                      <th>{{timesheet.date}}</th>
+                      <th>Total Hours:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="2">
+                      <!-- Begin Timechunks Table -->
+                      <div class="table-responsive">
+                        <table class="table" style="font-size: 12px;">
+                          <thead style="background-color: #d3a944">
+                            <tr>
+                              {{#if isTimely timesheet.date}}
+                                <th></th>
+                              {{/if}}
+                              <th>Project</th>
+                              <th>Hours</th>
+                              <th>Start Time</th>
+                              <th>End Time</th>
+                            </tr>
+                          </thead>
+                           <tbody>
+                            {{#each timechunk in timechunks timesheet._id}}
+                              <tr>
+                                {{#if isTimely timesheet.date}}
+                                  <td>
+                                    <input class="select-radio" type="radio" name="timechunkID" value="{{timechunk._id}}">
+                                  </td>
+                                {{/if}}
+                                <td>{{getProjectName timechunk.project}}</td>
+                                <td>5</td>
+                                <td>{{timechunk.startTime}}</td>
+                                <td>{{timechunk.endTime}}</td>
+                              </tr>
+                            {{/each}}
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            {{/if}}
+          {{/each}}
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<!--   <div class="timesheetNav">
-    <button name="previousWeek">&lt;-</button>
-    Current Week
-    <button name="previousWeek">-&gt;</button>
-  </div>
-  <p>
-    <table border='1' style='solid'>
-      <tr>
-        <th colspan='2'></th><th colspan='4'>9 AM</th><th colspan='4'>10 AM</th><th colspan='4'>11 AM</th>
-      </tr>
-      <tr>
-        <th>Date</th>
-        <th>Total (hrs)</th>
-        <td>00</td><td>15</td><td>30</td><td>45</td><td>00</td><td>15</td><td>30</td><td>45</td><td>00</td><td>15</td><td>30</td><td>45</td>
-      </tr>
-      <tr>
-        <th>3/1/2018</th><th>2</th><td bgcolor='red'></td><td bgcolor='red'></td><td bgcolor='red'></td><td bgcolor='red'></td><td bgcolor='red'></td><td bgcolor='red'></td><td bgcolor='red'></td><td bgcolor='red'></td><td></td><td></td><td></td><td></td>
-      </tr>
-      <tr>
-        <th>3/2/2018</th><th>2.25</th><td></td><td></td><td></td><td bgcolor='blue'></td><td bgcolor='blue'></td><td bgcolor='blue'></td><td bgcolor='blue'></td><td bgcolor='blue'></td><td bgcolor='blue'></td><td bgcolor='blue'></td><td bgcolor='blue'></td><td bgcolor='blue'></td>
-      </tr>
-    </table>
-  </p>
-</template> -->
