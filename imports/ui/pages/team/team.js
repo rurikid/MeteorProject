@@ -33,6 +33,25 @@ Template.team.helpers({
 	},
 });
 
+Template.TeamTableHeader.events({
+
+    'click .editProject'(event) {
+        // Prevent default browser behavior
+        event.preventDefault();
+  
+        var projectId = Session.get("projectId");
+        // // get value from form element
+        // const ids = document.getElementsByName('projectID');
+        // var id;
+        // for (i = 0; i < ids.length; i++) {
+        //     if (ids[i].checked){
+        //         id = ids[i].value;
+        //     }
+        // }
+  
+      Meteor.call('editProjectModal', projectId);
+    }
+});
 Template.TeamTableHeader.helpers({
     tableItems() {
         var projectId = Session.get("projectId");
@@ -49,5 +68,10 @@ Template.TeamTableHeader.helpers({
     "showMembers": function() {
         console.log("Inside Team Table Members");
 		return Session.get("showMembers");
+    },
+    
+    	// evaluates for supervisors
+	isSupervisor() {
+		return (Meteor.user().profile.position === 'Administrator' || Meteor.user().profile.position === 'Supervisor');
 	},
 });
