@@ -2,8 +2,10 @@
 Tracking and Development of Student Web App
 
 **[Live Preview](http://www.rurikid.com/meteor.html)**
+--------------------------------------------
 
 **Installation**
+--------------------------------------------
 ```
 > Install Meteor & NPM
 > git clone https://github.com/rurikid/meteorproject
@@ -13,32 +15,15 @@ Tracking and Development of Student Web App
 ```
 
 **Important Reading**
+--------------------------------------------
 
-[Install Mongo](https://docs.mongodb.com/manual/administration/install-community/)
-
-[MongoDB Tutorial](https://www.tutorialspoint.com/mongodb/index.htm)
-
-[Blaze Tutorial](http://blazejs.org/guide/introduction.html)
-
-[Application Structure](https://guide.meteor.com/structure.html)
-
-[Official Meteor Tutorial](https://www.meteor.com/tutorials/blaze/creating-an-app)
-
-[Getting Started with Meteor](https://themeteorchef.com/tutorials/getting-started-with-meteor)
-
-[Your First Meteor Application](http://meteortips.com/first-meteor-tutorial/)
-
-[Your Second Meteor Application](http://meteortips.com/second-meteor-tutorial/)
-
-[SweetAlert Documentation](https://sweetalert.js.org/docs/)
-
-[Meteor Modal Dialogs](https://experimentingwithcode.com/modal-dialogs-part-2/)
-
-[Moment.js](http://momentjs.com/)
-
-[RegExr](https://regexr.com/)
-
-[Handlebars.js](http://handlebarsjs.com/)
+Documentation | Node.js | Tutorials 
+-----------------------|---------|----------
+[Application Structure](https://guide.meteor.com/structure.html) | [Handlebars.js](http://handlebarsjs.com/) | [Install Mongo](https://docs.mongodb.com/manual/administration/install-community/)
+[Blaze Tutorial](http://blazejs.org/guide/introduction.html) | [Moment.js](http://momentjs.com/) | [Official Meteor Tutorial](https://www.meteor.com/tutorials/blaze/creating-an-app)
+[SweetAlert Documentation](https://sweetalert.js.org/docs/) | [Meteor Modal Dialogs](https://experimentingwithcode.com/modal-dialogs-part-2/) | [Your First Meteor Application](http://meteortips.com/first-meteor-tutorial/)
+[MongoDB Tutorial](https://www.tutorialspoint.com/mongodb/index.htm) | | [Your Second Meteor Application](http://meteortips.com/second-meteor-tutorial/)
+[RegExr](https://regexr.com/) | | [Getting Started with Meteor](https://themeteorchef.com/tutorials/getting-started-with-meteor)
 
 **Notes**
 ```
@@ -47,8 +32,8 @@ Tracking and Development of Student Web App
 ```
 
 **TODO**
+--------------------------------------------
 ```
-> Implement Timesheet Management and Rendering (rurikid)(Required Use Case)
 > Improve add/edit member in project functionality (mwight)(Required Use Case)
 > Design Report View (EASY)(Required Use Case)
 > Create Starting Database within startup/server/fixtures.js (EASY)(Required Use Case)
@@ -57,9 +42,23 @@ Tracking and Development of Student Web App
 > Catch issues when changing employee roles leaving project without supervisor (MODERATE)(Required Use Case)
 > Evaluate Functionality (EASY)(Would Be Nice)
 > Improve Stylization (EASY)(Would Be Nice)
-> Handlebar Guarding Against Logged Out Users & Wrong Roles (EASY)(Necessary)
 > Implement update password/email for users (HARD)(Would Be Nice)
 > Implement sort for columns (HARD)(Would Be Nice)
+```
+
+**Patch Notes**
+--------------------------------------------
+**18Apr2018** - rurikid
+```
+> timesheets now show number of hours worked per day and per timechunk
+> completed timechunk overlap validation
+> implemented previous and next week view functionality
+> guarded access against logged out users
+```
+
+**17Apr2018** - msylveus
+```
+> uploaded style and code for team
 ```
 
 **17Apr2018** - rurikid

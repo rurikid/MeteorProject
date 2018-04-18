@@ -16,7 +16,17 @@ Template.timesheets.onCreated(function () {
 Template.timesheets.helpers({
   // returns all user timesheets
   timesheets() {
-    return Timesheets.find({});
+    var timesheets = [];
+    var result = Timesheets.find({'employee': Meteor.user()._id});
+    
+    var targetWeek = Session.get('selectedTargetWeek');
+
+    result.forEach(function (doc) {
+      if (moment(doc.date).week() === (moment(targetWeek).week())) {
+        timesheets.push(doc);
+      }
+    });
+    return timesheets;
   },
   // returns all associated timechunks
   timechunks: function(id) {
@@ -40,9 +50,69 @@ Template.timesheets.helpers({
   isOwner: function(timesheetID) {
     return (timesheetID === Meteor.user()._id);
   },
+  // returns number of hours worked in a day
+  getDailyHours: function(timesheetID) {
+    var timechunks = Timechunks.find({'timesheet': timesheetID});
+    var hours = 0;
+
+    timechunks.forEach(function (doc) {
+      var start = doc.startTime.split(':');
+      var end = doc.endTime.split(':');
+
+      var total = (Number(end[0]) * 60 + Number(end[1])) - (Number(start[0]) * 60 + Number(start[1]));
+
+      hours = hours + (total / 60);
+
+    }, function(error) {
+      alert(error.error);
+    })
+    return hours;
+  },
+  // returns number of hours worked in a timechunk
+  getTimechunkHours: function(startTime, endTime) {
+    var start = startTime.split(':');
+    var end = endTime.split(':');
+
+    var total = (Number(end[0]) * 60 + Number(end[1])) - (Number(start[0]) * 60 + Number(start[1]));
+
+    return total / 60;
+  },
+  // returns target view week
+  getTargetWeek: function() {
+    var targetWeek = Session.get('selectedTargetWeek');
+
+    if (!targetWeek) {
+      var newWeek = moment().format("YYYY-MM-DD");
+      Session.set('selectedTargetWeek', newWeek);
+      targetWeek = newWeek;
+      console.log("!targetWeek");
+    }
+
+    console.log('get ' + targetWeek);
+    return moment(targetWeek).startOf('week').format("MMMM Do YYYY");
+  },
+  getHumanDate: function(date) {
+    return (moment(date).format('dddd, MMMM Do YYYY'));
+  }
 })
 
 Template.timesheets.events({
+  'click .previousWeek'(event) {
+    event.preventDefault();
+
+    var targetWeek = Session.get('selectedTargetWeek');
+    var newWeek = moment(moment(targetWeek).subtract(1, 'week')).format('YYYY-MM-DD');
+    Session.set('selectedTargetWeek', newWeek);
+  },
+  'click .nextWeek'(event) {
+    event.preventDefault();
+
+    var targetWeek = Session.get('selectedTargetWeek');
+    if (moment(targetWeek).week() < moment(moment()).week()) {
+      var newWeek = moment(moment(targetWeek).add(1, 'week')).format('YYYY-MM-DD');
+      Session.set('selectedTargetWeek', newWeek);
+    }
+  },
   'click .deleteTimesheet'(event) {
     // Prevent default browser behavior
     event.preventDefault();

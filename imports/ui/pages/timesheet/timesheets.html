@@ -8,9 +8,9 @@
             <div style="padding-bottom:10px;padding-top:10px;font-size:32px;margin-left:10%;">
             <strong>Your Timesheets</strong>
                   <!-- Week Select Buttons -->
-                  <button class="btn btn-dark" style="margin-left:5%;" name="previousWeek">&lt;-</button>
-                  Current Week
-                  <button class="btn btn-dark" name="previousWeek">-&gt;</button>
+                  <button class="btn btn-dark, previousWeek" style="margin-left:5%;" id="previousWeek">&lt;-</button>
+                  <span style="font-size:16px"><strong>Week of {{getTargetWeek}}</strong></span>
+                  <button class="btn btn-dark, nextWeek" id="nextWeek">-&gt;</button>
                   <!-- Edit Timesheet Button -->
                   <a href="#" class="btn btn-dark editTimesheet" style="margin-left:5%;"><button class="btn btn-dark" id="editTimesheet" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
                   </a>
@@ -34,13 +34,13 @@
 
         <!-- Begin Timesheet Table -->
         <div class="table-responsive">
-          {{#each timesheet in timesheets}}
+          {{#each timesheet in timesheets getTargetWeek}}
             {{#if isOwner timesheet.employee}}
               <table class="table" style="font-size: 12px;">
                 <thead style="background-color: #d3a944">
                     <tr>
-                      <th>{{timesheet.date}}</th>
-                      <th>Total Hours:</th>
+                      <th>{{getHumanDate timesheet.date}}</th>
+                      <th>Total Hours: {{getDailyHours timesheet._id}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,7 +69,7 @@
                                   </td>
                                 {{/if}}
                                 <td>{{getProjectName timechunk.project}}</td>
-                                <td>5</td>
+                                <td>{{getTimechunkHours timechunk.startTime timechunk.endTime}}</td>
                                 <td>{{timechunk.startTime}}</td>
                                 <td>{{timechunk.endTime}}</td>
                               </tr>

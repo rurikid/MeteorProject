@@ -6,7 +6,8 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import './newTimesheet.html';
 
-// evaluates for proper time format
+// returns true if timechunk times are in proper format
+// otherwise returns error text
 function checkform(timechunk){
 	// regex for valid times
 	re = /([0-1][0-9]|[2][0-3])[:]([0][0]|[1][5]|[3][0]|[4][5])/;
@@ -21,6 +22,7 @@ function checkform(timechunk){
 	return true;
 }
 
+// returns true if a timechunk date is in the future
 function isFuture(timechunk, date) {
 	return (moment(date).isAfter(moment().format("YYYY-MM-DD")) ||
 		     (moment(date).isSame(moment().format("YYYY-MM-DD")) && 
@@ -28,12 +30,13 @@ function isFuture(timechunk, date) {
 		      timechunk.endTime > moment().format("HH:mm"))));
 }
 
-// evaluates if a date is within the allowed timeframe
+// returns true if a week is within editable timeframe
 function inLastTwoWeeks(date) {
 	return (moment(date).week() < moment(moment().subtract(1, 'week')).week());
 }
 
-// enforces form completeness and proper standards
+// returns true if timechunk passes all test cases
+// otherwise returns error text
 function validateTimechunk(timechunk, timesheet) {
 
 	// evaluates for void fields
@@ -66,23 +69,37 @@ function validateTimechunk(timechunk, timesheet) {
 	}
 
 	// evaluates for conflicting timechunks
-	var timesheet = Timesheets.findOne({"date": timesheet.date, "employee": timesheet.employee});
-	
+	var timesheet = Timesheets.findOne({'date': timesheet.date, 'employee': timesheet.employee});
 	var timesheetID = timesheet && timesheet._id;
 
-	var timechunks = Timechunks.find({"timesheet:": timesheetID});
+	var timechunks = Timechunks.find({'timesheet': timesheetID});
 
-	for (var i = 0; i < timechunks.length; i++) {
-		if ((timechunk.startTime > timechunks[i].startTime &&
-			   timechunk.startTime < timechunks[i].endTime) ||
-				(timechunk.endTime < timechunks[i].endTime &&
-				 timechunk.endTime > timechunks[i].startTime) ||
-				(timechunk.startTime === timechunks[i].startTime ||
-				 timechunk.endTime === timechunks[i].endTime)) {
+	// flags overlapping timechunks
+	var invalid;
 
-			return "Your times are conflicting with other timeslots!";
+	var timechunkID = Session.get('selectedTimechunkID');
+
+	timechunks.forEach(function (doc) {
+		// excludes edited timechunk
+		if (timechunkID !== doc._id) {
+			// evaluates for overlapping timechunks
+			if ((timechunk.startTime > doc.startTime &&
+				   timechunk.startTime < doc.endTime) ||
+					(timechunk.endTime < doc.endTime &&
+					 timechunk.endTime > doc.startTime) ||
+					(timechunk.startTime === doc.startTime ||
+					 timechunk.endTime === doc.endTime)) {
+					// set flag
+					invalid = false;
+				return;
+			}
 		}
-		
+	}, function(error) {
+		alert(error.error);
+	});
+
+	if (invalid === false) {
+		return "Your timesheet is conflicting with another timeslot!"
 	}
 
 	return true;
@@ -205,7 +222,12 @@ Template.newTimesheet.events({
 		}
 
 		// validate timechunk 
-		checkTimechunk = validateTimechunk(timechunk, timesheet, timesheet);
+		if (!timechunkID) {
+		var checkTimechunk = validateTimechunk(timechunk, timesheet);
+		} else {
+			var editTimechunk = Timechunks.findOne({'_id': timechunkID});
+			var checkTimechunk = validateTimechunk(timechunk, timesheet)  
+		}
 		if (checkTimechunk !== true) {
 	    // return bad timesheet
 	    return swal({
