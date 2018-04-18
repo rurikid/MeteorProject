@@ -69,6 +69,7 @@ Tracking and Development of Student Web App
 > some stylization changes
 > allowed sysadmin creation on startup at /startup/server/fixtures.js
 > reverted to timechunk collections
+> implemented timesheet user validation
 ```
 
 **16Apr2018** - rurikid
