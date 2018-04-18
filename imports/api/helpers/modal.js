@@ -13,7 +13,7 @@ Meteor.methods({
 	},
 
 	editTimesheetModal: function(id) {
-		Session.set('selectedTimesheetID', id);
+		Session.set('selectedTimechunkID', id);
 		Modal.show('newTimesheet');
 	},
 });

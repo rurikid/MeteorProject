@@ -1,7 +1,9 @@
 import { Projects } from '/imports/api/projects/projects.js';
 import { Users } from '/imports/api/users/users.js';
 import { Timesheets } from '/imports/api/timesheets/timesheets.js';
+import { Timechunks } from '/imports/api/timechunks/timechunks.js';
 import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import './newTimesheet.html';
 
 // evaluates for proper time format
@@ -22,8 +24,8 @@ function checkform(timechunk){
 function isFuture(timechunk, date) {
 	return (moment(date).isAfter(moment().format("YYYY-MM-DD")) ||
 		     (moment(date).isSame(moment().format("YYYY-MM-DD")) && 
-		      timechunk.startTime > moment().format("HH:mm")) ||
-		      timechunk.endTime > moment().format("HH:mm"));
+		     (timechunk.startTime > moment().format("HH:mm") ||
+		      timechunk.endTime > moment().format("HH:mm"))));
 }
 
 // evaluates if a date is within the allowed timeframe
@@ -32,14 +34,14 @@ function inLastTwoWeeks(date) {
 }
 
 // enforces form completeness and proper standards
-function validateTimechunk(timechunk, date, employee) {
+function validateTimechunk(timechunk, timesheet) {
 
 	// evaluates for void fields
 	if (timechunk.startTime === '' ||
 			timechunk.endTime === '' ||
 			timechunk.project === '' ||
-			date == '' ||
-			employee == '') {
+			timesheet.date == '' ||
+			timesheet.employee == '') {
 		return "Please complete all fields!";
 	}
 
@@ -49,12 +51,12 @@ function validateTimechunk(timechunk, date, employee) {
 	}
 
 	// evaluates for future start times
-	if (isFuture(timechunk, date)) {
+	if (isFuture(timechunk, timesheet.date)) {
 	 	return "Time must not be in the future!";
 	}
 
 	// evaluates for dates outside of range
-	if (inLastTwoWeeks(date)) {
+	if (inLastTwoWeeks(timesheet.date)) {
 		return "Date must not precede last week!"
 	}
 
@@ -64,14 +66,19 @@ function validateTimechunk(timechunk, date, employee) {
 	}
 
 	// evaluates for conflicting timechunks
-	var timesheet = Timesheets.findOne({"date": date, "employee": employee});
-	for (var i = 0; i < timesheet.timechunks.length; i++) {
-		if ((timechunk.startTime > timesheet.timechunks[i].startTime &&
-			   timechunk.startTime < timesheet.timechunks[i].endTime) ||
-				(timechunk.endTime < timesheet.timechunks[i].endTime &&
-				 timechunk.endTime > timesheet.timechunks[i].startTime) ||
-				(timechunk.startTime === timesheet.timechunks[i].startTime ||
-				 timechunk.endTime === timesheet.timechunks[i].endTime)) {
+	var timesheet = Timesheets.findOne({"date": timesheet.date, "employee": timesheet.employee});
+	
+	var timesheetID = timesheet && timesheet._id;
+
+	var timechunks = Timechunks.find({"timesheet:": timesheetID});
+
+	for (var i = 0; i < timechunks.length; i++) {
+		if ((timechunk.startTime > timechunks[i].startTime &&
+			   timechunk.startTime < timechunks[i].endTime) ||
+				(timechunk.endTime < timechunks[i].endTime &&
+				 timechunk.endTime > timechunks[i].startTime) ||
+				(timechunk.startTime === timechunks[i].startTime ||
+				 timechunk.endTime === timechunks[i].endTime)) {
 
 			return "Your times are conflicting with other timeslots!";
 		}
@@ -88,6 +95,22 @@ Template.newTimesheet.onCreated(function () {
 });
 
 Template.newTimesheet.helpers({
+	timechunk: function() {
+		var timechunkID = Session.get('selectedTimechunkID');
+
+		if (typeof timechunkID !== "undefined") {
+			var timechunk = Timechunks.findOne(timechunkID);
+			return timechunk;
+		} else {
+			return {
+				date:'', 
+				project:'', 
+				startTime:'',
+				endTime:'',
+			}
+		}
+
+	},
 	// returns all projects
 	projects() {
 		return Projects.find({});
@@ -101,6 +124,38 @@ Template.newTimesheet.helpers({
 		var supervisor = result && result.supervisor;
 
 		return (Meteor.user().profile.position === 'Administrator' || Meteor.user()._id === result.supervisor);
+	},
+	// returns appropriate text for edit/new
+	isNew: function() {
+		var timechunkID = Session.get('selectedTimechunkID');
+
+		if (timechunkID === null) {
+			return "Add New Timesheet";
+		} else {
+			return "Update Timesheet";
+		}
+	},
+	// returns date for appropriate timesheet
+	getDate: function(timesheetID) {
+		var timesheet = Timesheets.findOne({"_id": timesheetID});
+
+		var date = timesheet && timesheet.date;
+
+		return date;
+	},
+	// returns selected for appropriate project
+	isEdit: function(projectID) {
+		var timechunkID = Session.get('selectedTimechunkID');
+
+		if (timechunkID !== null) {
+			var timechunk = Timechunks.findOne(timechunkID);
+
+			if (timechunk.project === projectID) {
+				return "selected";
+			} else {
+				return "";
+			}
+		}
 	},
 });
 
@@ -134,10 +189,13 @@ Template.newTimesheet.events({
 		// Prevent default browser behavior
 		event.preventDefault();
 
-		// var timesheetID = Session.get('selectedTimesheetID');
+		var timechunkID = Session.get('selectedTimechunkID');
 
-		var employee = Meteor.user()._id;
-		var date = $('#date').val();
+		// build timesheet
+		var timesheet = {
+			employee: Meteor.user()._id,
+			date: $('#date').val(),
+		}
 
 		// build timechunk
 		var timechunk = {
@@ -146,57 +204,94 @@ Template.newTimesheet.events({
 			endTime: $('#endTime').val(),
 		}
 
-		// begin validation
-		checkTimechunk = validateTimechunk(timechunk, date, employee);
+		// validate timechunk 
+		checkTimechunk = validateTimechunk(timechunk, timesheet, timesheet);
 		if (checkTimechunk !== true) {
-      // return bad timesheet
-      return swal({
-       	title: "Error",
-        text: checkTimechunk,
-		   	button: {
+	    // return bad timesheet
+	    return swal({
+	     	title: "Error",
+	      text: checkTimechunk,
+		  	button: {
 		   		text: "Close",
 		   	},
-         icon: "error"
-      });
+	  			icon: "error"
+	    });
 		}
 
-		if (Timesheets.find({'date': date, 'employee': employee}, {limit: 1}).count() < 1) {
-			var timesheet = {
-				date: date,
-				employee: employee,
-				timechunk: timechunk,
+		// if not in edit mode
+		if (!timechunkID) {
+			// if new timesheet doesn't exist
+			if (Timesheets.find({'date': timesheet.date, 'employee': timesheet.employee}, {limit: 1}).count() < 1) {
+				Meteor.call('insertTimesheet', timesheet, timechunk, (error) => {
+					if (error) {
+						alert(error.error);
+					} else {
+						// success alert
+						return swal({
+		    			title: "Success",
+		    			text: "New Timesheet Added",
+		    			button: {
+		    				text: "Close",
+		    			},
+		    			icon: "success"
+		    		});
+					}
+				});
+			} else {
+				// if new timesheet exists
+				Meteor.call('insertTimechunk', timechunk, timesheet, (error) => {
+					if (error) {
+						alert(error.error);
+					} else {
+						// success alert
+						return swal({
+			   			title: "Success",
+			   			text: "New Timesheet Added",
+			   			button: {
+			   				text: "Close",
+			   			},
+			   			icon: "success"
+			   		});
+					}
+				});
 			}
-			Meteor.call('insertTimesheet', timesheet, (error) => {
-				if (error) {
-					alert(error.error);
-				} else {
-					// success alert
-					return swal({
-	    			title: "Success",
-	    			text: "New Timesheet Added",
-	    			button: {
-	    				text: "Close",
-	    			},
-	    			icon: "success"
-	    		});
-				}
-			});
 		} else {
-			Meteor.call('insertTimechunk', timechunk, date, employee, (error) => {
-				if (error) {
-					alert(error.error);
-				} else {
-					// success alert
-					return swal({
-		   			title: "Success",
-		   			text: "New Timesheet Added",
-		   			button: {
-		   				text: "Close",
-		   			},
-		   			icon: "success"
-		   		});
-				}
-			});
+			// if new timesheet doesn't exist
+			if (Timesheets.find({'date': timesheet.date, 'employee': timesheet.employee}, {limit: 1}).count() < 1) {
+				Meteor.call('insertTimesheet', timesheet, timechunk, (error) => {
+					if (error) {
+						alert(error.error);
+					} else {
+						// success alert
+						return swal({
+		    			title: "Success",
+		    			text: "New Timesheet Added",
+		    			button: {
+		    				text: "Close",
+		    			},
+		    			icon: "success"
+		    		});
+					}
+				});
+			} else {
+				_.extend(timechunk, {id: timechunkID});
+				Meteor.call('editTimechunk', timechunk, (error) => {
+					if (error) {
+						alert(error.error);
+					} else {
+
+						// success alert
+						return swal({
+							title: "Success",
+							text: "Timesheet Updated",
+							button: {
+								text: "Close",
+							},
+							icon: "success"
+						});
+					}
+				});
+			}
 		}
 
 		// Clear form

@@ -2,6 +2,19 @@
   TODO:
     Condense style from all pages here.
 */
+
+body {
+  background-image: url("/img/nav-background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed,
+}
+
+.container {
+  background-color:rgba(216, 216, 216, 0.80);
+  width: 80%;
+}
+
 .navButton {
   background-color: #4CAF50;
   border: 1px solid black;
@@ -14,6 +27,11 @@
   float:left;
 }
 
+.navHeader {
+  background-color: rgba(52, 58, 64, 0.73);
+  min-height: 100%;
+}
+
 .homeButton {
   width: 312px;
   height: 261px;
@@ -24,8 +42,10 @@
   color: #ffffff;
 }
 
-body .body {
-  background-image:url('/img/body-background.png');
+.landing {
+  height: 100%;
+  width: 100%;
+  background-image: url("/img/nav-background.png");
   background-size: 100% auto;
 }
 
@@ -66,8 +86,8 @@ body .body {
   padding: 25px;
   position: relative;
   z-index: 2;
-  
 }
+
 input[type=submit] {
   background-color: #d3a944;
   color: #FFF;
@@ -86,8 +106,9 @@ input[type=button] {
   padding: 5px 10px 5px 10px;
 }
 
-input #select-radio {
-  margin-left:15px;
+.select-radio {
+  width: auto;
+  border: 0px 0px 0px 0px;
 }
 
 .new-container {
@@ -100,8 +121,9 @@ table {
   border-collapse: collapse;
 }
 
-td, th {
+td, th, tr {
   border: 1px solid black;
+  line-height: 15px;
 }
 
 #headerText {

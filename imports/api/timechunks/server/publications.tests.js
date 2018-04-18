@@ -3,7 +3,7 @@
 // https://guide.meteor.com/testing.html
 
 import { assert } from 'chai';
-import { Timesheets } from '../timesheets.js';
+import { Timechunks } from '../timechunks.js';
 import { PublicationCollector } from 'meteor/johanbrook:publication-collector';
 import './publications.js';
 
