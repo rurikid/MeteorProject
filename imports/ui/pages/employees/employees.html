@@ -4,7 +4,7 @@
 -->
 <template name="employees">
 	{{> nav}}
-	<div class="card, container">
+	<div class="card">
 		<div class="card-body">
     	<div style="padding: 0px 10px 0px 10px; ">
 
@@ -34,7 +34,7 @@
 							<!-- Admin Controls -->
 							{{#if isAdmin}}
 									<!-- Edit Employee Button -->
-									<a href="#" class="btn btn-dark, editEmployee" style="margin-left:10%;"><button class="btn btn-dark" id="editEmployee" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
+									<a href="#" class="btn btn-dark, editEmployee" style="margin-left:30%;"><button class="btn btn-dark" id="editEmployee" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
 									</a>
 									<!-- Delete Employee Button -->
 									<a href="#" class="btn btn-danger, deleteEmployee">
@@ -60,7 +60,7 @@
 	        	<thead style="background-color:#d3a944">
 	          	<tr>
 	          		{{#if isAdmin}}
-									<th id="select-radio"></th>
+									<th style="width:53px;">Select</th>
 								{{/if}}
 								<th>First Name</th>
 								<th>Last Name</th>
@@ -73,9 +73,9 @@
 	          <tbody>
 
 							{{#each users}}
-								<tr style="height:auto; margin-top:0px;">
+								<tr style="height:90px;margin-top:0px;">
 									{{#if isAdmin}}
-										<td id="select-radio"><input id="select-radio" type="radio" name="employeeID" value="{{_id}}" /></td>
+										<td><input class="select-radio" type="radio" name="employeeID" value="{{_id}}"></td>
 									{{/if}}
 									<td>{{profile.firstName}}</td>
 									<td>{{profile.lastName}}</td>

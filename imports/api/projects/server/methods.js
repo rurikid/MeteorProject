@@ -1,4 +1,4 @@
-// Methods related to projects
+// Methods related to users
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';

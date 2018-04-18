@@ -4,7 +4,7 @@
 -->
 <template name="projects">
 	{{> nav}}
-	<div class="card, container">
+	<div class="card">
 		<div class="card-body">
     	<div style="padding: 0px 10px 0px 10px; ">
 
@@ -34,7 +34,7 @@
 							<!-- Supervisor Controls -->
 							{{#if isSupervisor}}
 									<!-- Edit Project Button -->
-									<a href="#" class="btn btn-dark, editProject" style="margin-left:10%;"><button class="btn btn-dark" id="editProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
+									<a href="#" class="btn btn-dark, editProject" style="margin-left:30%;"><button class="btn btn-dark" id="editProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
 									</a>
 									<!-- Admin Controls -->
 									{{#if isAdmin}}
@@ -60,11 +60,11 @@
 				
 				<!-- Begin Project Table -->
 	      <div class="table-responsive">
-	      	<table class="table" style="font-size: 12px;">
+	      	<table class="table">
 	        	<thead style="background-color:#d3a944">
 	          	<tr>
 	          		{{#if isSupervisor}}
-									<th></th>
+									<th style="width:53px;">Select</th>
 								{{/if}}
 								<th>Project Name</th>
 								<th>Supervisor Name</th>
@@ -78,7 +78,7 @@
 
 							{{#each projects}}
 								{{#if isMember _id}}
-									<tr style="height:auto; margin-top:0px;">
+									<tr style="height:90px;margin-top:0px;">
 										{{#if isSupervisor}}
 											<td><input class="select-radio" type="radio" name="projectID" value="{{_id}}"></td>
 										{{/if}}

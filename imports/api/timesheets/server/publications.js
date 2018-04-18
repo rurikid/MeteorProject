@@ -1,4 +1,4 @@
-// All timesheets-related publications
+// All projects-related publications
 
 import { Meteor } from 'meteor/meteor';
 import { Timesheets } from '../timesheets.js';

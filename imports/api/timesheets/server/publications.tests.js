@@ -1,4 +1,4 @@
-// Tests for the timechunks publications
+// Tests for the projects publications
 //
 // https://guide.meteor.com/testing.html
 

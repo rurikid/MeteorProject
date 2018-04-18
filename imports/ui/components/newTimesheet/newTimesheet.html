@@ -4,23 +4,23 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h4 class="modal-title">{{isNew}}</h4>
+          <h4 class="modal-title">Add New Timesheet</h4>
         </div>
 
         <div class="modal-body">
           <div style="padding-bottom: 10px;">
             <div>
               <label>Date:</label>
-                <input type="date" id="date" value="{{getDate timechunk.timesheet}}" />
+                <input type="date" id="date" />
                 <br />
             </div>
             <div>
               <label>Project Name:</label>
                 <select id="project">
-                  {{#each project in projects}}
+                  {{#each projects}}
                     {{#if isMember _id}}
-                      <option value="{{project._id}}" {{isEdit project._id}}>
-                        {{project.name}}
+                      <option value="{{_id}}">
+                        {{name}}
                       </option>
                     {{/if}}
                   {{/each}}
@@ -29,12 +29,12 @@
             </div>
             <div>
               <label>Start Time:</label> 
-              	<input type="text" id="startTime" maxlength="5" placeholder="HH:mm" value="{{timechunk.startTime}}" />
+              	<input type="text" id="startTime" maxlength="5" placeholder="HH:mm" />
                 <br />
             </div>
             <div>
               <label>End Time:</label> 
-              	<input type="text" id="endTime" maxlength="5" placeholder="HH:mm" value="{{timechunk.endTime}}" />
+              	<input type="text" id="endTime" maxlength="5" placeholder="HH:mm" />
                 <br />
             </div>
           </div>

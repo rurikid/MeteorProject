@@ -1,4 +1,4 @@
-// Methods related to timesheets
+// Methods related to projects
 
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
