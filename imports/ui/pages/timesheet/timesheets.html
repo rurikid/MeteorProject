@@ -35,51 +35,53 @@
         <!-- Begin Timesheet Table -->
         <div class="table-responsive">
           {{#each timesheet in timesheets}}
-            <table class="table" style="font-size: 12px;">
-              <thead style="background-color: #d3a944">
+            {{#if isOwner timesheet.employee}}
+              <table class="table" style="font-size: 12px;">
+                <thead style="background-color: #d3a944">
+                    <tr>
+                      <th>{{timesheet.date}}</th>
+                      <th>Total Hours:</th>
+                    </tr>
+                </thead>
+                <tbody>
                   <tr>
-                    <th>{{timesheet.date}}</th>
-                    <th>Total Hours:</th>
-                  </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td colspan="2">
-                    <!-- Begin Timechunks Table -->
-                    <div class="table-responsive">
-                      <table class="table" style="font-size: 12px;">
-                        <thead style="background-color: #d3a944">
-                          <tr>
-                            {{#if isTimely timesheet.date}}
-                              <th></th>
-                            {{/if}}
-                            <th>Project</th>
-                            <th>Hours</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                          </tr>
-                        </thead>
-                         <tbody>
-                          {{#each timechunk in timechunks timesheet._id}}
+                    <td colspan="2">
+                      <!-- Begin Timechunks Table -->
+                      <div class="table-responsive">
+                        <table class="table" style="font-size: 12px;">
+                          <thead style="background-color: #d3a944">
                             <tr>
                               {{#if isTimely timesheet.date}}
-                                <td>
-                                  <input class="select-radio" type="radio" name="timechunkID" value="{{timechunk._id}}">
-                                </td>
+                                <th></th>
                               {{/if}}
-                              <td>{{getProjectName timechunk.project}}</td>
-                              <td>5</td>
-                              <td>{{timechunk.startTime}}</td>
-                              <td>{{timechunk.endTime}}</td>
+                              <th>Project</th>
+                              <th>Hours</th>
+                              <th>Start Time</th>
+                              <th>End Time</th>
                             </tr>
-                          {{/each}}
-                        </tbody>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                          </thead>
+                           <tbody>
+                            {{#each timechunk in timechunks timesheet._id}}
+                              <tr>
+                                {{#if isTimely timesheet.date}}
+                                  <td>
+                                    <input class="select-radio" type="radio" name="timechunkID" value="{{timechunk._id}}">
+                                  </td>
+                                {{/if}}
+                                <td>{{getProjectName timechunk.project}}</td>
+                                <td>5</td>
+                                <td>{{timechunk.startTime}}</td>
+                                <td>{{timechunk.endTime}}</td>
+                              </tr>
+                            {{/each}}
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            {{/if}}
           {{/each}}
         </div>
       </div>
