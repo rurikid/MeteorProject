@@ -35,7 +35,11 @@ Template.timesheets.helpers({
   // determines if an employee can modify a timesheet
   isTimely: function(date) {
     return (moment(date).week() >= moment(moment().subtract(1, 'week')).week());
-  }
+  },
+  // returns true if the current user owns the timesheet
+  isOwner: function(timesheetID) {
+    return (timesheetID === Meteor.user()._id);
+  },
 })
 
 Template.timesheets.events({
@@ -44,7 +48,7 @@ Template.timesheets.events({
     event.preventDefault();
 
     // Get value from form element
-    const ids = document.getElementsByName('timesheetID');
+    const ids = document.getElementsByName('timechunkID');
     var id;
     for (i = 0; i < ids.length; i++) {
        if (ids[i].checked){
