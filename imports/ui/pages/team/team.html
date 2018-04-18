@@ -1,60 +1,73 @@
-<!-- This page shows a supervisor's team. 
-  TODO:
-    Integrate with Database
-    Revise & Simplify Stylization
--->
 <template name="team">
-  {{> nav}}
-  <div class="card-body" style="height:800px;">
+    {{> nav}}
     <div>
-      <div class="row" style="height:144px;">
-        <div class="col">
-          <h1 style="width:878px;font-family:'Advent Pro', sans-serif;font-size:43px;"><i class="fa fa-search" style="padding-right:38px;width:73px;"></i>Search Project</h1><input type="text" style="width:463px;height:50px;"><button class="btn btn-dark" type="button" style="margin-left:32px;width:131px;height:50px;font-size:22px;">Filter</button>
-            <a class="btn btn-primary" role="button" href="#" style="width:259px;height:50px;margin-left:65px;background-color:#d3a944;font-size:22px;">Add New Team Member</a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col" style="background-color:rgba(52,58,64,0.14);">
-          <div class="row" style="background-color:#d3a944;">
-            <div class="col" style="height:16px;">
-              <h1></h1>
-            </div>
-          </div>
-          <h1>Employee List<button class="btn btn-danger" type="button" style="margin-left:570px;width:110px;font-size:22px;">Delete</button></h1>
-        </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th style="width:53px;">Select</th>
-              <th style="margin:0px;width:60px;">#</th>
-              <th>Full Name</th>
-              <th>Start Date</th>
-              <th style="padding-right:-16px;">Role</th>
-              <th style="width:198px;margin:0px;">Project Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="checkbox" style="margin-left:15px;"></td>
-              <td>&nbsp;1</td>
-              <td>John Smith</td>
-              <td>5/20/18</td>
-              <td>Supervisor</td>
-              <td>Test Project 1</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" style="margin-left:15px;"></td>
-              <td>2</td>
-              <td>Jane Doe</td>
-              <td>4/8/17</td>
-              <td>Programmer</td>
-              <td>Test Project 2</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <select id="project-select">
+            <option value="select_project" selected>Select a Project</option>
+            {{#each projects}}
+              <option name = "projects" value="{{_id}}">{{name}}</option>
+            {{/each}}
+          </select>
     </div>
-  </div>
+
+    {{#if showMembers}}
+      {{> TeamTableHeader}}
+    {{/if}}        
+           
 </template>
+
+<template name="TeamTableHeader">  
+    <div>
+        <h2 id="component-title">
+            Team Members
+          </h2>
+
+          <div class="row">
+              <div class="col">
+                <div style="padding-bottom:10px;padding-top:10px;font-size:20px;margin-left:10%;">
+              
+                  <!-- Supervisor Controls -->
+                  {{#if isSupervisor}}
+                      <!-- Edit Project Button -->
+                      <a href="#" class="btn btn-dark, editProject" style="margin-left:10%;"><button class="btn btn-dark" id="editProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">Add New Member</button>
+                      </a>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+
+        <table id="dataview-table" class="table table-striped">
+            <thead id="dataview-table-header" style="background-color:#d3a944">
+              <tr id="dataview-table-header-row" style="width:53px;">
+                <th class="th-sortable" data-sort="user.profile.name">
+                  First Name
+                </th>
+                <th class="th-sortable" data-sort="user.profile.nameL">
+                  Last Name
+                </th>
+                <th class="th-sortable" data-sort="user.profile.email">
+                  Email
+                </th>
+              </tr>
+            </thead>
+            <tbody id="dataview-table-items">
+              {{#each tableItems}} 
+                {{> TeamMemberTableItems}} 
+              {{/each}}
+            </tbody>
+          </table>
+    </div>
+</template>
+
+<template name="TeamMemberTableItems">
+    <tr id="dataview-table-items-row">
+      <td>
+        {{profile.firstName}}
+      </td>
+      <td>
+        {{profile.lastName}}
+      </td>
+      <td>
+        {{emails.[0].address}}
+      </td>
+    </tr>
+  </template>
