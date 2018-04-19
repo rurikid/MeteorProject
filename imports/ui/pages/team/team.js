@@ -50,6 +50,21 @@ Template.TeamTableHeader.events({
   
       Meteor.call('editProjectModal', projectId);
     }
+
+    //------------------------TO SORT-------------------------NOT WORKING--------
+    // 'click .th-sortable': function(e, t) {
+	// 	e.preventDefault();
+	// 	var oldSortBy = pageSession.get("TeamTeamUsersTeamUsersDataViewSortBy");
+	// 	var newSortBy = $(e.target).attr("data-sort");
+
+	// 	pageSession.set("TeamTeamUsersTeamUsersDataViewSortBy", newSortBy);
+	// 	if(oldSortBy == newSortBy) {
+	// 		var sortAscending = pageSession.get("TeamTeamUsersTeamUsersDataViewSortAscending") || false;
+	// 		pageSession.set("TeamTeamUsersTeamUsersDataViewSortAscending", !sortAscending);
+	// 	} else {
+	// 		pageSession.set("TeamTeamUsersTeamUsersDataViewSortAscending", true);
+	// 	}
+	// }
 });
 Template.TeamTableHeader.helpers({
     tableItems() {
@@ -72,5 +87,6 @@ Template.TeamTableHeader.helpers({
     	// evaluates for supervisors
 	isSupervisor() {
 		return (Meteor.user().profile.position === 'Administrator' || Meteor.user().profile.position === 'Supervisor');
-	},
+    },
+    
 });
