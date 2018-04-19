@@ -34,7 +34,6 @@ Documentation | Node.js | Tutorials
 **TODO**
 --------------------------------------------
 ```
-> Improve add/edit member in project functionality (mwight)(Required Use Case)
 > Design Report View (EASY)(Required Use Case)
 > Create Starting Database within startup/server/fixtures.js (EASY)(Required Use Case)
 > Implement Reports (MODERATE)(Required Use Case)
@@ -48,6 +47,16 @@ Documentation | Node.js | Tutorials
 
 **Patch Notes**
 --------------------------------------------
+**18Apr2018** - mwight
+```
+> Adding employees to new projects now implemented via multiselect
+> Updating project employees now implemented via multiselect
+> Validation for duplicates on editing and adding is complete
+> note: No way to remove a name off second multselect element after being added besides unselecting them before 
+    submit(only selected items on the second multiselector are sent to the db)
+```
+
+
 **18Apr2018** - rurikid
 ```
 > timesheets now show number of hours worked per day and per timechunk
