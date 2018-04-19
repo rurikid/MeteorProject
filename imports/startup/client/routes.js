@@ -115,8 +115,17 @@ FlowRouter.route('/team', {
 
 FlowRouter.route('/reports', {
   name: 'reports',
-  action() {
+  action: function (params, queryParams) {
+    console.log("Printing Query Params", queryParams);
     BlazeLayout.render('mainLayout', { main: 'reports' });
+  },
+});
+
+//Post report selections
+FlowRouter.route('/generatedReports', {
+  name: 'generatedReports',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'generatedReports' });
   },
 });
 
