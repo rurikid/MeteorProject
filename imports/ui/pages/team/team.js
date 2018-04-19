@@ -15,7 +15,6 @@ Template.team.events({
         Session.set("showMembers", true);
         Session.set("projectId", projectId);
         FlowRouter.go('/team');
-        Projects.find({});
     }
 });
 

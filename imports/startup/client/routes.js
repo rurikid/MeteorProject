@@ -120,6 +120,14 @@ FlowRouter.route('/reports', {
   },
 });
 
+//Post report selections
+FlowRouter.route('/generatedReport', {
+  name: 'generatedReport',
+  action() {
+    BlazeLayout.render('mainLayout', { main: 'generatedReport' });
+  },
+});
+
 FlowRouter.route('/team', {
   name: 'team',
   action() {

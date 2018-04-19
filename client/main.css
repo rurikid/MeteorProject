@@ -133,3 +133,12 @@ td, th, tr {
   font-family: 'Advent Pro', sans-serif;
   font-size: 38px;
 }
+
+select.field-wrapper input {
+  float: right;
+}
+select.required-field::before { 
+  content: "*";
+  float: right;
+  color: red;
+}

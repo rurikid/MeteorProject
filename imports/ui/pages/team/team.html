@@ -1,7 +1,7 @@
 <template name="team">
     {{> nav}}
-    <div>
-        <select id="project-select">
+    <div class="card, container">
+        <select id="project-select" class="form-control">
             <option value="select_project" selected>Select a Project</option>
             {{#each projects}}
               <option name = "projects" value="{{_id}}">{{name}}</option>
@@ -16,7 +16,7 @@
 </template>
 
 <template name="TeamTableHeader">  
-    <div>
+    <div class="card, container">
         <h2 id="component-title">
             Team Members
           </h2>
