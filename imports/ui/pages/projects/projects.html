@@ -28,33 +28,33 @@
 -->
 	      <div class="row">
 	      	<div class="col">
-						<div style="padding-bottom:10px;padding-top:10px;font-size:32px;margin-left:10%;">
-						<strong>Project Directory</strong>
+				<div style="padding-bottom:10px;padding-top:10px;font-size:32px;margin-left:10%;">
+				<strong>Project Directory</strong>
 
-							<!-- Supervisor Controls -->
-							{{#if isSupervisor}}
-									<!-- Edit Project Button -->
-									<a href="#" class="btn btn-dark, editProject" style="margin-left:10%;"><button class="btn btn-dark" id="editProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
-									</a>
-									<!-- Admin Controls -->
-									{{#if isAdmin}}
-										<!-- Delete Project Button -->
-									<a href="#" class="btn btn-danger, deleteProject">
-										<button class="btn btn-danger" id="deleteProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">
-											Delete
-										</button>
-									</a>
-									<!-- Add New Project Button -->
-			            <a class="newProject" href="#">
-			            	<button class="btn btn-primary" id="newProject" type="button" style="color:white;background-color:#d3a944;font-size:22px;margin-left:10px;border:none;">
-										<i class="icon ion-android-add" style="margin-left:0px;">
-										</i>
-											Add New Project
-										</button>
-									</a>
-									{{/if}}
+					<!-- Supervisor Controls -->
+					{{#if isSupervisor}}
+							<!-- Edit Project Button -->
+							<a href="#" class="btn btn-dark, editProject" style="margin-left:10%;"><button class="btn btn-dark" id="editProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
+							</a>
+							<!-- Admin Controls -->
+							{{#if isAdmin}}
+								<!-- Delete Project Button -->
+							<a href="#" class="btn btn-danger, deleteProject">
+								<button class="btn btn-danger" id="deleteProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">
+									Delete
+								</button>
+							</a>
+							<!-- Add New Project Button -->
+							<a class="newProject" href="#">
+							<button class="btn btn-primary" id="newProject" type="button" style="color:white;background-color:#d3a944;font-size:22px;margin-left:10px;border:none;">
+								<i class="icon ion-android-add" style="margin-left:0px;">
+								</i>
+									Add New Project
+								</button>
+							</a>
 							{{/if}}
-						</div>
+					{{/if}}
+				</div>
 	        </div>
 				</div>
 				
@@ -80,7 +80,7 @@
 								{{#if isMember _id}}
 									<tr style="height:auto; margin-top:0px;">
 										{{#if isSupervisor}}
-											<td><input class="select-radio" type="radio" name="projectID" value="{{_id}}"></td>
+											<td><input class="select-radio" type="radio" name="projectID" value="{{_id}}" checked="checked"></td>
 										{{/if}}
 										<td>{{name}}</td>
 										<td>{{getProjectSupervisor supervisor}}</td>

@@ -6,7 +6,8 @@ import './projects.html';
 
 Template.projects.onCreated(function () {
   Meteor.subscribe('projects.all');
-  Meteor.subscribe('users.all');
+	Meteor.subscribe('users.all');
+	
 });
 
 Template.projects.helpers({

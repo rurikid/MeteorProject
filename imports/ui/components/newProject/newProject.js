@@ -26,6 +26,22 @@ Template.newProject.helpers({
 		}
 
 	},
+	// returns all selected member ids of multiselectbox
+	selectedUsers() {
+		var selectedUsers = $('')
+		return $('select#employee').val();
+	},
+	getProjectEmployee: function(employee) {
+		var result = Meteor.users.findOne({"_id": employee});
+
+		// known as guarding (are we finding anything in the query)
+		var firstName = result && result.profile && result.profile.firstName;
+		var lastName = result && result.profile && result.profile.lastName;
+
+		return (firstName + " " + lastName);
+		// {{getProjectEmployee user._id}}
+	},
+
 	// returns all users
 	users() {
 		return Meteor.users.find({});
@@ -73,8 +89,8 @@ Template.newProject.helpers({
 });
 
 Template.newProject.events({
-  'click #back': function(event){
-    event.preventDefault();
+  	'click #back': function(event){
+   		event.preventDefault();
 
 		// Clear form
 		projectName.value = '';
@@ -84,62 +100,72 @@ Template.newProject.events({
 
 		// close modal
 		Modal.hide('newProject');
-  },
+  	},
 
-  'click #clear': function(event){
-    event.preventDefault();
+  	'click #clear': function(event){
+    	event.preventDefault();
     
 		// Clear form
 		projectName.value = '';
 		supervisor.value = '';
 		client.value = '';
 		budget.value = '';
-  },
+  	},
 
 	'click #submit': function(event){
 		// Prevent default browser behavior
 		event.preventDefault();
 
 		var projectID = Session.get('selectedProjectID');
-		
-		//create NodeList of employee _ids from select form tags
-		var employeesNodeList = document.getElementsByClassName("employee");
+		//var employeesNodeList = document.getElementsByClassName("employee");
 		var employeeList = [];
-		
+		var employeesNodeList = $('#selected_employees').val();
+
 		//push form values for "_id" into new employeeList string array
 		for (index = 0; index < employeesNodeList.length; index++)	{
-			employeeList.push(employeesNodeList[index].value);
+			employeeList.push(employeesNodeList[index]);
+		}
+		
+		employeeList.push($('#supervisor').val());
+
+		let validEmployees = [];
+		for (let i = 0; i < employeeList.length; i++) {
+			if(validEmployees.indexOf(employeeList[i]) == -1) {
+				validEmployees.push(employeeList[i]);
+			}
 		}
 
 		// Get value from form element
-    var project = {
-      name: $('#projectName').val(),
-      supervisor: $('#supervisor').val(),
-      client: $('#client').val(),
-      budget: $('#budget').val(),
-      employees: employeeList,
-	  
-    }
+		var project = {
+			name: $('#projectName').val(),
+			supervisor: $('#supervisor').val(),
+			client: $('#client').val(),
+			budget: $('#budget').val(),
+			employees: validEmployees,
+			//employees: employeeList, //insert selected values from box2
+		
+		}
 
-    // if not in edit mode
-    if (!projectID) {
-			Meteor.call('insertProject', project, (error) => {
-				if (error) {
-					alert(error.error);
-				} else {
+		// if not in edit mode
+		if (!projectID) {
+				Meteor.call('insertProject', project, (error) => {
+					if (error) {
+						alert(error.error);
+					} else {
 
-					// success alert
-					return swal({
-	    			title: "Success",
-	    			text: "New Project Added",
-	    			button: {
-	    				text: "Close",
-	    			},
-	    			icon: "success"
-	    		});
-				}
-			});
-		} else {
+						// success alert
+						return swal({
+						title: "Success",
+						text: "New Project Added",
+						button: {
+							text: "Close",
+						},
+						icon: "success"
+					});
+					}
+				});
+		} 
+		else {
 			_.extend(project, {id: projectID});
 			Meteor.call('editProject', project, (error) => {
 				if (error) {
@@ -148,12 +174,12 @@ Template.newProject.events({
 
 					// success alert
 					return swal({
-	    			title: "Success",
-	    			text: "Project Updated",
-	    			button: {
-	    				text: "Close",
-	    			},
-	    			icon: "success"
+					title: "Success",
+					text: "Project Updated",
+					button: {
+						text: "Close",
+					},
+					icon: "success"
 					});
 				}
 			});
@@ -166,43 +192,40 @@ Template.newProject.events({
 		budget.value = '';
 
 		// dismiss modal
-	  Modal.hide('newProject');
+	  	Modal.hide('newProject');
 	},
 
-	// adds new dropdown menu on click of '+'
+	// adds selected employees to submit box
 	'click .add_employee_field': function(event) {
-		event.preventDefault;
+		event.preventDefault();
+
 		var userList = Meteor.users.find({}).fetch();
-		var wrapper = $(".employee_container");
-		
-		// appends html for wrapper.append
-		var html = '';
-		html += '<div><select id="employee" class="employee">';
+		var selectedIDs = $('select#employee').val();
 
-		// for each user in users
-		for (index = 0; index < userList.length; index++) {
-
-			var userFirstName = userList[index].profile.firstName;
-			var userLastName = userList[index].profile.lastName;
-			var userID = userList[index]._id;
-
-			// if not a supervisor/admin
-			if (!(userList[index].profile.position == 'Supervisor') || 
-				  !(userList[index].profile.position == 'Administrator' )) {
-				
-				html +='<option value="'+ userID + '">';
-				html += userFirstName + ' ' + userLastName;
-				html +='</option>';
-			}
-		}
-
-		html += '</select><a href="#" class="delete">Delete</a></div>';
-		$(wrapper).append(html);
-		console.log (html);
-
-		$(wrapper).on("click", ".delete", function(e) {
-			e.preventDefault();
-			$(this).parent('div').remove();
-		})
+		//each selected #employee in box1: find user and append new option into box2
+		$.each(selectedIDs, function(key, value){
+			var result = Meteor.users.findOne({"_id": value});
+			var fName = result.profile.firstName;
+			var lName = result.profile.lastName;
+			$('#selected_employees')
+				.append($("<option selected></option>")
+				.attr("value",value)
+				.text(fName + " " + lName));
+		})		
 	},
+
+	//
+	//    Incomplete
+	//
+	'click .remove_employee_field': function(event) {
+		event.preventDefault();
+
+		var selectedIDs = $('select#selected_employees').val();
+		
+
+		$.each(selectedIDs, function(key, value){
+			//console.log("you are removing user:" +value+"!");
+		})
+		
+	}
 });
