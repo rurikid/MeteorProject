@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import '/imports/api/helpers/modal.js';
 import { Projects } from '../../../api/projects/projects.js'
 
+//import '/imports/api/helpers/modal.js';
 import './reports.html';
 
 
@@ -25,6 +26,7 @@ Template.reportsForm.events({
             Session.set("isDateRange", false);
         }
 
+        //Reloading the page
         FlowRouter.go('/reports');
     },
 
@@ -44,14 +46,26 @@ Template.reportsForm.events({
         var projectId = $(event.currentTarget).val();
         Session.set("projectId", projectId);
         console.log("Project Type Selected", projectId);
+        FlowRouter.go('/reports');
     },
 
     "change #employee-select": function(event, Template) {
         console.log("Variable Changed");
         var employeeId = $(event.currentTarget).val();
         Session.set("employeeId", employeeId);
-        console.log("Employee Selected", reportType);
-    }
+        console.log("Employee Selected", employeeId);
+    },
+
+
+    'click .generate-report-button': function(event) {
+        // Prevent default browser behavior
+        //event.preventDefault();
+        console.log("Inside generated report on click");
+        FlowRouter.setQueryParams({reportType: Session.get("reportType")})
+        FlowRouter.go('/generatedReports');
+        //Meteor.call('generatedReport', null);
+        //Meteor.call('reportsModal', null);
+    },
 
 });
 

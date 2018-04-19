@@ -2,3 +2,5 @@
 
 import './routes.js';
 import swal from 'sweetalert';
+
+//import '../generatedReports/generatedReports.js';
