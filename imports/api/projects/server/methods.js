@@ -16,7 +16,6 @@ Meteor.methods({
     var client = project.client;
     var budget = project.budget;
     var employees = project.employees;
-    employees.push(supervisor);
 
     return Projects.insert({
       name,
@@ -48,7 +47,9 @@ Meteor.methods({
       name: project.name,
       supervisor: project.supervisor,
       client: project.client,
-      budget: project.budget
+      budget: project.budget,
+      employees: project.employees,
+
     }})
   },
 })
