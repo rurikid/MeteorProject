@@ -1,7 +1,7 @@
 <template name="newProject">
   <div class="modal fade">
     <div class="modal-dialog modal-sm">
-      <div class="modal-content">
+      <div class="modal-content" style="width: 500px">
 
         <div class="modal-header">
           <h4 class="modal-title">{{isNew}}</h4>
@@ -27,23 +27,30 @@
                 </select>
                 <br />
             </div>
-
-            <div>
-              <label>Employee Name:</label>
-              <button class="add_employee_field"> + </button>
-              <div class="employee_container">
-                <select id="employee" class="employee">
-                  {{#each user in users}}
-                    <!-- {{#unless isSupervisor user.profile.position}} -->
-                      <option value="{{user._id}}" {{isEdit user._id}}>
-                        {{user.profile.firstName}} {{user.profile.lastName}}
-                      </option>
-                    <!--{{/unless}}-->
-                  {{/each}}
-                </select>
-                <br />
-              </div>
-                
+            <div style="display:inline-block;">
+              <!-- box 1-->
+              <div style="display:inline-block;"><label>Addable employees:</label><br>
+              <select multiple class="employee" id="employee" name="my-select[]" size="10">
+                {{#each user in users}}
+                  <option value="{{user._id}}" {{isEdit user._id}}>
+                    {{user.profile.firstName}} {{user.profile.lastName}}
+                  </option>
+                {{/each}}
+              </select>
+            </div>
+            <button class="add_employee_field"> add </button>
+            <!-- <button class="remove_employee_field"> remove </button> -->
+              <!-- box 2 -->
+              <div style="display:inline-block;"><label>Employees in project:</label><br>
+              <select multiple="multiple2"  class="selected_employees" id="selected_employees" name="my-select2[]" size="10">
+                {{#each user in project.employees}}
+                  <option value="{{user}}" selected>
+                    {{getProjectEmployee user}}
+                  </option>
+                {{/each}}
+              </select>
+            </div>
+            <br>
             </div>
             <div>
               <label>Client Name:</label> 
