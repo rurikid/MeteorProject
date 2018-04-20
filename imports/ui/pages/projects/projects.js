@@ -40,6 +40,10 @@ Template.projects.helpers({
 		var firstName = result && result.profile && result.profile.firstName;
 		var lastName = result && result.profile && result.profile.lastName;
 
+    if (!result) {
+      return "None Assigned"
+    }
+
 		return (firstName + " " + lastName);
 	},
 

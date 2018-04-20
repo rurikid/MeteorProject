@@ -54,9 +54,11 @@ Meteor.methods({
        (oldPosition === "Supervisor" ||
         oldPosition === "Administrator")) {
 
-      Meteor.call('removedSupervisor', employee._id, (error) => {
+      Meteor.call('removedSupervisor', employee.id, function (error, result) {
         if (error) {
-          alert(error.error);
+          console.log("Error updating project supervisor: ", error);
+        } else {
+          console.log("Project supervisor updated: " + result);
         }
       });
     }

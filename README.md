@@ -37,7 +37,6 @@ Documentation | Node.js | Tutorials
 > Design Report View (EASY)(Required Use Case)
 > Create Starting Database within startup/server/fixtures.js (EASY)(Required Use Case)
 > Implement Reports (MODERATE)(Required Use Case)
-> Catch issues when changing employee roles leaving project without supervisor (MODERATE)(Required Use Case)
 > Evaluate Functionality (EASY)(Would Be Nice)
 > Improve Stylization (EASY)(Would Be Nice)
 > Implement update password/email for users (HARD)(Would Be Nice)
@@ -49,6 +48,8 @@ Documentation | Node.js | Tutorials
 **20Apr2018** - rurikid
 ```
 > regular project members can now add timesheets
+> demoted supervisors/admins now update project supervisors to ''
+> began team timesheets page (currently shows all time chunks for all dates)
 ```
 
 +**20Apr2018** - mwight

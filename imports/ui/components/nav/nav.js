@@ -44,9 +44,9 @@ Template.nav.events({
     event.preventDefault();
     FlowRouter.go('/team');
   },
-  'click .teamTimesheet': function(event){
+  'click .teamTimesheets': function(event){
     event.preventDefault();
-    FlowRouter.go('/teamTimesheet');
+    FlowRouter.go('/teamTimesheets');
   },
   'click .reports': function(event){
     event.preventDefault();

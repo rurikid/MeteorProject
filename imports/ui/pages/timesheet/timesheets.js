@@ -21,7 +21,7 @@ Template.timesheets.helpers({
     
     var targetWeek = Session.get('selectedTargetWeek');
 
-    result.forEach(function (doc) {
+    result.forEach(function(doc) {
       if (moment(doc.date).week() === (moment(targetWeek).week())) {
         timesheets.push(doc);
       }

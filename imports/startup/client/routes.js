@@ -64,10 +64,10 @@ FlowRouter.route('/editTimesheet', {
   },
 });
 
-FlowRouter.route('/teamTimesheet', {
-  name: 'teamTimesheet',
+FlowRouter.route('/teamTimesheets', {
+  name: 'teamTimesheets',
   action() {
-    BlazeLayout.render('mainLayout', { main: 'teamTimesheet' });
+    BlazeLayout.render('mainLayout', { main: 'teamTimesheets' });
   },
 });
 
