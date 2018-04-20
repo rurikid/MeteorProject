@@ -25,6 +25,7 @@ meteortesting:mocha               # A package for writing and running your meteo
 johanbrook:publication-collector  # Test a Meteor publication by collecting its output
 accounts-password@1.5.0           # Allows users to login
 msavin:mongol                     # Mongo Debugging Tool
-twbs:bootstrap                    # bootstrap dependency for modals
-peppelg:bootstrap-3-modal         # enables modal calls
-session                           # enables session variables
+twbs:bootstrap 										# bootstrap dependency for modals
+peppelg:bootstrap-3-modal					# enables modal calls
+session														# enables session variables
+momentjs:moment										# enables moment.js
