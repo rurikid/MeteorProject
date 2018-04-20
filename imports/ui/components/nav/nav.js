@@ -2,15 +2,17 @@ import { Users } from '../../../api/users/users.js';
 
 import './nav.html';
 
-  // evaluates for supervisors
 Template.nav.helpers({
+  // returns user name
   userName() {
     var userId = Meteor.user().profile;
     return userId.firstName + " " +userId.lastName;
   },
+  // evaluates for supervisors
   isSupervisor: function(position) {
     return ((Meteor.user().profile.position === 'Supervisor') || (Meteor.user().profile.position === 'Administrator'));
   },
+  // evaluates for admin
   isAdmin: function(position) {
     return ((position === 'Administrator'));
   },

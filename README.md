@@ -46,13 +46,18 @@ Documentation | Node.js | Tutorials
 
 **Patch Notes**
 --------------------------------------------
-**20Apr2018** - mwight
+**20Apr2018** - rurikid
 ```
-> fixed css for "add new member" button on team.html
-> removed auto-check from radio buttons on projects.html
-> "You are logged in as: _______" has been added (into nav.html)
-> Implemented functionality for "Your role" column on My Projects page
-> Validation for creating new projects and editing new projects is complete
+> regular project members can now add timesheets
+```
+
++**20Apr2018** - mwight
+```
++> fixed css for "add new member" button on team.html
++> removed auto-check from radio buttons on projects.html
++> "You are logged in as: _______" has been added (into nav.html)
++> Implemented functionality for "Your role" column on My Projects page
++> Validation for creating new projects and editing new projects is complete
 ```
 
 **18Apr2018** - mwight

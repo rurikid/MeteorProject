@@ -46,6 +46,21 @@ Meteor.methods({
       payData: employee.payData,
     }
 
+    // updates projects in case of supervisor demotion
+    var oldEmployee = Meteor.users.findOne({'_id': employee.id});
+    var oldPosition = oldEmployee && oldEmployee.profile && oldEmployee.profile.position;
+    
+    if (newProfile.position === "Employee" &&
+       (oldPosition === "Supervisor" ||
+        oldPosition === "Administrator")) {
+
+      Meteor.call('removedSupervisor', employee._id, (error) => {
+        if (error) {
+          alert(error.error);
+        }
+      });
+    }
+
     return Meteor.users.update(employee.id, {$set: {
       username: employee.username,
       password: employee.password,

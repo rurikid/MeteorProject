@@ -50,6 +50,21 @@ Meteor.methods({
       budget: project.budget,
       employees: project.employees,
 
-    }})
+    }});
+  },
+
+  removedSupervisor(employeeID) {
+    check(employeeID, String);
+    var projects = Projects.find({'supervisor': employeeID});
+
+    console.log(employeeID);
+
+    projects.forEach(function(project) {
+      if (project.supervisor === employeeID) {
+        Projects.update(project.id, {$set: {
+          supervisor: '',
+        }});
+      }
+    });
   },
 })

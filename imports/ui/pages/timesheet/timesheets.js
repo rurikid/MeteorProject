@@ -85,10 +85,8 @@ Template.timesheets.helpers({
       var newWeek = moment().format("YYYY-MM-DD");
       Session.set('selectedTargetWeek', newWeek);
       targetWeek = newWeek;
-      console.log("!targetWeek");
     }
 
-    console.log('get ' + targetWeek);
     return moment(targetWeek).startOf('week').format("MMMM Do YYYY");
   },
   getHumanDate: function(date) {
