@@ -50,6 +50,10 @@ Documentation | Node.js | Tutorials
 > regular project members can now add timesheets
 > demoted supervisors/admins now update project supervisors to ''
 > began team timesheets page (currently shows all time chunks for all dates)
+> employee's can now properly see their projects
+> user's can now see their proper role in a project
+> supervisors can now only edit projects they are supervising
+> edit buttons no longer function if nothing is selected
 ```
 
 +**20Apr2018** - mwight
