@@ -54,7 +54,7 @@ Template.projects.helpers({
 		return (Meteor.user().profile.position === 'Administrator' || Meteor.user()._id === result.supervisor);
 	},
 
-  // finds and retrieves employee name
+  	// finds and retrieves employee name
 	getProjectEmployee: function(employee) {
 		var result = Meteor.users.findOne({"_id": employee});
 
@@ -63,6 +63,34 @@ Template.projects.helpers({
 		var lastName = result && result.profile && result.profile.lastName;
 
 		return (firstName + " " + lastName);
+	},
+	
+	//returns whether current user is an employee, supervisor, or not in project
+	getUserRole: function(supervisor, employees) {
+		//if user is in project check if he's the supervisor of project
+		var supervisorResult = Meteor.users.findOne({"_id": supervisor});
+		var supervisorName = supervisorResult.profile.firstName + " " + supervisorResult.profile.lastName;
+
+		var loggedUserResult = Meteor.user().profile;
+		var loggedUserName = loggedUserResult.firstName + " " +loggedUserResult.lastName; 
+		if (supervisorName == loggedUserName){
+				return "Supervisor/Employee";
+		}
+
+		//if user is in project check if he's just an employee in project
+		for(index = 0; index < employees.length; index++){
+
+			var employeeResult = Meteor.users.findOne({"_id": employees[index]});
+			var employeeName = employeeResult.profile.firstName + " " + employeeResult.profile.lastName;
+			
+			
+			if (employeeName == loggedUserName) {
+				return "Employee";
+			}
+			else {
+				return "[Not on project]";
+			}
+		}
 	},
 });
 

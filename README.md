@@ -37,7 +37,6 @@ Documentation | Node.js | Tutorials
 > Design Report View (EASY)(Required Use Case)
 > Create Starting Database within startup/server/fixtures.js (EASY)(Required Use Case)
 > Implement Reports (MODERATE)(Required Use Case)
-> Validate project fields (MODERATE)(Required Use Case)
 > Catch issues when changing employee roles leaving project without supervisor (MODERATE)(Required Use Case)
 > Evaluate Functionality (EASY)(Would Be Nice)
 > Improve Stylization (EASY)(Would Be Nice)
@@ -47,6 +46,15 @@ Documentation | Node.js | Tutorials
 
 **Patch Notes**
 --------------------------------------------
+**20Apr2018** - mwight
+```
+> fixed css for "add new member" button on team.html
+> removed auto-check from radio buttons on projects.html
+> "You are logged in as: _______" has been added (into nav.html)
+> Implemented functionality for "Your role" column on My Projects page
+> Validation for creating new projects and editing new projects is complete
+```
+
 **18Apr2018** - mwight
 ```
 > Adding employees to new projects now implemented via multiselect

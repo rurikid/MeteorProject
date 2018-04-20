@@ -4,6 +4,10 @@ import './nav.html';
 
   // evaluates for supervisors
 Template.nav.helpers({
+  userName() {
+    var userId = Meteor.user().profile;
+    return userId.firstName + " " +userId.lastName;
+  },
   isSupervisor: function(position) {
     return ((Meteor.user().profile.position === 'Supervisor') || (Meteor.user().profile.position === 'Administrator'));
   },

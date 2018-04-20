@@ -80,13 +80,13 @@
 								{{#if isMember _id}}
 									<tr style="height:auto; margin-top:0px;">
 										{{#if isSupervisor}}
-											<td><input class="select-radio" type="radio" name="projectID" value="{{_id}}" checked="checked"></td>
+											<td><input class="select-radio" type="radio" name="projectID" value="{{_id}}"></td>
 										{{/if}}
 										<td>{{name}}</td>
 										<td>{{getProjectSupervisor supervisor}}</td>
 										<td>{{client}}</td>
 										<td>{{budget}}</td>
-										<td>{{getUserRole}}</td>
+										<td>{{getUserRole supervisor employees}}</td>
 										<td>
 											{{#each value in employees}}
 												{{getProjectEmployee value}}
