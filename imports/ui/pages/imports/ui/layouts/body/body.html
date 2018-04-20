@@ -1,0 +1,16 @@
+<template name="mainLayout">
+	{{#if currentUser}}
+		{{> Template.dynamic template=main}}
+
+	{{else}}
+		{{> login}}
+	{{/if}}
+</template>
+
+<!-- <template name="reportLayout">
+		{{#if currentUser}}
+			{{> Template.dynamic template=main}}
+		{{else}}
+			{{> login}}
+		{{/if}}
+</template> -->

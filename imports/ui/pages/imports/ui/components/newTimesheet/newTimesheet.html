@@ -1,0 +1,52 @@
+<template name="newTimesheet">
+  <div class="modal fade">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">{{isNew}}</h4>
+        </div>
+
+        <div class="modal-body">
+          <div style="padding-bottom: 10px;">
+            <div>
+              <label>Date:</label>
+                <input type="date" id="date" value="{{getDate timechunk.timesheet}}" />
+                <br />
+            </div>
+            <div>
+              <label>Project Name:</label>
+                <select id="project">
+                  {{#each project in projects}}
+                    {{#if isMember project._id}}
+                      <option value="{{project._id}}" {{isEdit project._id}}>
+                        {{project.name}}
+                      </option>
+                    {{/if}}
+                  {{/each}}
+                </select>
+                <br />
+            </div>
+            <div>
+              <label>Start Time:</label>
+              	<input type="text" id="startTime" maxlength="5" placeholder="HH:mm" value="{{timechunk.startTime}}" />
+                <br />
+            </div>
+            <div>
+              <label>End Time:</label>
+              	<input type="text" id="endTime" maxlength="5" placeholder="HH:mm" value="{{timechunk.endTime}}" />
+                <br />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <input type="button" id="back" value="Cancel">
+          <input type="reset" id="clear" value="Clear">
+          <input type="submit" id="submit" value="{{isNew}}">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>

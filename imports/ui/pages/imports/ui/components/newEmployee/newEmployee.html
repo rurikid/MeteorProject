@@ -1,0 +1,80 @@
+<!-- This will eventually be a popup accessible by admins from the 'employees' template. 
+  TODO:
+    Integrate further with Database
+    Apply stylization to page
+-->
+<template name="newEmployee">
+  <div class="modal fade">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">{{label}}</h4>
+        </div>
+
+        <div class="modal-body">
+          <div style="padding-bottom: 10px;">
+            <div>
+              <label>First Name:</label> 
+                <input type="text" id="firstName" placeholder="First Name" value={{employee.profile.firstName}} />
+                <br />
+            </div>
+            <div>
+              <label>Last Name:</label> 
+                <input type="text" id="lastName" placeholder="Last Name" value={{employee.profile.lastName}} />
+                <br />
+            </div>
+            <div>
+              <label>Position:</label> 
+                <select id="position">
+                  <option value="Employee" {{positionCheck "Employee"}}>Employee</option>
+                  <option value="Supervisor" {{positionCheck "Supervisor"}}>Supervisor</option>
+                  <option value="Administrator" {{positionCheck "Administrator"}}>Administrator</option>
+                </select>
+                <br />
+            </div>
+            <div>
+              <label>Salary:</label> 
+                <input type="number" id="salary" placeholder="Salary" value={{employee.profile.salary}} />
+                <br />
+            </div>
+            <div>
+              <label>Pay Data:</label> 
+                <textarea id="payData" value={{employee.profile.payData}}></textarea>
+                <br />
+            </div>
+            {{#if isNew}}
+              <div>
+                <label>Email:</label> 
+                  <input type="email" id="email" placeholder="Email" value={{employee.emails.[0].address}} />
+                  <br />
+              </div>
+              <div>
+                <label>User Name:</label> 
+                  <input type="text" id="username" placeholder="User Name" value={{employee.username}} />
+                  <br />
+              </div>
+                <div>
+                  <label>Password:</label> 
+                    <input type="password" id="password" placeholder="Password" />
+                    <br />
+                </div>
+                <div>
+                  <label>Confirm Password:</label> 
+                    <input type="password" id="confPassword" placeholder="Confirm Password" />
+                    <br />
+                </div>
+              {{/if}}
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <input type="button" id="back" value="Cancel">
+          <input type="reset" id="clear" value="Clear">
+          <input type="submit" id="submit" value="{{label}}">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>
