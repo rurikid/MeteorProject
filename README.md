@@ -50,7 +50,7 @@ Documentation | Node.js | Tutorials
 ```
 > fixed css for "add new member" button on team.html
 > removed auto-check from radio buttons on projects.html
-> "You are logged in as: _______" has been implemented (into nav.html)
+> "You are logged in as: _______" has been added (into nav.html)
 > Implemented functionality for "Your role" column on My Projects page
 > Validation for creating new projects and editing new projects is complete
 ```
