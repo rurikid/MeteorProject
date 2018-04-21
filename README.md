@@ -46,6 +46,12 @@ Completed > Implement Reports (MODERATE)(Required Use Case)
 
 **Patch Notes**
 --------------------------------------------
+**21Apr2018** - rurikid
+```
+> TeamTimesheets are now fully functional for all required time frames (may need more testing)
+> Changed error message on adding timesheet
+```
+
 **20Apr2018** - msylveus
 ```
 > administrator can view daily, weekly, monthly and date range reports
