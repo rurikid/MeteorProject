@@ -14,10 +14,10 @@ function checkform(timechunk){
 
 	// tests
 	if (!re.test(timechunk.startTime)) {
-		return "Invalid start time! \n 24 Hr Clock Only";
+		return "Invalid start time! \n 24 Hr Clock \n Minutes in 15 Minute Increments Only";
 	}
 	if (!re.test(timechunk.endTime)) {
-		return "Invalid end time! \n 24 Hr Clock Only";
+		return "Invalid end time! \n 24 Hr Clock Only \n Minutes in 15 Minute Increments Only";
 	}
 	return true;
 }
