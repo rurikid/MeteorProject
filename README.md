@@ -34,9 +34,9 @@ Documentation | Node.js | Tutorials
 **TODO**
 --------------------------------------------
 ```
-> Design Report View (EASY)(Required Use Case)
+In Progress > Design Report View (EASY)(Required Use Case)
 > Create Starting Database within startup/server/fixtures.js (EASY)(Required Use Case)
-> Implement Reports (MODERATE)(Required Use Case)
+Completed > Implement Reports (MODERATE)(Required Use Case) 
 > Manage Timesheets/Timechunks/Projects when an employee is deleted
 > Evaluate Functionality (EASY)(Would Be Nice)
 > Improve Stylization (EASY)(Would Be Nice)
@@ -46,6 +46,14 @@ Documentation | Node.js | Tutorials
 
 **Patch Notes**
 --------------------------------------------
+**20Apr2018** - msylveus
+```
+> administrator can view daily, weekly, monthly and date range reports
+> supervisors can now see only the projects they are supervising on Team 
+> Error handling for empty fields before generating report
+
+```
+
 **20Apr2018** - rurikid
 ```
 > regular project members can now add timesheets
