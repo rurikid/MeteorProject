@@ -67,15 +67,55 @@ Template.reportsForm.events({
 
 
     'click .generate-report-button': function(event) {
-        // Prevent default browser behavior
-        //event.preventDefault();
-        console.log("Inside generated report on click");
-        // FlowRouter.setQueryParams({
-        //         reportType: Session.get("reportType"),
-        //         projectId: Session.get("projectId")
-        //     })
+        var reportType = Session.get("reportType");
+        var fromDate = Session.get("fromDate");
+        var toDate = Session.get("toDate");
 
-        FlowRouter.go('/generatedReports/' + Session.get("reportType") + "/" + Session.get("projectId"));
+        if(reportType == null) {
+            return swal({
+                title: "Error",
+                text: "Please select a time period",
+                button: {
+                    text: "Close",
+                },
+                icon: "error"
+            });
+        } else if (Session.get("projectId") == null) {
+            return swal({
+                title: "Error",
+                text: "Please select a project",
+                button: {
+                    text: "Close",
+                },
+                icon: "error"
+            });
+        } else if (reportType === 'date_range' ) {
+            if(fromDate == null) {
+                return swal({
+                    title: "Error",
+                    text: "Please select a from date",
+                    button: {
+                        text: "Close",
+                    },
+                    icon: "error"
+                });
+            } else if(toDate == null) {
+                return swal({
+                    title: "Error",
+                    text: "Please select a to date",
+                    button: {
+                        text: "Close",
+                    },
+                    icon: "error"
+                });
+            } else {
+                FlowRouter.go('/generatedReports/' + Session.get("reportType") + "/" + Session.get("projectId") + "/" + fromDate + "/" + toDate);
+            }
+        } else {        
+            FlowRouter.go('/generatedReports/' + Session.get("reportType") + "/" + Session.get("projectId"));
+        }
+        
+        
     },
 });
 

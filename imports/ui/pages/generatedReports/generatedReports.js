@@ -79,15 +79,29 @@ Template.reportTimesheets.helpers({
 
       // returns all user timesheets
   timesheets() {
+    var from = FlowRouter.getParam("from");
+    var to = FlowRouter.getParam("to");
+    var projectId = FlowRouter.getParam("projectId");
     var timesheets = [];
-    var result = Timesheets.find({'employee': Meteor.user()._id});
+    
+    var result = null;
+    if (from == null || to == null) {
+      result = Timesheets.find();
+    } else {
+      result = Timesheets.find({
+        $and:[
+          {'date': {$gte: from}}, 
+          {'date': {$lte: to}}
+      ]});
+    }
+    
     
     var fectchResult = result.fetch();
     
 
     //consolidatedArray.push.apply(fectchResult);
     fectchResult.forEach(function (entry) {
-      var timechunks = Timechunks.find({'timesheet': entry._id}).fetch();
+      var timechunks = Timechunks.find({$and:[{'timesheet': entry._id}, {'project': projectId}]}).fetch();
       
       var timeChunksArray = [];
 
@@ -95,85 +109,74 @@ Template.reportTimesheets.helpers({
         timeChunksArray.push(timeChunk);
       });
 
-      var totalHours = getTotalHoursForTimeChunks(timeChunksArray);
+        if (timeChunksArray.length > 0) {
+          var totalHours = getTotalHoursForTimeChunks(timeChunksArray);
       
      
-      if (FlowRouter.getParam("reportType") == "daily") {//Check if daily
-        var dateString = getStringDate(entry.date, 'dddd, MMMM Do YYYY');
-      
-        var valueJson = {};
-        valueJson["timeChunks"] = timeChunksArray;
-
-        valueJson["totalHours"] = totalHours;
-
-        if(timeSheetJson[dateString] == null) {
-          timeSheetKeyArray.push(dateString);
-          timeSheetJson[dateString] = valueJson;
-        } 
-
-      } else if(FlowRouter.getParam("reportType") == "weekly") {//Check if weekly
-        var curr = new Date(entry.date);
-        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-        var last = first + 6; // last day is the first day + 6
-
-        //getting first day and last day of week for a given date and saving it as key in dictionary
-        var dateString = getStringDate(new Date(curr.setDate(first)), 'MMMM Do YYYY') + " - " +  getStringDate(new Date(curr.setDate(last)), 'MMMM Do YYYY')
-        
-        console.log("printing date string", dateString);
-
-
-        if(timeSheetJson[dateString] == null) {
-          var valueJson = {};
-          valueJson["timeChunks"] = timeChunksArray;
-
-        valueJson["totalHours"] = totalHours;
-          timeSheetKeyArray.push(dateString);
-          timeSheetJson[dateString] = valueJson;
-        } else {
-          var array = timeSheetJson[dateString]["timeChunks"];
-          //array.push(timeChunksArray);
-          var concatArray = array.concat(timeChunksArray);
-          console.log("Inside Else Clause", timeSheetJson);
-          var concatHours = timeSheetJson[dateString]["totalHours"] + totalHours;
-          timeSheetJson[dateString]["timeChunks"] = concatArray;
-          timeSheetJson[dateString]["totalHours"] = concatHours;
+          if (FlowRouter.getParam("reportType") == "daily") {//Check if daily
+            var dateString = getStringDate(entry.date, 'dddd, MMMM Do YYYY');
+          
+            var valueJson = {};
+            valueJson["timeChunks"] = timeChunksArray;
+    
+            valueJson["totalHours"] = totalHours;
+    
+            if(timeSheetJson[dateString] == null) {
+              timeSheetKeyArray.push(dateString);
+              timeSheetJson[dateString] = valueJson;
+            } 
+    
+          } else if(FlowRouter.getParam("reportType") == "weekly" || FlowRouter.getParam("reportType") == "date_range") {//Check if weekly
+            var curr = new Date(entry.date);
+            var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+            var last = first + 6; // last day is the first day + 6
+    
+            //getting first day and last day of week for a given date and saving it as key in dictionary
+            var dateString = getStringDate(new Date(curr.setDate(first)), 'MMMM Do YYYY') + " - " +  getStringDate(new Date(curr.setDate(last)), 'MMMM Do YYYY')
+            
+            console.log("printing date string", dateString);
+    
+    
+            if(timeSheetJson[dateString] == null) {
+              var valueJson = {};
+              valueJson["timeChunks"] = timeChunksArray;
+    
+            valueJson["totalHours"] = totalHours;
+              timeSheetKeyArray.push(dateString);
+              timeSheetJson[dateString] = valueJson;
+            } else {
+              var array = timeSheetJson[dateString]["timeChunks"];
+              //array.push(timeChunksArray);
+              var concatArray = array.concat(timeChunksArray);
+              console.log("Inside Else Clause", timeSheetJson);
+              var concatHours = timeSheetJson[dateString]["totalHours"] + totalHours;
+              timeSheetJson[dateString]["timeChunks"] = concatArray;
+              timeSheetJson[dateString]["totalHours"] = concatHours;
+            }
+    
+          } else if(FlowRouter.getParam("reportType") == "monthly") {//Check if monthly
+            var dateString = getStringDate(entry.date, 'MMMM YYYY');
+          
+            if(timeSheetJson[dateString] == null) {
+              var valueJson = {};
+              valueJson["timeChunks"] = timeChunksArray;
+    
+            valueJson["totalHours"] = totalHours;
+              timeSheetKeyArray.push(dateString);
+              timeSheetJson[dateString] = valueJson;
+            } else {
+              var array = timeSheetJson[dateString]["timeChunks"];
+              //array.push(timeChunksArray);
+              var concatArray = array.concat(timeChunksArray);
+              console.log("Inside Else Clause", timeSheetJson);
+              var concatHours = timeSheetJson[dateString]["totalHours"] + totalHours;
+              timeSheetJson[dateString]["timeChunks"] = concatArray;
+              timeSheetJson[dateString]["totalHours"] = concatHours;
+            }
+          }
         }
-
-
-
-
-      } else if(FlowRouter.getParam("reportType") == "monthly") {//Check if monthly
-        var dateString = getStringDate(entry.date, 'MMMM YYYY');
-      
-        if(timeSheetJson[dateString] == null) {
-          var valueJson = {};
-          valueJson["timeChunks"] = timeChunksArray;
-
-        valueJson["totalHours"] = totalHours;
-          timeSheetKeyArray.push(dateString);
-          timeSheetJson[dateString] = valueJson;
-        } else {
-          var array = timeSheetJson[dateString]["timeChunks"];
-          //array.push(timeChunksArray);
-          var concatArray = array.concat(timeChunksArray);
-          console.log("Inside Else Clause", timeSheetJson);
-          var concatHours = timeSheetJson[dateString]["totalHours"] + totalHours;
-          timeSheetJson[dateString]["timeChunks"] = concatArray;
-          timeSheetJson[dateString]["totalHours"] = concatHours;
-        }
-      }
-
     });
     
-    // var targetWeek = Session.get('selectedTargetWeek');
-
-    // result.forEach(function (doc) {
-    //   if (moment(doc.date).week() === (moment(targetWeek).week())) {
-    //     timesheets.push(doc);
-    //   }
-    // });
-    // return timesheets;
-
     return timeSheetKeyArray;
   },
 

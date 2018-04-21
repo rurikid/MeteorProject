@@ -130,6 +130,15 @@ FlowRouter.route('/generatedReports/:reportType/:projectId', {
   },
 });
 
+FlowRouter.route('/generatedReports/:reportType/:projectId/:from/:to', {
+  name: 'generatedReports',
+  action() {
+    BlazeLayout.render('mainLayout', { 
+      main: 'generatedReports', 
+    });
+  },
+});
+
 FlowRouter.route('/team', {
   name: 'team',
   action() {
