@@ -47,6 +47,11 @@ Template.generatedReports.onCreated( function () {
 
 });
 
+Template.generatedReports.onDestroyed( function() {
+  timeSheetKeyArray = [];
+  timeSheetJson = {};
+});
+
 
 Template.generatedReports.events({
 
@@ -95,22 +100,44 @@ Template.reportTimesheets.helpers({
      
       if (FlowRouter.getParam("reportType") == "daily") {//Check if daily
         var dateString = getStringDate(entry.date, 'dddd, MMMM Do YYYY');
-        timeSheetKeyArray.push(dateString);
-
+      
         var valueJson = {};
         valueJson["timeChunks"] = timeChunksArray;
-
 
         valueJson["totalHours"] = totalHours;
 
         if(timeSheetJson[dateString] == null) {
-         timeSheetJson[dateString] = valueJson;
+          timeSheetKeyArray.push(dateString);
+          timeSheetJson[dateString] = valueJson;
         } else {
           timeSheetJson[dateString].timechunks.push(timeChunksArray);
         }
 
+        console.log("Printing JSON", timeSheetJson);
+
       } else if(FlowRouter.getParam("reportType") == "weekly") {//Check if weekly
   
+      } else if(FlowRouter.getParam("reportType") == "monthly") {//Check if weekly
+        var dateString = getStringDate(entry.date, 'MMMM YYYY');
+      
+        
+
+        if(timeSheetJson[dateString] == null) {
+          var valueJson = {};
+          valueJson["timeChunks"] = timeChunksArray;
+
+        valueJson["totalHours"] = totalHours;
+          timeSheetKeyArray.push(dateString);
+          timeSheetJson[dateString] = valueJson;
+        } else {
+          var array = timeSheetJson[dateString]["timeChunks"];
+          //array.push(timeChunksArray);
+          var concatArray = array.concat(timeChunksArray);
+          console.log("Inside Else Clause", timeSheetJson);
+          var concatHours = timeSheetJson[dateString]["totalHours"] + totalHours;
+          timeSheetJson[dateString]["timeChunks"] = concatArray;
+          timeSheetJson[dateString]["totalHours"] = concatHours;
+        }
       }
 
     });
@@ -132,15 +159,9 @@ Template.reportTimesheets.helpers({
     return timeSheetJson[key].totalHours;
   },
 
-  timeSheetJSON: function(key) {
-    console.log("Inside TimeSheet JSON");
-    return timeSheetJson[key];
-  },
-  
   // returns all associated timechunks
   timechunks: function(key) {
     var timechunk =  timeSheetJson[key].timeChunks;
-    console.log("Printing TimeChunk", timechunk);
     return timeSheetJson[key].timeChunks;
   },
   // finds and retrieves project name
