@@ -9,28 +9,18 @@
     <template name="reportsForm">
         <div id="reports-reports-home-form" class="card, container">
             <form role="form">
-                {{#if errorMessage}}
-                <div class="alert alert-warning">
-                    {{errorMessage}}
-                </div>
-                {{/if}}
-    
-                {{#if infoMessage}}
-                <div class="alert alert-success">
-                    {{infoMessage}}
-                </div>
-                {{/if}}
                 <div class="form-group  field-report_type">
                     <label for="report_type">
-                        Report Type
+                        Time Period
                     </label>
 
                     <div class="input-div">
                         <select id="report-type-select" class="form-control field-wrapper required-field" name="report_type" data-type="string">
-                            <option value="day" selected>							Day</option>
-                            <option value="week">							Week</option>
-                            <option value="month">							Month</option>
-                            <option value="date_range">							Date Range</option>
+                            <option value="select_time_period" selected>	Select a Time Period</option>
+                            <option value="daily">	Daily</option>
+                            <option value="weekly">	Weekly</option>
+                            <option value="monthly"> Monthly</option>
+                            <option value="date_range">	Date Range</option>
                         </select>
                     </div>
 
@@ -58,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="form-group  field-user-id">
+                <!-- <div class="form-group  field-user-id">
                     <label for="userId">
                         Employee
                     </label>
@@ -70,9 +60,9 @@
                                 {{/each}}
                         </select>
                     </div>
-                </div>
+                </div> -->
 
-				<button type="button" class="generate-report-button" style='color:#ffffff;background-color:#d3a944;'>
+				<button type="button" class="generate-report-button btn btn-dark" style='color:#ffffff;background-color:#d3a944;'>
                         Generate Report
                 </button>
 

@@ -3,16 +3,25 @@ import { Timesheets } from '/imports/api/timesheets/timesheets.js';
 import { Timechunks } from '/imports/api/timechunks/timechunks.js';
 import { Meteor } from 'meteor/meteor';
 import '/imports/api/helpers/modal.js';
-import { Projects } from '../../../api/projects/projects.js'
+import { Projects } from '/imports/api/projects/projects.js'
 
 //import '/imports/api/helpers/modal.js';
 import './reports.html';
 
+Template.reportsForm.onCreated( function() {
+    Meteor.subscribe('projects.all');
+});
 
 Template.reportsForm.onDestroyed( function () {
     
     console.log("Calling on Destroyed");
     Session.set("isDateRange", false);
+    Session.set("reportType", null);
+    Session.set("fromDate", null);
+    Session.set("toDate", null);
+    Session.set("projectId", null);
+    Session.set("employeeId", null);
+    Session.set("projects", null);
 });
 
 Template.reportsForm.events({
@@ -61,28 +70,37 @@ Template.reportsForm.events({
         // Prevent default browser behavior
         //event.preventDefault();
         console.log("Inside generated report on click");
-        FlowRouter.setQueryParams({reportType: Session.get("reportType")})
-        FlowRouter.go('/generatedReports');
-        //Meteor.call('generatedReport', null);
-        //Meteor.call('reportsModal', null);
-    },
+        // FlowRouter.setQueryParams({
+        //         reportType: Session.get("reportType"),
+        //         projectId: Session.get("projectId")
+        //     })
 
+        FlowRouter.go('/generatedReports/' + Session.get("reportType") + "/" + Session.get("projectId"));
+    },
 });
 
 Template.reportsForm.helpers({
     projects() {
-         //un-comment for when we have supervisor login in.
-        //return Projects.find({"supervisor": Meteor.userId()});
-        console.log("Project helper");
-		return Projects.find({});
+        if(Meteor.user().profile.position === 'Administrator') {
+            return Projects.find({});
+         } else if(Meteor.user().profile.position === 'Supervisor') {
+            return Projects.find({"supervisor": Meteor.userId()});
+         }
     },
 
     employees() {
-        var projectId = Session.get("projectId");
-        var project = Projects.findOne({"_id": projectId});
-        var employees = project.employees;        
-        var users = Meteor.users.find({"_id": {"$in": employees}});
-        return users;
+        console.log("Printing Session",Session.get("projectId"));
+        if(Session.get("projectId") !== 'undefined') {
+            var projectId = Session.get("projectId");
+            var project = Projects.findOne({"_id": projectId});
+            
+            console.log("Inside Employees", project.employees);
+            var employees = project.employees;        
+            var users = Meteor.users.find({"_id": {"$in": employees}});
+            return users;
+        }
+
+        return [];
     },
     
     "isDateRange": function() {

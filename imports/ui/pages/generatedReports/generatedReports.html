@@ -1,14 +1,93 @@
 <template name="generatedReports">
-        <!-- daily-project-timesheet-report
-        weekly-project-timesheet-report
-        monthly-project-timesheet-report -->
+  <div>
+    <!-- {{#if isDaily}} -->
+      {{> reportTimesheets}}
+    <!-- {{/if}} -->
 
-        <!-- daily-project-employee-timesheet-report -->
+    {{#if isWeekly}}
+      {{> dailyProjectTimesheetReport}}
+    {{/if}}
 
+    {{#if isMonthly}}
+      {{> dailyProjectTimesheetReport}}
+    {{/if}}
+
+  </div>
+  
 </template>
 
+
+<!-- <template name="generatedReports">
+        daily-project-timesheet-report
+        weekly-project-timesheet-report
+        monthly-project-timesheet-report
+
+        daily-project-employee-timesheet-report
+            <h1>Hello</h1>
+</template>  -->
+
+<template name="reportTimesheets">
+
+    <div id="daily-report-header">
+        <!-- align center may not work for html5 -->
+        <h1 style="color:white" align="center"> Daily Timesheet Report</h1>
+        <h4 style="color:white" align="center"> Prepared By: {{getUsersName}}</h4>
+    </div>
+
+    <div class="table-responsive card, container">
+        {{#each timesheet in timesheets}}
+            <table class="table" style="font-size: 12px;">
+              <thead style="background-color: #d3a944">
+                  <tr>
+                    <th>{{timesheet}}</th>
+                    <th>Total Hours: {{timeSheetTotalHours timesheet}}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="2">
+                    <!-- Begin Timechunks Table -->
+                    <div class="table-responsive">
+                      <table class="table" style="font-size: 12px;">
+                        <thead style="background-color: #d3a944">
+                          <tr>
+                            {{#if isTimely timesheet.date}}
+                              <th></th>
+                            {{/if}}
+                            <th>Project</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Hours</th>
+                          </tr>
+                        </thead>
+                         <tbody>
+                          {{#each timechunk in timechunks timesheet}}
+                            <tr>
+                              {{#if isTimely timesheet.date}}
+                                <td>
+                                  <input class="select-radio" type="radio" name="timechunkID" value="{{timechunk._id}}">
+                                </td>
+                              {{/if}}
+                              <td>{{getProjectName timechunk.project}}</td>
+                              <td>{{timechunk.startTime}}</td>
+                              <td>{{timechunk.endTime}}</td>
+                              <td>{{getTimechunkHours timechunk.startTime timechunk.endTime}}</td>
+                            </tr>
+                          {{/each}}
+                        </tbody>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        {{/each}}
+      </div>
+</template>
+
+
 <!-- FOR PROJECT ONLY -->
-<template name="daily-project-timesheet-report">
+<template name="dailyProjectTimesheetReport">
         <div id="daily-report-header">
             <!-- align center may not work for html5 -->
             <h1 align="center"> Daily Timesheet Report</h1>
@@ -71,7 +150,7 @@
 </template>
 
 
-<template name="weekly-project-timesheet-report">
+<template name="weeklyProjectTimesheetReport">
         <div id="daily-report-header">
             <!-- align center may not work for html5 -->
             <h1 align="center"> Weekly Timesheet Report</h1>
@@ -122,7 +201,7 @@
 </template>
 
 
-<template name="monthly-project-timesheet-report">
+<template name="monthlyProjectTimesheetReport">
         <div id="monthly-report-header">
             <!-- align center may not work for html5 -->
             <h1 align="center"> Monthly Timesheet Report</h1>

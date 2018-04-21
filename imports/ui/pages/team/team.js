@@ -8,6 +8,10 @@ import './team.html'
 //   Select Users from Project Logic
 //var pageSession = new ReactiveDict();
 
+Template.team.onCreated( function() {
+    Meteor.subscribe('projects.all');
+});
+
 Template.team.events({
     "change #project-select": function(event, Template) {
         console.log("Variable Changed");
@@ -21,9 +25,11 @@ Template.team.events({
 Template.team.helpers({
     projects() {
          //un-comment for when we have supervisor login in.
-        //return Projects.find({"supervisor": Meteor.userId()});
-        console.log("aj;lkadakdf a");
-		return Projects.find({});
+         if(Meteor.user().profile.position === 'Administrator') {
+            return Projects.find({});
+         } else if(Meteor.user().profile.position === 'Supervisor') {
+            return Projects.find({"supervisor": Meteor.userId()});
+         }
     },
     
     "showMembers": function() {

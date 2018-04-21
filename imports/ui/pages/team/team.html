@@ -1,6 +1,8 @@
 <template name="team">
     {{> nav}}
+    
     <div class="card, container">
+        <h2>My Team</h2>
         <select id="project-select" class="form-control">
             <option value="select_project" selected>Select a Project</option>
             {{#each projects}}
@@ -28,7 +30,10 @@
                   <!-- Supervisor Controls -->
                   {{#if isSupervisor}}
                       <!-- Edit Project Button -->
-                      <a href="#" class="btn btn-dark, editProject" style="margin-left:10%;"><button class="btn btn-dark" id="editProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">Add New Member</button>
+                      <a href="#" class="btn btn-dark, editProject" style="margin-left:10%;">
+                        <button class="btn btn-dark" id="editProject" type="button" style="margin-left:0px;font-size:20px;">
+                          Add New Member
+                        </button>
                       </a>
                   {{/if}}
                 </div>

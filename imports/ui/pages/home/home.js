@@ -20,7 +20,7 @@ import '../projects/projects.js';
 import '../team/team.js';
 import '../employees/employees.js';
 import '../reports/reports.js';
-//import '../generatedReports/generatedReports.js';
+import '../generatedReports/generatedReports.js';
 
 Template.home.helpers({
   // finds and retrieves supervisor name
