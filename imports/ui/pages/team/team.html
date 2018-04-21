@@ -3,12 +3,14 @@
     
     <div class="card, container">
         <h2>My Team</h2>
-        <select id="project-select" class="form-control">
+        <div style="padding: 80px">
+          <select id="project-select" class="form-control">
             <option value="select_project" selected>Select a Project</option>
             {{#each projects}}
               <option name = "projects" value="{{_id}}">{{name}}</option>
             {{/each}}
           </select>
+        </div>
     </div>
 
     {{#if showMembers}}
@@ -19,9 +21,9 @@
 
 <template name="TeamTableHeader">  
     <div class="card, container">
-        <h2 id="component-title">
+        <h3 id="component-title">
             Team Members
-          </h2>
+          </h3>
 
           <div class="row">
               <div class="col">
