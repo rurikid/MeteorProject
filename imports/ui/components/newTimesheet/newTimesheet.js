@@ -139,8 +139,17 @@ Template.newTimesheet.helpers({
 
 		// guarding
 		var supervisor = result && result.supervisor;
+		var employees = result && result.employees;
 
-		return (Meteor.user().profile.position === 'Administrator' || Meteor.user()._id === result.supervisor);
+		// checks if current user is a project member
+		var isEmployee = false;
+		employees.forEach(function(employee) {
+			if (employee === Meteor.user()._id) {
+				isEmployee = true;
+			}
+		});
+
+		return (isEmployee || Meteor.user().profile.position === 'Administrator' || Meteor.user()._id === result.supervisor);
 	},
 	// returns appropriate text for edit/new
 	isNew: function() {

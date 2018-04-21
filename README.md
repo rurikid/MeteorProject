@@ -37,7 +37,6 @@ Documentation | Node.js | Tutorials
 > Design Report View (EASY)(Required Use Case)
 > Create Starting Database within startup/server/fixtures.js (EASY)(Required Use Case)
 > Implement Reports (MODERATE)(Required Use Case)
-> Catch issues when changing employee roles leaving project without supervisor (MODERATE)(Required Use Case)
 > Evaluate Functionality (EASY)(Would Be Nice)
 > Improve Stylization (EASY)(Would Be Nice)
 > Implement update password/email for users (HARD)(Would Be Nice)
@@ -46,13 +45,25 @@ Documentation | Node.js | Tutorials
 
 **Patch Notes**
 --------------------------------------------
-**20Apr2018** - mwight
+**20Apr2018** - rurikid
 ```
-> fixed css for "add new member" button on team.html
-> removed auto-check from radio buttons on projects.html
-> "You are logged in as: _______" has been added (into nav.html)
-> Implemented functionality for "Your role" column on My Projects page
-> Validation for creating new projects and editing new projects is complete
+> regular project members can now add timesheets
+> demoted supervisors/admins now update project supervisors to ''
+> began team timesheets page (currently shows all time chunks for all dates)
+> employee's can now properly see their projects
+> user's can now see their proper role in a project
+> supervisors can now only edit projects they are supervising
+> edit buttons no longer function if nothing is selected
+> team timesheets now displays timechunks from former project members
+```
+
++**20Apr2018** - mwight
+```
++> fixed css for "add new member" button on team.html
++> removed auto-check from radio buttons on projects.html
++> "You are logged in as: _______" has been added (into nav.html)
++> Implemented functionality for "Your role" column on My Projects page
++> Validation for creating new projects and editing new projects is complete
 ```
 
 **18Apr2018** - mwight

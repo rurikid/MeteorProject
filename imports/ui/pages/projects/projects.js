@@ -40,21 +40,32 @@ Template.projects.helpers({
 		var firstName = result && result.profile && result.profile.firstName;
 		var lastName = result && result.profile && result.profile.lastName;
 
+    if (!result) {
+      return "None Assigned"
+    }
+
 		return (firstName + " " + lastName);
 	},
 
 	// determines if a user belongs to a project
 	isMember: function(projectID) {
 		// search Projects for ProjectID
-		var result = Projects.findOne({"_id": projectID});
+		var project = Projects.findOne({"_id": projectID});
+    // guarding
+    var supervisor = project && project.supervisor;
+    var employees = project && project.employees;
 
-		// guarding
-		var supervisor = result && result.supervisor;
+    var isMember = false;
+    employees.forEach(function(employee) {
+      if (employee === Meteor.user()._id) {
+        isMember = true;
+      }
+    });
 
-		return (Meteor.user().profile.position === 'Administrator' || Meteor.user()._id === result.supervisor);
+		return (isMember || Meteor.user().profile.position === 'Administrator' || Meteor.user()._id === supervisor);
 	},
 
-  	// finds and retrieves employee name
+  // finds and retrieves employee name
 	getProjectEmployee: function(employee) {
 		var result = Meteor.users.findOne({"_id": employee});
 
@@ -64,34 +75,26 @@ Template.projects.helpers({
 
 		return (firstName + " " + lastName);
 	},
-	
-	//returns whether current user is an employee, supervisor, or not in project
-	getUserRole: function(supervisor, employees) {
-		//if user is in project check if he's the supervisor of project
-		var supervisorResult = Meteor.users.findOne({"_id": supervisor});
-		var supervisorName = supervisorResult.profile.firstName + " " + supervisorResult.profile.lastName;
 
-		var loggedUserResult = Meteor.user().profile;
-		var loggedUserName = loggedUserResult.firstName + " " +loggedUserResult.lastName; 
-		if (supervisorName == loggedUserName){
-				return "Supervisor/Employee";
-		}
+  // returns whether current user is an employee, supervisor, or not in project
+  getUserRole: function(supervisorID, employees) {
+    if (supervisorID === Meteor.user()._id) {
+      return "Supervisor";
+    }
 
-		//if user is in project check if he's just an employee in project
-		for(index = 0; index < employees.length; index++){
+    var userRole = "Administrator"; 
+    employees.forEach(function(employee) {
+      if (employee === Meteor.user()._id && Meteor.user().profile.position !== 'Administrator') {
+        userRole = "Employee";
+      }
+    });
 
-			var employeeResult = Meteor.users.findOne({"_id": employees[index]});
-			var employeeName = employeeResult.profile.firstName + " " + employeeResult.profile.lastName;
-			
-			
-			if (employeeName == loggedUserName) {
-				return "Employee";
-			}
-			else {
-				return "[Not on project]";
-			}
-		}
-	},
+    return userRole;
+  },
+  // returns true for the project supervisor and administrators
+  isProjectSupervisor: function(supervisorID) {
+    return (supervisorID === Meteor.user()._id || Meteor.user().profile.position === "Administrator");
+  },
 });
 
 Template.projects.events({
@@ -145,6 +148,8 @@ Template.projects.events({
   		}
   	}
 
-    Meteor.call('editProjectModal', id);
+    if (id) {
+      Meteor.call('editProjectModal', id);
+    }
   },
 });
