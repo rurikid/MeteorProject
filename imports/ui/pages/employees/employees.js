@@ -1,6 +1,9 @@
 import { Users } from '/imports/api/users/users.js';
 import { Meteor } from 'meteor/meteor';
+import { Timesheets } from '/imports/api/timesheets/timesheets.js';
+import { Timechunks } from '/imports/api/timechunks/timechunks.js';
 import './employees.html';
+
 
 // TODO
 //   Integrate with Database
@@ -8,6 +11,8 @@ import './employees.html';
 
 Template.employees.onCreated(function () {
     Meteor.subscribe('users.all');
+    Meteor.subscribe('timesheets.all');
+    Meteor.subscribe('timechunks.all');
   });
 
 Template.employees.helpers({
@@ -39,7 +44,16 @@ Template.employees.events({
       if (error) {
         alert(error.error);
       } else {
+        //Get all timesheets for this employee
+        var timeSheets = Timesheets.find({employee: id}).fetch;
+        //Iterating through all the timesheets
+        timeSheets.forEach(function (timeSheet) {
+          //Deleting all timechunks associated with a time sheet
+          Timechunks.remove({project: timeSheet._id});
 
+          //Delete the time sheet after deleting the time chunck
+          Timesheets.remove({_id: timeSheet._id});
+        });
         // success alert
         return swal({
           title: "Removed!",
