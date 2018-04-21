@@ -109,19 +109,42 @@ Template.reportTimesheets.helpers({
         if(timeSheetJson[dateString] == null) {
           timeSheetKeyArray.push(dateString);
           timeSheetJson[dateString] = valueJson;
-        } else {
-          timeSheetJson[dateString].timechunks.push(timeChunksArray);
-        }
-
-        console.log("Printing JSON", timeSheetJson);
+        } 
 
       } else if(FlowRouter.getParam("reportType") == "weekly") {//Check if weekly
-  
-      } else if(FlowRouter.getParam("reportType") == "monthly") {//Check if weekly
+        var curr = new Date(entry.date);
+        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+        var last = first + 6; // last day is the first day + 6
+
+        //getting first day and last day of week for a given date and saving it as key in dictionary
+        var dateString = getStringDate(new Date(curr.setDate(first)), 'MMMM Do YYYY') + " - " +  getStringDate(new Date(curr.setDate(last)), 'MMMM Do YYYY')
+        
+        console.log("printing date string", dateString);
+
+
+        if(timeSheetJson[dateString] == null) {
+          var valueJson = {};
+          valueJson["timeChunks"] = timeChunksArray;
+
+        valueJson["totalHours"] = totalHours;
+          timeSheetKeyArray.push(dateString);
+          timeSheetJson[dateString] = valueJson;
+        } else {
+          var array = timeSheetJson[dateString]["timeChunks"];
+          //array.push(timeChunksArray);
+          var concatArray = array.concat(timeChunksArray);
+          console.log("Inside Else Clause", timeSheetJson);
+          var concatHours = timeSheetJson[dateString]["totalHours"] + totalHours;
+          timeSheetJson[dateString]["timeChunks"] = concatArray;
+          timeSheetJson[dateString]["totalHours"] = concatHours;
+        }
+
+
+
+
+      } else if(FlowRouter.getParam("reportType") == "monthly") {//Check if monthly
         var dateString = getStringDate(entry.date, 'MMMM YYYY');
       
-        
-
         if(timeSheetJson[dateString] == null) {
           var valueJson = {};
           valueJson["timeChunks"] = timeChunksArray;

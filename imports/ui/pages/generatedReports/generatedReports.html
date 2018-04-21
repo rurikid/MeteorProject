@@ -51,9 +51,6 @@
                       <table class="table" style="font-size: 12px;">
                         <thead style="background-color: #d3a944">
                           <tr>
-                            {{#if isTimely timesheet.date}}
-                              <th></th>
-                            {{/if}}
                             <th>Project</th>
                             <th>Start Time</th>
                             <th>End Time</th>
@@ -63,11 +60,6 @@
                          <tbody>
                           {{#each timechunk in timechunks timesheet}}
                             <tr>
-                              {{#if isTimely timesheet.date}}
-                                <td>
-                                  <input class="select-radio" type="radio" name="timechunkID" value="{{timechunk._id}}">
-                                </td>
-                              {{/if}}
                               <td>{{getProjectName timechunk.project}}</td>
                               <td>{{timechunk.startTime}}</td>
                               <td>{{timechunk.endTime}}</td>
