@@ -34,9 +34,8 @@ Documentation | Node.js | Tutorials
 **TODO**
 --------------------------------------------
 ```
-In Progress > Design Report View (EASY)(Required Use Case)
+> Design Report View (msylveus)(EASY)(Required Use Case)
 > Create Starting Database within startup/server/fixtures.js (EASY)(Required Use Case)
-Completed > Implement Reports (MODERATE)(Required Use Case) 
 > Manage Timesheets/Timechunks/Projects when an employee is deleted
 > Evaluate Functionality (EASY)(Would Be Nice)
 > Improve Stylization (EASY)(Would Be Nice)
@@ -46,6 +45,13 @@ Completed > Implement Reports (MODERATE)(Required Use Case)
 
 **Patch Notes**
 --------------------------------------------
+**21Apr2018** - rurikid
+```
+> teamTimesheets are now fully functional for all required time frames (may need more testing)
+> changed error message on adding timesheet
+> fixed an issue with duplicate files
+```
+
 **20Apr2018** - msylveus
 ```
 > administrator can view daily, weekly, monthly and date range reports

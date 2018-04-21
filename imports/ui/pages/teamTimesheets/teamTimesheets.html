@@ -1,8 +1,3 @@
-<!-- This page displays a team's timesheet to the appropriate supervisor.
-  TODO:
-    Integrate with Database
-    Implement stylization
--->
 <template name="teamTimesheets">
   {{> nav}}
   <div class="card container">
@@ -12,18 +7,39 @@
           <div class="col">
             <div style="padding-bottom: 10px; padding-top: 10px; font-size: 32px; margin-left: 10%;">
               <strong>Team Timesheets</strong>
+              <!-- Specifies Date Range -->
+              <span style="font-size:16px; margin-left:3%;">
+                <strong>
+                  Date Range: 
+                  {{#if isDateRange}}
+                    <input type="date" id="fromDate">
+                    to 
+                    <input style="margin-right: 3%;" type="date" id="toDate">
+                  {{else}}
+                  {{targetDateRange.from}} to {{targetDateRange.to}}
+                  {{/if}}
+                </strong>
+              </span>
               <!-- Timeframe Select Buttons -->
-              <button class="btn btn-dark, previousWeek" style="margin-left:5%;" id="previousWeek">&lt;-</button>
-              <select id="selectTimeframe" style="font-size: 20px">
-                <option id="weekly" value="weekly">Weekly</option>
-                <option id="monthly" value="monthly">Monthly</option>
-                <option id="daily" value="daily">Daily</option>
-                <option id="dateRange" value="dateRange">Date Range</option>
-              </select>
-              <button class="btn btn-dark, nextWeek" id="nextWeek">-&gt;</button>
+              {{#if isDateRange}}
+
+              {{else}}
+                <button class="btn btn-dark, previous" style="margin-left:3%;" id="previous">&lt;-</button>
+              {{/if}}
+                <select class="btn btn-dark" id="selectTimeframe" style="font-size: 20px">
+                  <option value="week">Weekly</option>
+                  <option value="month">Monthly</option>
+                  <option value="day">Daily</option>
+                  <option id="dateRange" value="dateRange">Date Range</option>
+                </select>
+              {{#if isDateRange}}
+
+              {{else}}
+                <button class="btn btn-dark, next" id="nextWeek">-&gt;</button>
+              {{/if}}
               <!-- Generate Report Button -->
               <a class="generateReport" href="#">
-                <button class="btn btn-primary" id="generateReport" type="button" style="color: white; background-color: #d3a944; font-size: 22px; margin-left: 10%; border: none;">
+                <button class="btn btn-primary" id="generateReport" type="button" style="margin-left: 3%; color: white; background-color: #d3a944; font-size: 22px; border: none;">
                   Generate Report
                 </button>
               </a>
@@ -54,8 +70,8 @@
                           <table class="table" style="font-size: 12px;">
                             <thead style="background-color: #d3a944">
                               <tr>
-                                <th colspan="2" width="50%">{{getName contributor._id}}</th>
-                                <th colspan="2" width="50%">Hours: </th>
+                                <th colspan="3" width="75%">{{getName contributor._id}}</th>
+                                <th colspan="1" width="25%">Hours: {{getContributorTotalHours project._id contributor._id}}</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -63,9 +79,9 @@
                               {{#each timechunk in timechunks contributor._id project._id}}
                                 <tr>
                                   <td width="25%">{{getTimechunkDate timechunk.timesheet}}</td>
-                                  <td width="25%">{{getTimechunkHours timechunk.startTime timechunk.endTime}} Hours</td>
                                   <td width="25%">From: {{timechunk.startTime}}</td>
                                   <td width="25%">To: {{timechunk.endTime}}</td>
+                                  <td width="25%">{{getTimechunkHours timechunk.startTime timechunk.endTime}} Hours</td>
                                 </tr>
                               {{/each}}
                             </tbody>
