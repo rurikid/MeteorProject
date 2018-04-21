@@ -40,18 +40,29 @@ Template.projects.helpers({
 		var firstName = result && result.profile && result.profile.firstName;
 		var lastName = result && result.profile && result.profile.lastName;
 
+    if (!result) {
+      return "None Assigned"
+    }
+
 		return (firstName + " " + lastName);
 	},
 
 	// determines if a user belongs to a project
 	isMember: function(projectID) {
 		// search Projects for ProjectID
-		var result = Projects.findOne({"_id": projectID});
+		var project = Projects.findOne({"_id": projectID});
+    // guarding
+    var supervisor = project && project.supervisor;
+    var employees = project && project.employees;
 
-		// guarding
-		var supervisor = result && result.supervisor;
+    var isMember = false;
+    employees.forEach(function(employee) {
+      if (employee === Meteor.user()._id) {
+        isMember = true;
+      }
+    });
 
-		return (Meteor.user().profile.position === 'Administrator' || Meteor.user()._id === result.supervisor);
+		return (isMember || Meteor.user().profile.position === 'Administrator' || Meteor.user()._id === supervisor);
 	},
 
   // finds and retrieves employee name
@@ -64,6 +75,26 @@ Template.projects.helpers({
 
 		return (firstName + " " + lastName);
 	},
+
+  // returns whether current user is an employee, supervisor, or not in project
+  getUserRole: function(supervisorID, employees) {
+    if (supervisorID === Meteor.user()._id) {
+      return "Supervisor";
+    }
+
+    var userRole = "Administrator"; 
+    employees.forEach(function(employee) {
+      if (employee === Meteor.user()._id && Meteor.user().profile.position !== 'Administrator') {
+        userRole = "Employee";
+      }
+    });
+
+    return userRole;
+  },
+  // returns true for the project supervisor and administrators
+  isProjectSupervisor: function(supervisorID) {
+    return (supervisorID === Meteor.user()._id || Meteor.user().profile.position === "Administrator");
+  },
 });
 
 Template.projects.events({
@@ -117,6 +148,8 @@ Template.projects.events({
   		}
   	}
 
-    Meteor.call('editProjectModal', id);
+    if (id) {
+      Meteor.call('editProjectModal', id);
+    }
   },
 });

@@ -13,7 +13,7 @@ import '../../components/editTimesheet/editTimesheet.js';
 import '../../components/newTimesheet/newTimesheet.js';
 
 import '../login/login.js';
-import '../teamTimesheet/teamTimesheet.js';
+import '../teamTimesheets/teamTimesheets.js';
 import '../timesheet/timesheets.js';
 import '../profile/profile.js';
 import '../projects/projects.js';
@@ -59,9 +59,9 @@ Template.home.events({
     event.preventDefault();
     FlowRouter.go('/team');
   },
-  'click .teamTimesheet': function(event){
+  'click .teamTimesheets': function(event){
     event.preventDefault();
-    FlowRouter.go('/teamTimesheet');
+    FlowRouter.go('/teamTimesheets');
   },
   'click .reports': function(event){
     event.preventDefault();

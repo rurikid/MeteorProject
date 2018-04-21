@@ -3,6 +3,15 @@ import { Users } from '/imports/api/users/users.js';
 import { Meteor } from 'meteor/meteor';
 import './newProject.html';
 
+// evaluates for void fields
+function validateProject(project) {
+	if (project.name === '' ||
+		  project.client === '' ||
+		  project.budget === '') {
+		return "Please complete all fields!";
+	}
+}
+
 Template.newProject.onCreated(function () {
   Meteor.subscribe('projects.all');
   Meteor.subscribe('users.all');
@@ -65,6 +74,9 @@ Template.newProject.helpers({
 	isEdit: function(userID) {
 		var projectID = Session.get('selectedProjectID');
 		
+		console.log(userID);
+		console.log(projectID);
+
 		if (projectID !== null) {
 			var project = Projects.findOne(projectID);
 
@@ -144,6 +156,18 @@ Template.newProject.events({
 			employees: validEmployees,
 			//employees: employeeList, //insert selected values from box2
 		
+		}
+
+		var checkProject = validateProject(project);
+		if (checkProject) {
+			return swal({
+				title: "Error",
+				text: checkProject,
+				button: {
+					text: "Confirm",
+				},
+				icon: "error"
+			});
 		}
 
 		// if not in edit mode
