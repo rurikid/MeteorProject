@@ -76,19 +76,21 @@
 	          </thead>
 	          <tbody>
 
-							{{#each projects}}
-								{{#if isMember _id}}
+							{{#each project in projects}}
+								{{#if isMember project._id}}
 									<tr style="height:auto; margin-top:0px;">
-										{{#if isSupervisor}}
-											<td><input class="select-radio" type="radio" name="projectID" value="{{_id}}"></td>
+										{{#if isProjectSupervisor project.supervisor}}
+											<td><input class="select-radio" type="radio" name="projectID" value="{{project._id}}"></td>
+										{{else}}
+											<td></td>
 										{{/if}}
-										<td>{{name}}</td>
-										<td>{{getProjectSupervisor supervisor}}</td>
-										<td>{{client}}</td>
-										<td>{{budget}}</td>
-										<td>{{getUserRole supervisor employees}}</td>
+										<td>{{project.name}}</td>
+										<td>{{getProjectSupervisor project.supervisor}}</td>
+										<td>{{project.client}}</td>
+										<td>{{project.budget}}</td>
+										<td>{{getUserRole project.supervisor project.employees}}</td>
 										<td>
-											{{#each value in employees}}
+											{{#each value in project.employees}}
 												{{getProjectEmployee value}}
 												<br>
 											{{/each}}

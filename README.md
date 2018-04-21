@@ -54,6 +54,7 @@ Documentation | Node.js | Tutorials
 > user's can now see their proper role in a project
 > supervisors can now only edit projects they are supervising
 > edit buttons no longer function if nothing is selected
+> team timesheets now displays timechunks from former project members
 ```
 
 +**20Apr2018** - mwight

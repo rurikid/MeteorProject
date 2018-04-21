@@ -52,8 +52,8 @@ Template.teamTimesheets.helpers({
 	// returns name of employee
 	getName(employeeID) {
 		var employee = Meteor.users.findOne({'_id': employeeID});
-		firstName = employee && employee.profile && employee.profile.firstName;
-		lastName = employee && employee.profile && employee.profile.lastName;
+		var firstName = employee && employee.profile && employee.profile.firstName;
+		var lastName = employee && employee.profile && employee.profile.lastName;
 
 		if (!employeeID) {
 			return "Not Assigned";
@@ -63,18 +63,39 @@ Template.teamTimesheets.helpers({
 	},
 	// returns all employees which contributed towards a project
 	projectContributors(projectID) {
+		// if there is a better way to do this please tell me - rurikid
 
-		project = Projects.findOne({'_id': projectID});
-		contributors = [];
+		var project = Projects.findOne({'_id': projectID});
+		var timechunks = Timechunks.find({'project': projectID});
+		var timesheets = [];
+		var contributors = new Set([]);	// set to manage duplicate ids
+		var result = [];								// handlebars only takes arrays
 
 		// add date range logic
-		// project member and contributor logic
 
-		project.employees.forEach(function(employee) {
-			contributors.push(Meteor.users.findOne({'_id': employee}));
+		// finds employees no longer assigned to project
+		timechunks.forEach(function(timechunk) {
+			timesheets.push(Timesheets.findOne({'_id': timechunk.timesheet}));
 		});
 
-		return contributors;
+		// finds all devoted timechunks to project and pushes employee id to set
+		timesheets.forEach(function(timesheet) {
+			console.log("sheet " + timesheet.date);
+			contributors.add(Meteor.users.findOne({'_id': timesheet.employee})._id);
+		});
+
+		// finds all current project member ids and pushes to set
+		project.employees.forEach(function(employee) {
+			console.log("employee: " + employee);
+			contributors.add(Meteor.users.findOne({'_id': employee})._id);
+		});
+
+		// finds all contributors and pushes to array
+		contributors.forEach(function(contributor) {
+			result.push(Meteor.users.findOne({'_id': contributor}));
+		});
+
+		return result;
 	},
 	// returns timechunk date
 	getTimechunkDate(timesheetID) {

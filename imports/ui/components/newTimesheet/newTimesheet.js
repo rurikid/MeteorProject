@@ -140,8 +140,6 @@ Template.newTimesheet.helpers({
 		// guarding
 		var supervisor = result && result.supervisor;
 		var employees = result && result.employees;
-		console.log('hello');
-		console.log(result.employees);
 
 		// checks if current user is a project member
 		var isEmployee = false;
@@ -149,7 +147,6 @@ Template.newTimesheet.helpers({
 			if (employee === Meteor.user()._id) {
 				isEmployee = true;
 			}
-			console.log(employee.value + " " + Meteor.user()._id);
 		});
 
 		return (isEmployee || Meteor.user().profile.position === 'Administrator' || Meteor.user()._id === result.supervisor);

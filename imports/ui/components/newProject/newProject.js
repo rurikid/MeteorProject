@@ -74,6 +74,9 @@ Template.newProject.helpers({
 	isEdit: function(userID) {
 		var projectID = Session.get('selectedProjectID');
 		
+		console.log(userID);
+		console.log(projectID);
+
 		if (projectID !== null) {
 			var project = Projects.findOne(projectID);
 

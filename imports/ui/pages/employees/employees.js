@@ -72,6 +72,8 @@ Template.employees.events({
       }
     }
 
-    Meteor.call('editEmployeeModal', id);
+    if (id) {
+      Meteor.call('editEmployeeModal', id);
+    }
   }
 });

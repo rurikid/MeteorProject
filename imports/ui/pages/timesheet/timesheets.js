@@ -161,6 +161,8 @@ Template.timesheets.events({
   	 	}
   	}
 
-    Meteor.call('editTimesheetModal', id);
+    if (id) {
+      Meteor.call('editTimesheetModal', id);
+    }
   },
 });
