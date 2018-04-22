@@ -106,7 +106,8 @@ Template.timesheets.events({
     event.preventDefault();
 
     var targetWeek = Session.get('selectedTargetWeek');
-    if (moment(targetWeek).week() < moment(moment()).week()) {
+    if (moment(targetWeek).week() < moment(moment()).week() ||
+        moment(targetWeek).year() < moment(moment()).year()) {
       var newWeek = moment(moment(targetWeek).add(1, 'week')).format('YYYY-MM-DD');
       Session.set('selectedTargetWeek', newWeek);
     }
