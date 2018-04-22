@@ -53,6 +53,16 @@ Meteor.methods({
     }});
   },
 
+  updateProject(project) {
+      return Projects.update(project._id, {$set: {
+      name: project.name,
+      supervisor: project.supervisor,
+      client: project.client,
+      budget: project.budget,
+      employees: project.employees,
+    }});
+  },
+
   removedSupervisor(employeeID) {
     check(employeeID, String);
     var projects = Projects.find({'supervisor': employeeID});

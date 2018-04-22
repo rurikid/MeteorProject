@@ -17,9 +17,4 @@ Meteor.methods({
 		Modal.show('newTimesheet');
 	},
 
-
-	// reportsModal: function(id) {
-	// 	//Session.set('selectedTimechunkID', id);
-	// 	Modal.show('generateReports');
-	// },
 });

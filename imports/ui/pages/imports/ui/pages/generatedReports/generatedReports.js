@@ -20,6 +20,6 @@ Template.generatedReports.events({
 
         'click #back': function(event){
           event.preventDefault();
-              //$('#editProjectModal').modal('hide');
+              
         },
 });

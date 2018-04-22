@@ -50,6 +50,27 @@ Meteor.methods({
       budget: project.budget,
       employees: project.employees,
 
+    } ,function(error) {
+      if (error) {
+        throw new Meteor.Error(500, error.message);
+    } else {
+        console.log("Update Successful");
+    }
+    }});
+  },
+
+  updateProject(project) {
+    // check(project.name, String);
+    // check(project.supervisor, String);
+    // check(project.client, String);
+    console.log("Updating project in server");
+    return Projects.update(project._id, {$set: {
+      name: project.name,
+      supervisor: project.supervisor,
+      client: project.client,
+      budget: project.budget,
+      employees: [],
+
     }});
   },
 
