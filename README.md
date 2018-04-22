@@ -36,9 +36,7 @@ Documentation | Node.js | Tutorials
 **TODO**
 --------------------------------------------
 ```
-> Design Report View (msylveus)(EASY)(Required Use Case)
 > Create Starting Database within startup/server/fixtures.js (EASY)(Required Use Case)
-> Manage Timesheets/Timechunks/Projects when an employee is deleted
 > Evaluate Functionality (EASY)(Would Be Nice)
 > Improve Stylization (EASY)(Would Be Nice)
 > Implement update password/email for users (HARD)(Would Be Nice)
