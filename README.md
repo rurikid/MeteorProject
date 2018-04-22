@@ -48,6 +48,19 @@ Documentation | Node.js | Tutorials
 
 **Patch Notes**
 --------------------------------------------
+**22Apr2018** - msylveus
+```
+> Added employee to timechunk database schema to display on Reports
+> Added Employee name to reports table
+> Show No data label when no timesheets availabe for a particular project
+```
+
+**21Apr2018** - msylveus
+```
+> Removing employee from projects, timesheets and timechunks when employee is deleted
+
+```
+
 **21Apr2018** - rurikid
 ```
 > teamTimesheets are now fully functional for all required time frames (may need more testing)
