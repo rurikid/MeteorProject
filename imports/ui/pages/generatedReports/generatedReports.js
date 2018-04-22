@@ -39,14 +39,28 @@ function getTotalHoursForTimeChunks(timeChunksArray) {
   return hours;
 }//end of getTotalHoursForTimeChunks
 
-Template.generatedReports.onCreated( function () {
+function reloadPage() {
+  var fromDate = FlowRouter.getParam("from");
+  var toDate = FlowRouter.getParam("to");
+  var projectId = FlowRouter.getParam("projectId");
+  var reportType = FlowRouter.getParam("reportType");
+
+  if (reportType == "date_range") {
+    FlowRouter.go('/generatedReports/' + reportType + "/" + projectId + "/" + fromDate + "/" + toDate);
+  } else {
+    FlowRouter.go('/generatedReports/' + Session.get("reportType") + "/" + Session.get("projectId"));
+  }
   
+}
+
+Template.generatedReports.onCreated( function () {
   console.log("Report Type", FlowRouter.getParam("reportType"));
   console.log("ProjectId", FlowRouter.getParam("projectId"));
   Meteor.subscribe('projects.all');
   Meteor.subscribe('users.all');
   Meteor.subscribe('timesheets.all');
   Meteor.subscribe('timechunks.all');
+  Session.set("pageReloaded", false);
 
 });
 
@@ -54,10 +68,26 @@ Template.generatedReports.onDestroyed( function() {
   //Resetting to empty
   timeSheetKeyArray = [];
   timeSheetJson = {};
+  Session.set("showNoData", false);
+  Session.set("pageReloaded", false);
 });
 
+// Template.generatedReports.helpers ({
+//   showNodata() {
+//     var nodataValue = Session.get("showNoData")
+//     console.log("Printing DataVAlue", nodataValue);
+//     return nodataValue;
+//   },
+// });
 
 Template.reportTimesheets.helpers({ 
+
+      showNodata() {
+        var nodataValue = Session.get("showNoData")
+        console.log("Printing DataVAlue", nodataValue);
+        return nodataValue;
+      },
+
     //Display time period selected
     getTimePeriod() {
       var param = FlowRouter.getParam("reportType");
@@ -138,7 +168,20 @@ Template.reportTimesheets.helpers({
             if(timeSheetJson[dateString] == null) {
               timeSheetKeyArray.push(dateString);
               timeSheetJson[dateString] = valueJson;
-            } 
+            } else { //updating the value for that key if it exist
+
+              var array = timeSheetJson[dateString]["timeChunks"];
+              
+              var concatArray = array.concat(timeChunksArray);
+              
+              //taking existing total hours from json and adding new totalHours for a timechunck
+              var concatHours = timeSheetJson[dateString]["totalHours"] + totalHours;
+
+              timeSheetJson[dateString]["timeChunks"] = concatArray;
+              timeSheetJson[dateString]["totalHours"] = concatHours;
+            }
+
+            console.log("printing json", timeSheetJson);
     
           } else if(FlowRouter.getParam("reportType") == "weekly" || FlowRouter.getParam("reportType") == "date_range") {//Check if weekly
             var curr = new Date(entry.date);
@@ -152,7 +195,6 @@ Template.reportTimesheets.helpers({
             if(timeSheetJson[dateString] == null) { //adding entry to json if key doesn't exist
               var valueJson = {};
               valueJson["timeChunks"] = timeChunksArray;
-    
               valueJson["totalHours"] = totalHours;
 
               timeSheetKeyArray.push(dateString);
@@ -177,7 +219,6 @@ Template.reportTimesheets.helpers({
             if(timeSheetJson[dateString] == null) {
               var valueJson = {};
               valueJson["timeChunks"] = timeChunksArray;
-    
               valueJson["totalHours"] = totalHours;
 
               timeSheetKeyArray.push(dateString);
@@ -199,6 +240,20 @@ Template.reportTimesheets.helpers({
 
     });//end of fetchResult forEach loop
     
+    console.log("Showing No Data", Session.get("showNoData"));
+    console.log("Page Reloaded", Session.get("pageReloaded"));
+    var reloaded = Session.get("pageReloaded");
+    if(reloaded === false) {
+      console.log("INSIDE IF ****************", timeSheetKeyArray.length);
+      var showNodataValue = timeSheetKeyArray.length === 0;
+      Session.set("showNoData", showNodataValue);
+      console.log("Showing No Data", Session.get("showNoData"));
+      Session.set("pageReloaded", true);
+      reloadPage();
+    }
+
+    console.log("Showing No Data After", Session.get("showNoData"));
+
     return timeSheetKeyArray;
 
   },//end of timesheets()
@@ -212,6 +267,7 @@ Template.reportTimesheets.helpers({
   // returns all associated timechunks
   timechunks: function(key) {
     var timechunk =  timeSheetJson[key].timeChunks;
+    console.log(timechunk)
     return timeSheetJson[key].timeChunks;
   },
 
@@ -226,6 +282,10 @@ Template.reportTimesheets.helpers({
     return result.name;
   },//end of getProjectName
  
+  getEmployeeName: function(timechunk) {
+    return timechunk.employee.profile.firstName + " " + timechunk.employee.profile.lastName;
+  },
+
   // returns number of hours worked in a timechunk
   getTimechunkHours: function(startTime, endTime) {
     var start = startTime.split(':');

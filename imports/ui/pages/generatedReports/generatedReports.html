@@ -1,6 +1,8 @@
 <template name="generatedReports">
   <div>
+
       {{> reportTimesheets}}
+
   </div>
 </template>
 
@@ -14,45 +16,59 @@
         <h4 style="color:white" align="center"> Prepared By: {{getUsersName}}</h4>
     </div>
 
-    <div class="table-responsive card, container">
-        {{#each timesheet in timesheets}}
-            <table class="table" style="font-size: 12px;">
-              <thead style="background-color: #d3a944">
+    {{#if showNodata}}
+        <div style="text-align: center; display: flex; align-items: center; justify-content: center; background-color:#d3a944; margin-left: 50px; margin-right: 50px; height: 95px; margin-top: 50px">
+            <h2 style="color:white; margin-bottom: 20px"> 
+              
+              No Reports found
+            </h2>
+    </div>
+    {{else}}
+      <div class="table-responsive card, container">
+          {{#each timesheet in timesheets}}
+              <table class="table" style="font-size: 12px;">
+                <thead style="background-color: #d3a944">
+                    <tr>
+                      <th>{{timesheet}}</th>
+                      <th>Total Hours: {{timeSheetTotalHours timesheet}}</th>
+                    </tr>
+                </thead>
+                <tbody>
                   <tr>
-                    <th>{{timesheet}}</th>
-                    <th>Total Hours: {{timeSheetTotalHours timesheet}}</th>
-                  </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td colspan="2">
-                    <!-- Begin Timechunks Table -->
-                    <div class="table-responsive">
-                      <table class="table" style="font-size: 12px;">
-                        <thead style="background-color: #d3a944">
-                          <tr>
-                            <th>Project</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Hours</th>
-                          </tr>
-                        </thead>
-                         <tbody>
-                          {{#each timechunk in timechunks timesheet}}
+                    <td colspan="2">
+                      <!-- Begin Timechunks Table -->
+                      <div class="table-responsive">
+                        <table class="table" style="font-size: 12px;">
+                          <thead style="background-color: #d3a944">
                             <tr>
-                              <td>{{getProjectName timechunk.project}}</td>
-                              <td>{{timechunk.startTime}}</td>
-                              <td>{{timechunk.endTime}}</td>
-                              <td>{{getTimechunkHours timechunk.startTime timechunk.endTime}}</td>
+                              <th>Project</th>
+                              <th>Empployee Name</th>
+                              <th>Start Time</th>
+                              <th>End Time</th>
+                              <th>Hours</th>
                             </tr>
-                          {{/each}}
-                        </tbody>
-                      </table>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-        {{/each}}
-      </div>
+                          </thead>
+                          <tbody>
+                            {{#each timechunk in timechunks timesheet}}
+                              <tr>
+                                <td>{{getProjectName timechunk.project}}</td>
+                                <td>{{getEmployeeName timechunk}}</td>
+                                <td>{{timechunk.startTime}}</td>
+                                <td>{{timechunk.endTime}}</td>
+                                <td>{{getTimechunkHours timechunk.startTime timechunk.endTime}}</td>
+                              </tr>
+                            {{/each}}
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          {{/each}}
+        </div>
+    {{/if}}
+
 </template>
+
+

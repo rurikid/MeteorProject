@@ -22,6 +22,7 @@ Meteor.methods({
 			"project": timechunk.project,
 			"startTime": timechunk.startTime,
 			"endTime": timechunk.endTime,
+			"employee": timechunk.employee,
 		});
 	},
 

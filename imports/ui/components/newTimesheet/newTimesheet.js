@@ -228,6 +228,7 @@ Template.newTimesheet.events({
 			project: $('#project').val(),
 			startTime: $('#startTime').val(),
 			endTime: $('#endTime').val(),
+			employee: Meteor.user()
 		}
 
 		// validate timechunk 
