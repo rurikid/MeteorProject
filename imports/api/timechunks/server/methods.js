@@ -37,6 +37,18 @@ Meteor.methods({
     });
 	},
 
+	deleteTimechunkWithTimeSheeId(timesheeId) {
+		check(timesheeId, String);
+
+    return Timechunks.remove({ timesheet: timesheeId }, function (error, result) {
+    	if (error) {
+    		console.log("Error removing timechunk: ", error);
+    	} else {
+    		console.log("Timechunk removed: " + result);
+    	}
+    });
+	},
+
 	editTimechunk(timechunk) {
 		check(timechunk.project, String);
 		check(timechunk.startTime, String);

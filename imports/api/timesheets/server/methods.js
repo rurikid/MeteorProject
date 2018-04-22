@@ -24,4 +24,16 @@ Meteor.methods({
 			}
 		});
 	},
+
+	deleteTimesheet(id) {
+		check(id, String);
+
+		return Timesheets.remove({ _id: id }, function (error, result) {
+			if (error) {
+				console.log("Error removing timesheet: ", error);
+			} else {
+				console.log("Timesheet removed: " + result);
+			}
+		});
+	},
 })

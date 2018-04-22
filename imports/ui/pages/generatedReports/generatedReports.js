@@ -8,7 +8,6 @@ import { Projects } from '../../../api/projects/projects.js'
 import  '../../../ui/pages/reports/reports.js'
 import  '../../../ui/pages/timesheet/timesheets.js'
 
-
 import './generatedReports.html';
 
 //Global variables

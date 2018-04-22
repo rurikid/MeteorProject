@@ -3,11 +3,6 @@ import { Projects } from '../../../api/projects/projects.js'
 
 import './team.html'
 
-// TODO
-//   Integrate with Database
-//   Select Users from Project Logic
-//var pageSession = new ReactiveDict();
-
 Template.team.onCreated( function() {
     Meteor.subscribe('projects.all');
 });

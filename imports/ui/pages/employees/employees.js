@@ -45,14 +45,23 @@ Template.employees.events({
         alert(error.error);
       } else {
         //Get all timesheets for this employee
-        var timeSheets = Timesheets.find({employee: id}).fetch;
+        var timeSheets = Timesheets.find({employee: id}).fetch();
         //Iterating through all the timesheets
         timeSheets.forEach(function (timeSheet) {
+          console.log("Printing timesheet Id",timeSheet._id);
           //Deleting all timechunks associated with a time sheet
-          Timechunks.remove({project: timeSheet._id});
+          // var timeChunks = Timechunks.find({timesheet: timeSheet._id}).fetch();
+          // timeChunks.forEach(function (timeChunk) {
+          //   Meteor.call('deleteTimechunk', id);
+          //   //Timechunks.remove({_id: timeChunk._id});
+          // });
+
+          Meteor.call('deleteTimechunkWithTimeSheeId', timeSheet._id);
 
           //Delete the time sheet after deleting the time chunck
-          Timesheets.remove({_id: timeSheet._id});
+          
+          Meteor.call('deleteTimesheet', timeSheet._id);
+          //Timesheets.remove({_id: timeSheet._id});
         });
         // success alert
         return swal({
