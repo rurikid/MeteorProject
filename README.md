@@ -46,6 +46,16 @@ Documentation | Node.js | Tutorials
 
 **Patch Notes**
 --------------------------------------------
+**22Apr2018** - rurikid
+```
+> moved employee deletion upkeep management to serverside
+> consolidated My Team into My Projects
+> implemented collapsible tables for Timesheets/TeamTimesheets/Projects
+> fixed issue which allowed supervisors to edit project details
+> removed employee view for supervisors by popular demand
+> removed deprecated files
+```
+
 **22Apr2018** - msylveus
 ```
 > Added employee to timechunk database schema to display on Reports

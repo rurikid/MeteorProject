@@ -37,12 +37,15 @@
               {{else}}
                 <button class="btn btn-dark, next" id="nextWeek">-&gt;</button>
               {{/if}}
-              <!-- Generate Report Button -->
+              <!-- Generate Report Button 
+                To be implemented after project presentation.
+
               <a class="generateReport" href="#">
                 <button class="btn btn-primary" id="generateReport" type="button" style="margin-left: 3%; color: white; background-color: #d3a944; font-size: 22px; border: none;">
                   Generate Report
                 </button>
               </a>
+              -->
             </div>
           </div>
         </div>
@@ -50,9 +53,9 @@
         <!-- Begin Project Table -->
         <div class="table-responsive">
           {{#each project in projects}}
-            {{#if isSupervisor timesheet.supervisor}}
+            {{#if isSupervisor project.supervisor}}
               <table class="table" style="font-size: 12px;">
-                <thead style="background-color: #d3a944">
+                <thead class="toggle" style="background-color: #d3a944" id="{{project._id}}">
                   <tr>
                     <th width="20%">Project: {{project.name}}</th>
                     <th width="20%">Client: {{project.client}}</th>
@@ -61,36 +64,40 @@
                     <th width="20%">Total Hours: {{getTotalProjectHours project._id}}</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="5">
-                      <!-- Begin Project Members Table -->
-                      {{#each contributor in projectContributors project._id}}
-                        <div class="table-responsive">
-                          <table class="table" style="font-size: 12px;">
-                            <thead style="background-color: #d3a944">
-                              <tr>
-                                <th colspan="3" width="75%">{{getName contributor._id}}</th>
-                                <th colspan="1" width="25%">Hours: {{getContributorTotalHours project._id contributor._id}}</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <!-- Begin Member Timesheet Table -->
-                              {{#each timechunk in timechunks contributor._id project._id}}
+                {{#if isProjectToggled project._id}}
+                  <tbody>
+                    <tr>
+                      <td colspan="5">
+                        <!-- Begin Project Members Table -->
+                        {{#each contributor in projectContributors project._id}}
+                          <div class="table-responsive">
+                            <table class="table" style="font-size: 12px;">
+                              <thead class="toggle" style="background-color: #d3a944" id="{{contributor._id}}{{project._id}}">
                                 <tr>
-                                  <td width="25%">{{getTimechunkDate timechunk.timesheet}}</td>
-                                  <td width="25%">From: {{timechunk.startTime}}</td>
-                                  <td width="25%">To: {{timechunk.endTime}}</td>
-                                  <td width="25%">{{getTimechunkHours timechunk.startTime timechunk.endTime}} Hours</td>
+                                  <th colspan="3" width="75%">{{getName contributor._id}}</th>
+                                  <th colspan="1" width="25%">Hours: {{getContributorTotalHours project._id contributor._id}}</th>
                                 </tr>
-                              {{/each}}
-                            </tbody>
-                          </table>
-                        </div>
-                      {{/each}}
-                    </td>
-                  </tr>
-                </tbody>
+                              </thead>
+                              {{#if isContributorToggled contributor._id project._id}}
+                                <tbody>
+                                  <!-- Begin Member Timesheet Table -->
+                                  {{#each timechunk in timechunks contributor._id project._id}}
+                                    <tr>
+                                      <td width="25%">{{getTimechunkDate timechunk.timesheet}}</td>
+                                      <td width="25%">From: {{timechunk.startTime}}</td>
+                                      <td width="25%">To: {{timechunk.endTime}}</td>
+                                      <td width="25%">{{getTimechunkHours timechunk.startTime timechunk.endTime}} Hours</td>
+                                    </tr>
+                                  {{/each}}
+                                </tbody>
+                              {{/if}}
+                            </table>
+                          </div>
+                        {{/each}}
+                      </td>
+                    </tr>
+                  </tbody>
+                {{/if}}
               </table>
             {{/if}}
           {{/each}}

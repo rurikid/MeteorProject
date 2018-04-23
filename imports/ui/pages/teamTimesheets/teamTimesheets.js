@@ -13,7 +13,6 @@ Template.teamTimesheets.onCreated(function () {
   Meteor.subscribe('timechunks.all');
 });
 
-
 // returns total hours in a timechunk
 function timechunkHours(startTime, endTime) {
   var start = startTime.split(':');
@@ -25,28 +24,28 @@ function timechunkHours(startTime, endTime) {
 }
 
 Template.teamTimesheets.helpers({
-	// returns all projects within date range
+	// returns all projects
 	projects() {
-    var targetRange = Session.get('selectedTargetRange');
-    var timesheets = Timesheets.find({});
-    var projects = new Set([]);
-    var result = [];
+    // var targetRange = Session.get('selectedTargetRange');
+    // var timesheets = Timesheets.find({});
+    // var projects = new Set([]);
+    // var result = [];
 
-    timesheets.forEach(function(timesheet) {
-    	if (moment(timesheet.date) >= moment(targetRange.from) &&
-    		  moment(timesheet.date) <= moment(targetRange.to)) {
-    		var timechunks = Timechunks.find({'timesheet': timesheet._id});
-    		timechunks.forEach(function(timechunk) {
-    			projects.add(timechunk.project);
-    		});
-    	}
-    });
+    // timesheets.forEach(function(timesheet) {
+    // 	if (moment(timesheet.date) >= moment(targetRange.from) &&
+    // 		  moment(timesheet.date) <= moment(targetRange.to)) {
+    // 		var timechunks = Timechunks.find({'timesheet': timesheet._id});
+    // 		timechunks.forEach(function(timechunk) {
+    // 			projects.add(timechunk.project);
+    // 		});
+    // 	}
+    // });
 
-    projects.forEach(function(project) {
-    	result.push(Projects.findOne({'_id': project}));
-    });
+    // projects.forEach(function(project) {
+    // 	result.push(Projects.findOne({'_id': project}));
+    // });
 
-		return result;
+		return Projects.find({});
 	},
 	// returns all timechunks by contributors in daterange
 	timechunks(contributorID, projectID) {
@@ -179,6 +178,13 @@ Template.teamTimesheets.helpers({
 		var targetRange = Session.get('selectedTargetRange');
 		return targetRange.period === 'dateRange';
 	},
+	isProjectToggled(ID) {
+		return Session.get(ID);
+	},
+	isContributorToggled(contributorID, projectID) {
+		var ID = contributorID + projectID;
+	 	return Session.get(ID);
+	},
 })
 
 Template.teamTimesheets.events({
@@ -243,16 +249,27 @@ Template.teamTimesheets.events({
 	  }
 	  Session.set('selectedTargetRange', targetRange);
   },
+  // refreshes session variable when date field is selected
   'change #fromDate': function(event) {
   	var targetRange = Session.get('selectedTargetRange');
   	var fromDate = $('#fromDate').val();
   	targetRange.from = moment(fromDate).format('YYYY-MM-DD');
   	Session.set('selectedTargetRange', targetRange);
   },
+  // refreshes session variable when date field is selected
   'change #toDate': function(event) {
   	var targetRange = Session.get('selectedTargetRange');
   	var toDate = $('#toDate').val();
   	targetRange.to = moment(toDate).format('YYYY-MM-DD');
   	Session.set('selectedTargetRange', targetRange);
   },
+  'click .toggle': function(event) {
+  	var toggle = Session.get(event.currentTarget.id);
+
+  	if (!toggle) {
+  		Session.set(event.currentTarget.id, true);
+  	} else {
+  		Session.set(event.currentTarget.id, false);
+  	}
+  }
 })

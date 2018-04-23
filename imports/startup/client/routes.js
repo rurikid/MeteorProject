@@ -57,13 +57,6 @@ FlowRouter.route('/newTimesheet', {
   },
 });
 
-FlowRouter.route('/editTimesheet', {
-  name: 'editTimesheet',
-  action() {
-    BlazeLayout.render('mainLayout', { main: 'editTimesheet' });
-  },
-});
-
 FlowRouter.route('/teamTimesheets', {
   name: 'teamTimesheets',
   action() {
@@ -96,20 +89,6 @@ FlowRouter.route('/newProject', {
   name: 'newProject',
   action() {
     BlazeLayout.render('mainLayout', { main: 'newProject' });
-  },
-});
-
-FlowRouter.route('/editProject', {
-  name: 'editProject',
-  action() {
-    BlazeLayout.render('mainLayout', { main: 'editProject' });
-  },
-});
-
-FlowRouter.route('/team', {
-  name: 'team',
-  action() {
-    BlazeLayout.render('mainLayout', { main: 'team' });
   },
 });
 

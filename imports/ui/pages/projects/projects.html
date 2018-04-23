@@ -1,7 +1,3 @@
-<!-- This page displayes employees and is accessible by Admins only. 
-	TODO:
-		Edit Project Functionality
--->
 <template name="projects">
 	{{> nav}}
 	<div class="card, container">
@@ -33,74 +29,93 @@
 
 					<!-- Supervisor Controls -->
 					{{#if isSupervisor}}
-							<!-- Edit Project Button -->
-							<a href="#" class="btn btn-dark, editProject" style="margin-left:10%;"><button class="btn btn-dark" id="editProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">Edit</button>
+						<!-- Manage Project Members Button -->
+						<a href="#" class="btn btn-dark, editProject" style="float:right; margin-right: 10%;">
+							<button class="btn btn-dark" id="editProject" type="button" style="margin-left:0px;width:auto;font-size:22px;">
+								Manage Members
+							</button>
+						</a>
+					{{/if}}
+					<!-- Admin Controls -->
+					{{#if isAdmin}}
+						<span style="float:right; margin-right: 10%;">
+							<!-- Manage Project Members Button -->
+							<a href="#" class="btn btn-dark, editProject">
+								<button class="btn btn-dark" id="editProject" type="button" style="width:110px;font-size:22px;">
+									Edit
+								</button>
 							</a>
-							<!-- Admin Controls -->
-							{{#if isAdmin}}
-								<!-- Delete Project Button -->
+							<!-- Delete Project Button -->
 							<a href="#" class="btn btn-danger, deleteProject">
-								<button class="btn btn-danger" id="deleteProject" type="button" style="margin-left:0px;width:110px;font-size:22px;">
+								<button class="btn btn-danger" id="deleteProject" type="button" style="width:110px;font-size:22px;">
 									Delete
 								</button>
 							</a>
 							<!-- Add New Project Button -->
 							<a class="newProject" href="#">
-							<button class="btn btn-primary" id="newProject" type="button" style="color:white;background-color:#d3a944;font-size:22px;margin-left:10px;border:none;">
-								<i class="icon ion-android-add" style="margin-left:0px;">
-								</i>
+								<button class="btn btn-primary" id="newProject" type="button" style="color:white;background-color:#d3a944;font-size:22px;border:none;">
 									Add New Project
 								</button>
 							</a>
-							{{/if}}
+						</span>
 					{{/if}}
 				</div>
 	        </div>
 				</div>
-				
-				<!-- Begin Project Table -->
-	      <div class="table-responsive">
-	      	<table class="table" style="font-size: 12px;">
-	        	<thead style="background-color:#d3a944">
-	          	<tr>
-	          		{{#if isSupervisor}}
-									<th></th>
-								{{/if}}
-								<th>Project Name</th>
-								<th>Supervisor Name</th>
-								<th>Client</th>
-								<th>Budget</th>
-								<th>Your Role</th>
-								<th>Employees in Project</th>
-	            </tr>
-	          </thead>
-	          <tbody>
 
-							{{#each project in projects}}
-								{{#if isMember project._id}}
-									<tr style="height:auto; margin-top:0px;">
+				<!-- Begin Project Table -->
+				{{#each project in projects}}
+					{{#if isMember project._id}}
+						<div class="table-responsive">
+							<table class="table" style="font-size: 12px;">
+								<thead class="toggle" id="{{project._id}}" style="background-color:#d3a944">
+									<tr>
 										{{#if isProjectSupervisor project.supervisor}}
-											<td><input class="select-radio" type="radio" name="projectID" value="{{project._id}}"></td>
-										{{else}}
-											<td></td>
+											<th><input class="select-radio" type="radio" name="projectID" value="{{project._id}}"></th>
 										{{/if}}
-										<td>{{project.name}}</td>
-										<td>{{getProjectSupervisor project.supervisor}}</td>
-										<td>{{project.client}}</td>
-										<td>{{project.budget}}</td>
-										<td>{{getUserRole project.supervisor project.employees}}</td>
-										<td>
-											{{#each value in project.employees}}
-												{{getProjectEmployee value}}
-												<br>
-											{{/each}}
-										</td>
+										<th width="20%">Project: {{project.name}}</th>
+										<th width="20%">Supervisor: {{getUserName project.supervisor}}</th>
+										<th width="20%">Client: {{project.client}}</th>
+										<th width="20%">Budget: ${{project.budget}}</th>
+										<th width="20%">Your Role: {{getUserRole project.supervisor project.employees}}</th>
 									</tr>
+								</thead>
+								{{#if isToggled project._id}}
+									<tbody>
+										<tr>
+											<td colspan="6">
+
+											<!-- Begin Project Member Table -->
+	                    <div class="table-responsive">
+	                      <table class="table" style="font-size: 12px;">
+	                        <thead style="background-color: #d3a944">
+	                        	<tr>
+															<th width="33%">Project Member</th>
+															<th width="33%">Member Email</th>
+															<th width="33%">Member Position</th>
+														</tr>
+													</thead>
+													<tbody>
+														{{#each employee in getProjectEmployees project.employees}}
+															<tr>
+																<td>{{getUserName employee._id}}</td>
+																<td>{{employee.emails.[0].address}}</td>
+																<td>{{employee.profile.position}}</td>
+															</tr>
+														{{/each}}
+													</tbody>
+												</table>
+											</div>
+
+											</td>
+										</tr>
+									</tbody>
 								{{/if}}
-							{{/each}}
-	          </tbody>
-	        </table>
-				</div>
+							</table>
+						</div>
+					{{/if}}
+				{{/each}}
+
     	</div>
   	</div>
 	</div>

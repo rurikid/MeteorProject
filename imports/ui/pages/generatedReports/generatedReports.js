@@ -283,7 +283,10 @@ Template.reportTimesheets.helpers({
   },//end of getProjectName
  
   getEmployeeName: function(timechunk) {
-    return timechunk.employee.profile.firstName + " " + timechunk.employee.profile.lastName;
+    var timesheet = Timesheets.findOne({'_id': timechunk.timesheet});
+    var employee = Meteor.users.findOne({'_id': timesheet.employee});
+
+    return employee.profile.firstName + " " + employee.profile.lastName;
   },
 
   // returns number of hours worked in a timechunk

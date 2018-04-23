@@ -6,15 +6,15 @@ Template.nav.helpers({
   // returns user name
   userName() {
     var userId = Meteor.user().profile;
-    return userId.firstName + " " +userId.lastName;
+    return userId.firstName + " " + userId.lastName;
   },
   // evaluates for supervisors
-  isSupervisor: function(position) {
-    return ((Meteor.user().profile.position === 'Supervisor') || (Meteor.user().profile.position === 'Administrator'));
+  isSupervisor: function() {
+    return (Meteor.user().profile.position === 'Supervisor' || Meteor.user().profile.position === 'Administrator');
   },
   // evaluates for admin
-  isAdmin: function(position) {
-    return ((position === 'Administrator'));
+  isAdmin: function() {
+    return Meteor.user().profile.position === 'Administrator';
   },
 });
 
@@ -39,10 +39,6 @@ Template.nav.events({
   'click .timesheets': function(event){
     event.preventDefault();
     FlowRouter.go('/timesheets');
-  },
-  'click .team': function(event){
-    event.preventDefault();
-    FlowRouter.go('/team');
   },
   'click .teamTimesheets': function(event){
     event.preventDefault();

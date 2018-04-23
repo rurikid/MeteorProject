@@ -3,6 +3,9 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Users } from '../users.js';
+import { Projects } from '../../projects/projects.js';
+import { Timechunks } from '../../timechunks/timechunks.js';
+import { Timesheets } from '../../timesheets/timesheets.js';
 
 Accounts.onCreateUser(function(options, user) {
    // Use provided profile in options, or create an empty object
@@ -73,6 +76,31 @@ Meteor.methods({
 	deleteEmployee(id) {
     check(id, String);
 
+    var timesheets = Timesheets.find({'employee': id});
+
+    timesheets.forEach(function(timesheet) {
+      Timechunks.remove({'timesheet': timesheet._id});
+      Timesheets.remove({'_id': timesheet._id});
+    });
+
+    var projects = Projects.find({'employees': id});
+
+    projects.forEach(function (project) {
+      var employees = project.employees;
+      if (employees.indexOf(id) > -1) {
+        employees.splice(employees.indexOf(id), 1)
+      }
+      project.employees = employees;
+
+      Meteor.call('editProject', project, function (error) {
+        if (error) {
+          console.log(error.error);
+        } else {
+          console.log("Employee Removed From Project");
+        }
+      });
+    })
+
     return Meteor.users.remove({ _id: id }, function (error, result) {
     	if (error) {
     		console.log("Error removing user: ", error);
@@ -82,5 +110,3 @@ Meteor.methods({
     });
   },
 })
-
-// Meteor.users.update({_id:Meteor.user()._id}, {$set:{"profile.name":"Carlos"}})

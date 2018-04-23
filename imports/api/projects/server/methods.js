@@ -43,23 +43,13 @@ Meteor.methods({
     check(project.supervisor, String);
     check(project.client, String);
 
-    return Projects.update(project.id, {$set: {
+    return Projects.update(project._id, {$set: {
       name: project.name,
       supervisor: project.supervisor,
       client: project.client,
       budget: project.budget,
       employees: project.employees,
 
-    }});
-  },
-
-  updateProject(project) {
-      return Projects.update(project._id, {$set: {
-      name: project.name,
-      supervisor: project.supervisor,
-      client: project.client,
-      budget: project.budget,
-      employees: project.employees,
     }});
   },
 
