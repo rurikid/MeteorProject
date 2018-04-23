@@ -91,6 +91,9 @@ Template.timesheets.helpers({
   },
   getHumanDate: function(date) {
     return (moment(date).format('dddd, MMMM Do YYYY'));
+  },
+  isToggled(ID) {
+    return Session.get(ID);
   }
 })
 
@@ -144,26 +147,35 @@ Template.timesheets.events({
   },
 
   'click .newTimesheet'(event) {
-  	// Prevent default browser behavior
-  	event.preventDefault();
+    // Prevent default browser behavior
+    event.preventDefault();
     Meteor.call('editTimesheetModal', null);
   },
 
   'click .editTimesheet'(event) {
-  	// Prevent default browser behavior
-  	event.preventDefault();
+    // Prevent default browser behavior
+    event.preventDefault();
 
-  	// get value from form element
-  	const ids = document.getElementsByName('timechunkID');
-  	var id;
-  	for (i = 0; i < ids.length; i++) {
-  	 	if (ids[i].checked){
-  	 		id = ids[i].value;
-  	 	}
-  	}
+    // get value from form element
+    const ids = document.getElementsByName('timechunkID');
+    var id;
+    for (i = 0; i < ids.length; i++) {
+      if (ids[i].checked){
+        id = ids[i].value;
+      }
+    }
 
     if (id) {
       Meteor.call('editTimesheetModal', id);
     }
   },
+  'click .toggle': function(event) {
+    var toggle = Session.get(event.currentTarget.id);
+
+    if (!toggle) {
+      Session.set(event.currentTarget.id, true);
+    } else {
+      Session.set(event.currentTarget.id, false);
+    }
+  }
 });

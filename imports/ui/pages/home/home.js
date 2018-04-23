@@ -8,8 +8,6 @@ import './home.html';
 import '../../components/nav/nav.js';
 import '../../components/newEmployee/newEmployee.js';
 import '../../components/newProject/newProject.js';
-import '../../components/newMember/newMember.js';
-import '../../components/editTimesheet/editTimesheet.js';
 import '../../components/newTimesheet/newTimesheet.js';
 
 import '../login/login.js';
@@ -17,7 +15,6 @@ import '../teamTimesheets/teamTimesheets.js';
 import '../timesheet/timesheets.js';
 import '../profile/profile.js';
 import '../projects/projects.js';
-import '../team/team.js';
 import '../employees/employees.js';
 import '../reports/reports.js';
 import '../generatedReports/generatedReports.js';
@@ -30,7 +27,11 @@ Template.home.helpers({
   // evaluates for supervisors & admins
   isSupervisor: function() {
     return (Meteor.user().profile.position === 'Administrator' || Meteor.user().profile.position === 'Supervisor');
-  }
+  },
+  // evaluates for admins
+  isAdmin: function() {
+    return Meteor.user().profile.position === 'Administrator';
+  },
 });
 
 Template.home.events({
@@ -54,10 +55,6 @@ Template.home.events({
   'click .timesheets': function(event){
     event.preventDefault();
     FlowRouter.go('/timesheets');
-  },
-  'click .team': function(event){
-    event.preventDefault();
-    FlowRouter.go('/team');
   },
   'click .teamTimesheets': function(event){
     event.preventDefault();

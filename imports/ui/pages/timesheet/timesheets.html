@@ -42,49 +42,51 @@
           {{#each timesheet in timesheets getTargetWeek}}
             {{#if isOwner timesheet.employee}}
               <table class="table" style="font-size: 12px;">
-                <thead style="background-color: #d3a944">
+                <thead class="toggle" style="background-color: #d3a944" id="{{timesheet._id}}">
                     <tr>
                       <th width="50%">{{getHumanDate timesheet.date}}</th>
                       <th width="50%">Total Hours: {{getDailyHours timesheet._id}}</th>
                     </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="2">
-                      <!-- Begin Timechunks Table -->
-                      <div class="table-responsive">
-                        <table class="table" style="font-size: 12px;">
-                          <thead style="background-color: #d3a944">
-                            <tr>
-                              {{#if isTimely timesheet.date}}
-                                <th></th>
-                              {{/if}}
-                              <th width="25%">Project</th>
-                              <th width="25%">Hours</th>
-                              <th width="25%">Start Time</th>
-                              <th width="25%">End Time</th>
-                            </tr>
-                          </thead>
-                           <tbody>
-                            {{#each timechunk in timechunks timesheet._id}}
+                {{#if isToggled timesheet._id}}
+                  <tbody>
+                    <tr>
+                      <td colspan="2">
+                        <!-- Begin Timechunks Table -->
+                        <div class="table-responsive">
+                          <table class="table" style="font-size: 12px;">
+                            <thead style="background-color: #d3a944">
                               <tr>
                                 {{#if isTimely timesheet.date}}
-                                  <td>
-                                    <input class="select-radio" type="radio" name="timechunkID" value="{{timechunk._id}}">
-                                  </td>
+                                  <th></th>
                                 {{/if}}
-                                <td>{{getProjectName timechunk.project}}</td>
-                                <td>{{getTimechunkHours timechunk.startTime timechunk.endTime}}</td>
-                                <td>{{timechunk.startTime}}</td>
-                                <td>{{timechunk.endTime}}</td>
+                                <th width="25%">Project</th>
+                                <th width="25%">Hours</th>
+                                <th width="25%">Start Time</th>
+                                <th width="25%">End Time</th>
                               </tr>
-                            {{/each}}
-                          </tbody>
-                        </table>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                            </thead>
+                             <tbody>
+                              {{#each timechunk in timechunks timesheet._id}}
+                                <tr>
+                                  {{#if isTimely timesheet.date}}
+                                    <td>
+                                      <input class="select-radio" type="radio" name="timechunkID" value="{{timechunk._id}}">
+                                    </td>
+                                  {{/if}}
+                                  <td>{{getProjectName timechunk.project}}</td>
+                                  <td>{{getTimechunkHours timechunk.startTime timechunk.endTime}}</td>
+                                  <td>{{timechunk.startTime}}</td>
+                                  <td>{{timechunk.endTime}}</td>
+                                </tr>
+                              {{/each}}
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                {{/if}}
               </table>
             {{/if}}
           {{/each}}

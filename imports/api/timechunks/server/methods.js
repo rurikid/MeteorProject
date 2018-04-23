@@ -22,7 +22,6 @@ Meteor.methods({
 			"project": timechunk.project,
 			"startTime": timechunk.startTime,
 			"endTime": timechunk.endTime,
-			"employee": timechunk.employee,
 		});
 	},
 
@@ -34,18 +33,6 @@ Meteor.methods({
     		console.log("Error removing timesheet: ", error);
     	} else {
     		console.log("Timesheet removed: " + result);
-    	}
-    });
-	},
-
-	deleteTimechunkWithTimeSheeId(timesheeId) {
-		check(timesheeId, String);
-
-    return Timechunks.remove({ timesheet: timesheeId }, function (error, result) {
-    	if (error) {
-    		console.log("Error removing timechunk: ", error);
-    	} else {
-    		console.log("Timechunk removed: " + result);
     	}
     });
 	},

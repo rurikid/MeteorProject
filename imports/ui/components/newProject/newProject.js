@@ -33,7 +33,6 @@ Template.newProject.helpers({
 				employees:'',
 			}
 		}
-
 	},
 	// returns all selected member ids of multiselectbox
 	selectedUsers() {
@@ -97,12 +96,17 @@ Template.newProject.helpers({
 			return "Update Project";
 		}
 	},
-	//dynamic employee add
+	isProjectSupervisor: function() {
+		return Meteor.user().profile.position === 'Supervisor';
+	},
+	isEditable: function() {
+		return (Meteor.user().profile.position === 'Supervisor' ? "disabled" : "");
+	}
 });
 
 Template.newProject.events({
-  	'click #back': function(event){
-   		event.preventDefault();
+  'click #back': function(event){
+  	event.preventDefault();
 
 		// Clear form
 		projectName.value = '';
@@ -112,9 +116,9 @@ Template.newProject.events({
 
 		// close modal
 		Modal.hide('newProject');
-  	},
+  },
 
-  	'click #clear': function(event){
+  'click #clear': function(event){
     	event.preventDefault();
     
 		// Clear form
@@ -122,7 +126,7 @@ Template.newProject.events({
 		supervisor.value = '';
 		client.value = '';
 		budget.value = '';
-  	},
+  },
 
 	'click #submit': function(event){
 		// Prevent default browser behavior
@@ -190,7 +194,7 @@ Template.newProject.events({
 				});
 		} 
 		else {
-			_.extend(project, {id: projectID});
+			_.extend(project, {_id: projectID});
 			Meteor.call('editProject', project, (error) => {
 				if (error) {
 					alert(error.error);

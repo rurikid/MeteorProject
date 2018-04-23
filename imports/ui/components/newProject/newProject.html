@@ -2,21 +2,25 @@
   <div class="modal fade">
     <div class="modal-dialog modal-sm">
       <div class="modal-content" style="width: 500px">
-
+        
         <div class="modal-header">
-          <h4 class="modal-title">{{isNew}}</h4>
+          {{#if isProjectSupervisor}}
+            <h4 class="modal-title">Managing Project Members for {{project.name}}</h4>
+          {{else}}
+            <h4 class="modal-title">{{isNew}}</h4>
+          {{/if}}
         </div>
 
         <div class="modal-body">
           <div style="padding-bottom: 10px;">
             <div>
               <label>Project Name:</label>
-                <input type="text" id="projectName" placeholder="Project Name" value={{project.name}} />
+                <input type="text" id="projectName" placeholder="Project Name" value={{project.name}} {{isEditable}} />
                 <br />
             </div>
             <div>
               <label>Supervisor Name:</label>
-                <select id="supervisor">
+                <select id="supervisor" {{isEditable}} >
                   {{#each user in users}}
                     {{#if isSupervisor user.profile.position}}
                       <option value="{{user._id}}" {{isEdit user._id}}>
@@ -25,6 +29,16 @@
                     {{/if}}
                   {{/each}}
                 </select>
+                <br />
+            </div>
+            <div>
+              <label>Client Name:</label> 
+                <input type="text" id="client" placeholder="Client Name" value={{project.client}} {{isEditable}} />
+                <br />
+            </div>
+            <div>
+              <label>Budget:</label> 
+                <input type="number" id="budget" placeholder="Budget" value={{project.budget}} {{isEditable}} />
                 <br />
             </div>
             <div style="display:inline-block;">
@@ -52,19 +66,9 @@
             </div>
             <br>
             </div>
-            <div>
-              <label>Client Name:</label> 
-                <input type="text" id="client" placeholder="Client Name" value={{project.client}} />
-                <br />
-            </div>
-            <div>
-              <label>Budget:</label> 
-                <input type="number" id="budget" placeholder="Budget" value={{project.budget}} />
-                <br />
-            </div>
           </div>
         </div>
-
+      
         <div class="modal-footer">
           <input type="button" id="back" value="Cancel">
           <input type="reset" id="clear" value="Clear">
