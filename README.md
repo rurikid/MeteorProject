@@ -12,7 +12,6 @@ Tracking and Development of Student Web App
 > cd meteorproject
 > npm install --sweetalert
 > meteor
-
 ```
 
 **Important Reading**
@@ -30,7 +29,6 @@ Documentation | Node.js | Tutorials
 ```
 > To access unimplemented components
 > localhost:3000/templateName
-
 ```
 
 **TODO**
@@ -42,7 +40,6 @@ Documentation | Node.js | Tutorials
 > Improve Stylization (EASY)(Would Be Nice)
 > Implement update password/email for users (HARD)(Would Be Nice)
 > Implement sort for columns (HARD)(Would Be Nice)
-
 ```
 
 **Patch Notes**
@@ -68,7 +65,6 @@ Documentation | Node.js | Tutorials
 **21Apr2018** - msylveus
 ```
 > Removing employee from projects, timesheets and timechunks when employee is deleted
-
 ```
 
 **21Apr2018** - rurikid
