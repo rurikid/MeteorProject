@@ -25,12 +25,6 @@ Documentation | Node.js | Tutorials
 [MongoDB Tutorial](https://www.tutorialspoint.com/mongodb/index.htm) | | [Your Second Meteor Application](http://meteortips.com/second-meteor-tutorial/)
 [RegExr](https://regexr.com/) | | [Getting Started with Meteor](https://themeteorchef.com/tutorials/getting-started-with-meteor)
 
-**Notes**
-```
-> To access unimplemented components
-> localhost:3000/templateName
-```
-
 **TODO**
 --------------------------------------------
 ```
