@@ -36,6 +36,7 @@ Documentation | Node.js | Tutorials
 **TODO**
 --------------------------------------------
 ```
+> Improve Reports
 > Create Starting Database within startup/server/fixtures.js (EASY)(Required Use Case)
 > Evaluate Functionality (EASY)(Would Be Nice)
 > Improve Stylization (EASY)(Would Be Nice)
@@ -53,6 +54,7 @@ Documentation | Node.js | Tutorials
 > implemented collapsible tables for Timesheets/TeamTimesheets/Projects
 > fixed issue which allowed supervisors to edit project details
 > removed employee view for supervisors by popular demand
+> reverted Meteor.user() attribute in timechunk collection
 > removed deprecated files
 ```
 

@@ -180,10 +180,12 @@ Template.teamTimesheets.helpers({
 	},
 	isProjectToggled(ID) {
 		return Session.get(ID);
+		// return true;
 	},
 	isContributorToggled(contributorID, projectID) {
 		var ID = contributorID + projectID;
 	 	return Session.get(ID);
+	 	// return true;
 	},
 })
 
