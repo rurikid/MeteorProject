@@ -86,6 +86,23 @@ Template.newProject.helpers({
 				}
 		}
 	},
+	// returns all employees within project in selectedProject Session.
+	isEditEmployee: function(userID) {
+		var projectID = Session.get('selectedProjectID');
+
+		if (projectID !== null) {
+			var project = Projects.findOne(projectID);
+
+			for(index = 0; index < project.employees.length; index++)
+			{
+				if ((project.employees[index] === userID)) {
+					return "selected";
+				} 
+			}
+			return "";
+		}
+	},
+	
 	// returns appropriate text for edit/new
 	isNew: function() {
 		var projectID = Session.get('selectedProjectID');
