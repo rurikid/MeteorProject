@@ -30,7 +30,7 @@
               <table class="table" style="font-size: 12px;">
                 <thead style="background-color: #d3a944">
                     <tr>
-                      <th>{{timesheet}}</th>
+                      <th>{{getTableHeaderTitle timesheet}}</th>
                       <!-- <th>Total Hours: {{timeSheetTotalHours timesheet}}</th> -->
                     </tr>
                 </thead>
@@ -50,15 +50,15 @@
                             </tr>
                           </thead>
                           <tbody>
-                            {{#each timechunk in timechunks}}
+                            <!-- {{#each timechunk in timechunks}} -->
                               <tr>
                                 <!-- <td>{{getProjectName timechunk.project}}</td> -->
-                                <td>{{getEmployeeName timechunk timesheet}}</td>
+                                <td>{{getEmployeeName timesheet}}</td>
                                 <!-- <td>{{timechunk.startTime}}</td> -->
                                 <!-- <td>{{timechunk.endTime}}</td> -->
-                                <td>{{getTimechunkHours timechunk timesheet}}</td>
+                                <td>{{getTimechunkHours timesheet}}</td>
                               </tr>
-                            {{/each}}
+                            <!-- {{/each}} -->
                           </tbody>
                         </table>
                       </div>
