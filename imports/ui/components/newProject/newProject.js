@@ -72,9 +72,6 @@ Template.newProject.helpers({
 	// returns selected for appropriate supervisor
 	isEdit: function(userID) {
 		var projectID = Session.get('selectedProjectID');
-		
-		console.log(userID);
-		console.log(projectID);
 
 		if (projectID !== null) {
 			var project = Projects.findOne(projectID);
@@ -86,6 +83,23 @@ Template.newProject.helpers({
 				}
 		}
 	},
+	// returns all employees within project in selectedProject Session.
+	isEditEmployee: function(userID) {
+		var projectID = Session.get('selectedProjectID');
+
+		if (projectID !== null) {
+			var project = Projects.findOne(projectID);
+
+			for(index = 0; index < project.employees.length; index++)
+			{
+				if ((project.employees[index] === userID)) {
+					return "selected";
+				} 
+			}
+			return "";
+		}
+	},
+
 	// returns appropriate text for edit/new
 	isNew: function() {
 		var projectID = Session.get('selectedProjectID');
@@ -135,12 +149,15 @@ Template.newProject.events({
 		var projectID = Session.get('selectedProjectID');
 		//var employeesNodeList = document.getElementsByClassName("employee");
 		var employeeList = [];
-		var employeesNodeList = $('#selected_employees').val();
+		var employeesNodeList = $('#employee').val();
 
 		//push form values for "_id" into new employeeList string array
-		for (index = 0; index < employeesNodeList.length; index++)	{
-			employeeList.push(employeesNodeList[index]);
+		if (employeesNodeList !== null){
+			for (index = 0; index < employeesNodeList.length; index++)	{
+				employeeList.push(employeesNodeList[index]);
+			}
 		}
+		
 		
 		employeeList.push($('#supervisor').val());
 
@@ -222,38 +239,4 @@ Template.newProject.events({
 		// dismiss modal
 	  	Modal.hide('newProject');
 	},
-
-	// adds selected employees to submit box
-	'click .add_employee_field': function(event) {
-		event.preventDefault();
-
-		var userList = Meteor.users.find({}).fetch();
-		var selectedIDs = $('select#employee').val();
-
-		//each selected #employee in box1: find user and append new option into box2
-		$.each(selectedIDs, function(key, value){
-			var result = Meteor.users.findOne({"_id": value});
-			var fName = result.profile.firstName;
-			var lName = result.profile.lastName;
-			$('#selected_employees')
-				.append($("<option selected></option>")
-				.attr("value",value)
-				.text(fName + " " + lName));
-		})		
-	},
-
-	//
-	//    Incomplete
-	//
-	'click .remove_employee_field': function(event) {
-		event.preventDefault();
-
-		var selectedIDs = $('select#selected_employees').val();
-		
-
-		$.each(selectedIDs, function(key, value){
-			//console.log("you are removing user:" +value+"!");
-		})
-		
-	}
 });

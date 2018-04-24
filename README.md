@@ -38,6 +38,12 @@ Documentation | Node.js | Tutorials
 
 **Patch Notes**
 --------------------------------------------
+**24Apr2018** - mwight
+```
+> Edit project and new project now reduced to operating out of a single multibox - down from two.  
+> removed relevant functions and html elements in newproject.js/newproject.html.
+```
+
 **23Apr2018** - msylveus
 ```
 > Fix issues on Reports
