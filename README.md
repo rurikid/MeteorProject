@@ -28,7 +28,6 @@ Documentation | Node.js | Tutorials
 **TODO**
 --------------------------------------------
 ```
-> Improve Reports implementation
 > Improve add/remove project member functionality
 > Create Starting Database within startup/server/fixtures.js (EASY)(Required Use Case)
 > Evaluate Functionality (EASY)(Would Be Nice)
@@ -39,6 +38,11 @@ Documentation | Node.js | Tutorials
 
 **Patch Notes**
 --------------------------------------------
+**23Apr2018** - msylveus
+```
+> Fix issues on Reports
+> Changed design to only show employee name and total hours
+```
 **22Apr2018** - rurikid
 ```
 > moved employee deletion upkeep management to serverside
