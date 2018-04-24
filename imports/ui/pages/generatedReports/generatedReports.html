@@ -31,7 +31,7 @@
                 <thead style="background-color: #d3a944">
                     <tr>
                       <th>{{timesheet}}</th>
-                      <th>Total Hours: {{timeSheetTotalHours timesheet}}</th>
+                      <!-- <th>Total Hours: {{timeSheetTotalHours timesheet}}</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -42,21 +42,21 @@
                         <table class="table" style="font-size: 12px;">
                           <thead style="background-color: #d3a944">
                             <tr>
-                              <th>Project</th>
+                              <!-- <th>Project</th> -->
                               <th>Employee Name</th>
-                              <th>Start Time</th>
-                              <th>End Time</th>
+                              <!-- <th>Start Time</th> -->
+                              <!-- <th>End Time</th> -->
                               <th>Hours</th>
                             </tr>
                           </thead>
                           <tbody>
-                            {{#each timechunk in timechunks timesheet}}
+                            {{#each timechunk in timechunks}}
                               <tr>
-                                <td>{{getProjectName timechunk.project}}</td>
-                                <td>{{getEmployeeName timechunk}}</td>
-                                <td>{{timechunk.startTime}}</td>
-                                <td>{{timechunk.endTime}}</td>
-                                <td>{{getTimechunkHours timechunk.startTime timechunk.endTime}}</td>
+                                <!-- <td>{{getProjectName timechunk.project}}</td> -->
+                                <td>{{getEmployeeName timechunk timesheet}}</td>
+                                <!-- <td>{{timechunk.startTime}}</td> -->
+                                <!-- <td>{{timechunk.endTime}}</td> -->
+                                <td>{{getTimechunkHours timechunk timesheet}}</td>
                               </tr>
                             {{/each}}
                           </tbody>
