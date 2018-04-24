@@ -72,9 +72,6 @@ Template.newProject.helpers({
 	// returns selected for appropriate supervisor
 	isEdit: function(userID) {
 		var projectID = Session.get('selectedProjectID');
-		
-		console.log(userID);
-		console.log(projectID);
 
 		if (projectID !== null) {
 			var project = Projects.findOne(projectID);
@@ -102,7 +99,7 @@ Template.newProject.helpers({
 			return "";
 		}
 	},
-	
+
 	// returns appropriate text for edit/new
 	isNew: function() {
 		var projectID = Session.get('selectedProjectID');
@@ -152,12 +149,15 @@ Template.newProject.events({
 		var projectID = Session.get('selectedProjectID');
 		//var employeesNodeList = document.getElementsByClassName("employee");
 		var employeeList = [];
-		var employeesNodeList = $('#selected_employees').val();
+		var employeesNodeList = $('#employee').val();
 
 		//push form values for "_id" into new employeeList string array
-		for (index = 0; index < employeesNodeList.length; index++)	{
-			employeeList.push(employeesNodeList[index]);
+		if (employeesNodeList !== null){
+			for (index = 0; index < employeesNodeList.length; index++)	{
+				employeeList.push(employeesNodeList[index]);
+			}
 		}
+		
 		
 		employeeList.push($('#supervisor').val());
 
