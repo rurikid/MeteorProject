@@ -13,8 +13,8 @@
     <div id="daily-report-header">
         <!-- align center may not work for html5 -->
         <h1 style="color:white" align="center"> {{getTimePeriod}}</h1>
-        <h3 style="color:white" align="center"> {{getRangeTimePeriod}}</h3>
-        <h4 style="color:white" align="center"> Prepared By: {{getUsersName}}</h4>
+        <h3 style="color:white" align="center"> Project: {{getProjectName}}</h3>
+        <h3 style="color:white" align="center"> {{getRangeTimePeriod}}</h3>  
     </div>
 
     {{#if showNodata}}
@@ -30,8 +30,7 @@
               <table class="table" style="font-size: 12px;">
                 <thead style="background-color: #d3a944">
                     <tr>
-                      <th>{{getTableHeaderTitle timesheet}}</th>
-                      <!-- <th>Total Hours: {{timeSheetTotalHours timesheet}}</th> -->
+                      <th>{{timesheet}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,24 +40,18 @@
                       <div class="table-responsive">
                         <table class="table" style="font-size: 12px;">
                           <thead style="background-color: #d3a944">
-                            <tr>
-                              <!-- <th>Project</th> -->
-                              <th>Employee Name</th>
-                              <!-- <th>Start Time</th> -->
-                              <!-- <th>End Time</th> -->
-                              <th>Hours</th>
-                            </tr>
+                                <tr>
+                                  <th>Employee Name</th>
+                                  <th>Hours</th>
+                                </tr>
                           </thead>
                           <tbody>
-                            <!-- {{#each timechunk in timechunks}} -->
+                              {{#each timechunk in timechunks timesheet}}
                               <tr>
-                                <!-- <td>{{getProjectName timechunk.project}}</td> -->
-                                <td>{{getEmployeeName timesheet}}</td>
-                                <!-- <td>{{timechunk.startTime}}</td> -->
-                                <!-- <td>{{timechunk.endTime}}</td> -->
-                                <td>{{getTimechunkHours timesheet}}</td>
+                                  <td>{{timechunk.name}}</td>
+                                  <td>{{timechunk.totalHours}}</td>
                               </tr>
-                            <!-- {{/each}} -->
+                            {{/each}}
                           </tbody>
                         </table>
                       </div>

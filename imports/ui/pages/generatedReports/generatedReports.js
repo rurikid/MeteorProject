@@ -34,8 +34,6 @@ function getTotalHoursForTimeChunk(timeChunk) {
 }//end of getTotalHoursForTimeChunk
 
 Template.generatedReports.onCreated( function () {
-  console.log("Report Type", FlowRouter.getParam("reportType"));
-  console.log("ProjectId", FlowRouter.getParam("projectId"));
   this.subscribe('projects.all');
   this.subscribe('users.all');
   this.subscribe('timesheets.all');
@@ -46,7 +44,7 @@ Template.generatedReports.onCreated( function () {
 Template.generatedReports.onDestroyed( function() {
   //Resetting to empty
   timeSheetKeyArray = [];
- //timeSheetJson = {};
+  timeChunkObject = {};
   timeChunkKeyArray = [];
   Session.set("showNoData", false);
 });
@@ -115,9 +113,7 @@ Template.reportTimesheets.helpers({
     
     //consolidatedArray.push.apply(fectchResult);
     fectchResult.forEach(function (entry) {
-        console.log("****inside for each****");
         var timechunks = Timechunks.find({$and:[{'timesheet': entry._id}, {'project': projectId}]}).fetch();
-      
         if(FlowRouter.getParam("reportType") == "daily") {
           dateString = getStringDate(entry.date, 'dddd, MMMM Do YYYY');
 
@@ -132,15 +128,31 @@ Template.reportTimesheets.helpers({
         }
         
         timechunks.forEach(function (timechunck) {
-          var key = timechunck.userInfo.userId + "-" + dateString;
+          var key =  dateString;
+          var userId = timechunck.userInfo["userId"];
+          console.log("Printng userId----*****", userId);
           if(timeChunkObject[key] == null) {
+            
             var timeChunkData = {};
             timeChunkData["name"] = (timechunck.userInfo.firstName + " " + timechunck.userInfo.lastName);
             timeChunkData["totalHours"] = getTotalHoursForTimeChunk(timechunck);
             timeChunkData["date"] = dateString;
-            timeChunkObject[key] =  timeChunkData;
-            
+
+            var userObj = {};
+            userObj[userId] = timeChunkData;
+
+            /*
+              monday: {
+                userId: {}
+                userId2: {}
+                userId3 : {}
+              }
+
+            */
+            timeChunkObject[key] =  userObj;
             timeChunkKeyArray.push(key);
+            //console.log("Adding to array key", timeChunkObject);
+              
           } else {
             /*
               we have a json that looks like this. 
@@ -152,63 +164,50 @@ Template.reportTimesheets.helpers({
               }
             */
             
-            //get the value from timeChunkObject
-            var data = timeChunkObject[key]; 
+           if(timeChunkObject[dateString][userId] == null) {
             
-            //get the totalhour from the value(data)
-            var totalHours = data["totalHours"];
-            
-            //aggregate the existing hour with the new time chunk hour
-            var concatHours = totalHours + getTotalHoursForTimeChunk(timechunck);
-            
-            // update the value object totalhours with aggreagated value
-            data["totalHours"] = concatHours;
+             console.log("printing else oj",timeChunkObject[dateString]);
+             
 
-            //Set the upated value object back to timechunkObject
-            timeChunkObject[key] = data;
+              console.log("tcObj before", timeChunkObject);
+              var timeChunkData = {};
+              timeChunkData["name"] = (timechunck.userInfo.firstName + " " + timechunck.userInfo.lastName);
+              timeChunkData["totalHours"] = getTotalHoursForTimeChunk(timechunck);
+              timeChunkData["date"] = dateString;
+
+              var data = timeChunkObject[dateString];
+              data[userId] = timeChunkData;
+              timeChunkObject[dateString] = data;
+             
+
+           } else {
+            console.log("tcObj", timeChunkObject);
+
+              //get the value from timeChunkObject
+              var data = timeChunkObject[key][userId]; 
+              
+              // if(data["userId"] === userId) {
+
+              // } else {
+
+              // }
+              //get the totalhour from the value(data)
+              var totalHours = data["totalHours"];
+              
+              //aggregate the existing hour with the new time chunk hour
+              var concatHours = totalHours + getTotalHoursForTimeChunk(timechunck);
+              
+              // update the value object totalhours with aggreagated value
+              data["totalHours"] = concatHours;
+
+              //Set the upated value object back to timechunkObject
+              timeChunkObject[key][userId] = data;
+           }
+
+           console.log("PRINTING DATA", timeChunkObject);
+            
           }
         });
-
-         
-
-        // if (Object.keys(timeChunkObject).length > 0) {
-    
-        //   if (FlowRouter.getParam("reportType") == "daily") {//Check if daily
-        //     //Adding things to timeSheetJson, with date as key, and saving timechuncks and total hours
-        //     if(timeSheetJson[dateString] == null) {
-        //       timeSheetKeyArray.push(dateString);
-        //       console.log("Adding to timesheet array", timeSheetKeyArray);
-        //       timeSheetJson[dateString] = valueJson;
-        //     }     
-        //   } else if(FlowRouter.getParam("reportType") == "weekly" || FlowRouter.getParam("reportType") == "date_range") {//Check if weekly
-        //       var curr = new Date(entry.date);
-        //       var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-        //       var last = first + 6; // last day is the first day + 6
-      
-        //       //getting first day and last day of week for a given date and saving it as key in dictionary
-        //       var dateString = getStringDate(new Date(curr.setDate(first)), 'MMMM Do YYYY') + " - " +  getStringDate(new Date(curr.setDate(last)), 'MMMM Do YYYY')
-
-        //       //checking to see if JSON already has the date string key
-        //       if(timeSheetJson[dateString] == null) { //adding entry to json if key doesn't exist
-        //         var valueJson = {};
-        //         valueJson["timeChunks"] = timeChunkObject;
-        //         timeSheetKeyArray.push(dateString);
-        //         timeSheetJson[dateString] = valueJson;
-        //     } 
-        //   } else if(FlowRouter.getParam("reportType") == "monthly") {//Check if monthly
-        //     var dateString = getStringDate(entry.date, 'MMMM YYYY');
-          
-        //     if(timeSheetJson[dateString] == null) {
-        //       var valueJson = {};
-        //       valueJson["timeChunks"] = timeChunkObject;
-
-        //       timeSheetKeyArray.push(dateString);
-        //       timeSheetJson[dateString] = valueJson;
-              
-        //     } 
-        //   }//end of time period if-else statements
-
-        // }//end of timeChunksArray length check if statement
 
     });//end of fetchResult forEach loop
     
@@ -229,8 +228,10 @@ Template.reportTimesheets.helpers({
 
   // finds and retrieves project name
   getProjectName: function(project) {
+    var projectId = FlowRouter.getParam("projectId");
+
     // search for project
-    var result = Projects.findOne({"_id": project});
+    var result = Projects.findOne({"_id": projectId});
 
     // known as guarding (are we finding anything in the query)
     var name = result && result.name;
@@ -238,9 +239,22 @@ Template.reportTimesheets.helpers({
     return result.name;
   },//end of getProjectName
  
+  timechunks: function(key) {
+    
+    var valueArray = [];
+    for (var objKey in timeChunkObject[key]) {
+      //console.log("objKey",timeChunkObject[key][objKey]);
+      //if (timeChunkObject.hasOwnProperty(objKey)) {
+        valueArray.push(timeChunkObject[key][objKey]);
+     // }
+    }
+
+    console.log("printing timeChunkObject", valueArray);
+    return valueArray;
+  },
+
   getTableHeaderTitle: function(key) {
-    console.log("printing key", timeChunkKeyArray);
-    console.log("printing timeChunkObject", timeChunkObject);
+    
     return timeChunkObject[key].date;
   },
 
