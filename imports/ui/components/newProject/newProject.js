@@ -239,38 +239,4 @@ Template.newProject.events({
 		// dismiss modal
 	  	Modal.hide('newProject');
 	},
-
-	// adds selected employees to submit box
-	'click .add_employee_field': function(event) {
-		event.preventDefault();
-
-		var userList = Meteor.users.find({}).fetch();
-		var selectedIDs = $('select#employee').val();
-
-		//each selected #employee in box1: find user and append new option into box2
-		$.each(selectedIDs, function(key, value){
-			var result = Meteor.users.findOne({"_id": value});
-			var fName = result.profile.firstName;
-			var lName = result.profile.lastName;
-			$('#selected_employees')
-				.append($("<option selected></option>")
-				.attr("value",value)
-				.text(fName + " " + lName));
-		})		
-	},
-
-	//
-	//    Incomplete
-	//
-	'click .remove_employee_field': function(event) {
-		event.preventDefault();
-
-		var selectedIDs = $('select#selected_employees').val();
-		
-
-		$.each(selectedIDs, function(key, value){
-			//console.log("you are removing user:" +value+"!");
-		})
-		
-	}
 });
