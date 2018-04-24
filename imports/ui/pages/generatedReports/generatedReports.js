@@ -39,28 +39,13 @@ function getTotalHoursForTimeChunks(timeChunksArray) {
   return hours;
 }//end of getTotalHoursForTimeChunks
 
-function reloadPage() {
-  var fromDate = FlowRouter.getParam("from");
-  var toDate = FlowRouter.getParam("to");
-  var projectId = FlowRouter.getParam("projectId");
-  var reportType = FlowRouter.getParam("reportType");
-
-  if (reportType == "date_range") {
-    FlowRouter.go('/generatedReports/' + reportType + "/" + projectId + "/" + fromDate + "/" + toDate);
-  } else {
-    FlowRouter.go('/generatedReports/' + Session.get("reportType") + "/" + Session.get("projectId"));
-  }
-  
-}
-
 Template.generatedReports.onCreated( function () {
   console.log("Report Type", FlowRouter.getParam("reportType"));
   console.log("ProjectId", FlowRouter.getParam("projectId"));
-  Meteor.subscribe('projects.all');
-  Meteor.subscribe('users.all');
-  Meteor.subscribe('timesheets.all');
-  Meteor.subscribe('timechunks.all');
-  Session.set("pageReloaded", false);
+  this.subscribe('projects.all');
+  this.subscribe('users.all');
+  this.subscribe('timesheets.all');
+  this.subscribe('timechunks.all');
 
 });
 
@@ -69,16 +54,8 @@ Template.generatedReports.onDestroyed( function() {
   timeSheetKeyArray = [];
   timeSheetJson = {};
   Session.set("showNoData", false);
-  Session.set("pageReloaded", false);
 });
 
-// Template.generatedReports.helpers ({
-//   showNodata() {
-//     var nodataValue = Session.get("showNoData")
-//     console.log("Printing DataVAlue", nodataValue);
-//     return nodataValue;
-//   },
-// });
 
 Template.reportTimesheets.helpers({ 
 
@@ -241,20 +218,10 @@ Template.reportTimesheets.helpers({
 
     });//end of fetchResult forEach loop
     
-    console.log("Showing No Data", Session.get("showNoData"));
-    console.log("Page Reloaded", Session.get("pageReloaded"));
-    var reloaded = Session.get("pageReloaded");
-    if(reloaded === false) {
-      console.log("INSIDE IF ****************", timeSheetKeyArray.length);
       var showNodataValue = timeSheetKeyArray.length === 0;
       Session.set("showNoData", showNodataValue);
-      console.log("Showing No Data", Session.get("showNoData"));
-      Session.set("pageReloaded", true);
-      reloadPage();
-    }
 
-    console.log("Showing No Data After", Session.get("showNoData"));
-    console.log("printing array length",timeSheetKeyArray.length);
+
     return timeSheetKeyArray;
 
   },//end of timesheets()

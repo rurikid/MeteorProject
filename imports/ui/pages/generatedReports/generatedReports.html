@@ -1,7 +1,8 @@
 <template name="generatedReports">
   <div>
-
+    {{#if Template.subscriptionsReady}}
       {{> reportTimesheets}}
+    {{/if}}
 
   </div>
 </template>
