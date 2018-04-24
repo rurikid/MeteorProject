@@ -231,7 +231,7 @@ Template.newTimesheet.events({
 			endTime: $('#endTime').val(),
 			userInfo: {
 				firstName: Meteor.user().profile.firstName,
-				lastName: Meteor.user().lastName,
+				lastName: Meteor.user().profile.lastName,
 				userId: Meteor.user()._id
 			}
 		}
