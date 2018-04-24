@@ -3,10 +3,10 @@ import { Timesheets } from '/imports/api/timesheets/timesheets.js';
 import { Timechunks } from '/imports/api/timechunks/timechunks.js';
 import { Meteor } from 'meteor/meteor';
 import '/imports/api/helpers/modal.js';
-import { Projects } from '../../../api/projects/projects.js'
-
-import  '../../../ui/pages/reports/reports.js'
-import  '../../../ui/pages/timesheet/timesheets.js'
+//import { Projects } from '../../../api/projects/projects.js';
+import { Projects } from '/imports/api/projects/projects.js';
+import  '../../../ui/pages/reports/reports.js';
+import  '../../../ui/pages/timesheet/timesheets.js';
 
 import './generatedReports.html';
 
@@ -140,7 +140,7 @@ Template.reportTimesheets.helpers({
     
     
     var fectchResult = result.fetch();
-    
+    console.log("Printing fetch result", result);
 
     //consolidatedArray.push.apply(fectchResult);
     fectchResult.forEach(function (entry) {
@@ -163,10 +163,11 @@ Template.reportTimesheets.helpers({
             var valueJson = {};
             valueJson["timeChunks"] = timeChunksArray;
             valueJson["totalHours"] = totalHours;
-    
+            console.log("printing Date String", dateString);
             //Adding things to timeSheetJson, with date as key, and saving timechuncks and total hours
             if(timeSheetJson[dateString] == null) {
               timeSheetKeyArray.push(dateString);
+              console.log("Adding to timesheet array", timeSheetKeyArray);
               timeSheetJson[dateString] = valueJson;
             } else { //updating the value for that key if it exist
 
@@ -253,7 +254,7 @@ Template.reportTimesheets.helpers({
     }
 
     console.log("Showing No Data After", Session.get("showNoData"));
-
+    console.log("printing array length",timeSheetKeyArray.length);
     return timeSheetKeyArray;
 
   },//end of timesheets()
