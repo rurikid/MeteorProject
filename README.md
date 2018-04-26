@@ -16,7 +16,7 @@ Contributors: rurikid, msylveus, mwight20
 
 **Notice**
 --------------------------------------------
-This application is not production ready. This may or not be 
+This application is not production ready. This may or not be fixed in the future.
 
 **Important Reading**
 --------------------------------------------
