@@ -1,5 +1,6 @@
 # MeteorProject
 Graduate group project implementing a time management system using the Meteor webframework.
+
 Contributors: rurikid, msylveus, mwight20
 
 **Installation**
