@@ -1,5 +1,5 @@
 # MeteorProject
-Graduate group project implementing a time management system using the Meteor webframework.
+Graduate group project implementing a time management system using the Meteor web framework.
 
 Contributors: rurikid, msylveus, mwight20
 
