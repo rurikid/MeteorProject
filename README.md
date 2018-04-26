@@ -1,7 +1,8 @@
-# MeteorProject
+# TMS - Meteor
 Graduate group project implementing a time management system using the Meteor web framework.
 
-Contributors: rurikid, msylveus, mwight20
+**[Live Preview](http://www.rurikid.com/meteor.html)**
+--------------------------------------------
 
 **Installation**
 --------------------------------------------
@@ -48,3 +49,6 @@ Documentation | Node.js | Tutorials
 
 **Contact:**
 rurikid@tutanota.com
+
+**Contributors:** rurikid, msylveus, mwight20
+
