@@ -21,10 +21,11 @@
                 </strong>
               </span>
               <!-- Timeframe Select Buttons -->
+
               {{#if isDateRange}}
 
               {{else}}
-                <button class="btn btn-dark, previous" style="margin-left:3%;" id="previous">&lt;-</button>
+                <button style="margin-left: 3%;" class="btn btn-dark, previous" id="previous">&lt;-</button>
               {{/if}}
                 <select class="btn btn-dark" id="selectTimeframe" style="font-size: 20px">
                   <option value="week">Weekly</option>
@@ -37,15 +38,13 @@
               {{else}}
                 <button class="btn btn-dark, next" id="nextWeek">-&gt;</button>
               {{/if}}
-              <!-- Generate Report Button 
-                To be implemented after project presentation.
-
-              <a class="generateReport" href="#">
-                <button class="btn btn-primary" id="generateReport" type="button" style="margin-left: 3%; color: white; background-color: #d3a944; font-size: 22px; border: none;">
-                  Generate Report
-                </button>
-              </a>
-              -->
+              <span style="float: right; margin-right: 10%;">
+                <a class="generateReport" href="#">
+                  <button class="btn btn-primary" id="generateReport" type="button" style="color: white; background-color: #d3a944; font-size: 22px; border: none;">
+                    Generate Report
+                  </button>
+                </a>
+              </span>
             </div>
           </div>
         </div>

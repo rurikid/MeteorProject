@@ -44,10 +44,6 @@ Template.nav.events({
     event.preventDefault();
     FlowRouter.go('/teamTimesheets');
   },
-  'click .reports': function(event){
-    event.preventDefault();
-    FlowRouter.go('/reports');
-  },
   'click .employees': function(event){
     event.preventDefault();
     FlowRouter.go('/employees');

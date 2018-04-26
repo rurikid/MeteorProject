@@ -223,17 +223,11 @@ Template.newTimesheet.events({
 			date: $('#date').val(),
 		}
 
-		var userInfo
 		// build timechunk
 		var timechunk = {
 			project: $('#project').val(),
 			startTime: $('#startTime').val(),
 			endTime: $('#endTime').val(),
-			userInfo: {
-				firstName: Meteor.user().profile.firstName,
-				lastName: Meteor.user().profile.lastName,
-				userId: Meteor.user()._id
-			}
 		}
 
 		// validate timechunk 

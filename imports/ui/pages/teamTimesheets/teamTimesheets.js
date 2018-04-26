@@ -26,25 +26,6 @@ function timechunkHours(startTime, endTime) {
 Template.teamTimesheets.helpers({
 	// returns all projects
 	projects() {
-    // var targetRange = Session.get('selectedTargetRange');
-    // var timesheets = Timesheets.find({});
-    // var projects = new Set([]);
-    // var result = [];
-
-    // timesheets.forEach(function(timesheet) {
-    // 	if (moment(timesheet.date) >= moment(targetRange.from) &&
-    // 		  moment(timesheet.date) <= moment(targetRange.to)) {
-    // 		var timechunks = Timechunks.find({'timesheet': timesheet._id});
-    // 		timechunks.forEach(function(timechunk) {
-    // 			projects.add(timechunk.project);
-    // 		});
-    // 	}
-    // });
-
-    // projects.forEach(function(project) {
-    // 	result.push(Projects.findOne({'_id': project}));
-    // });
-
 		return Projects.find({});
 	},
 	// returns all timechunks by contributors in daterange

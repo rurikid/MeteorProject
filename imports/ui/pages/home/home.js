@@ -16,8 +16,6 @@ import '../timesheet/timesheets.js';
 import '../profile/profile.js';
 import '../projects/projects.js';
 import '../employees/employees.js';
-import '../reports/reports.js';
-import '../generatedReports/generatedReports.js';
 
 Template.home.helpers({
   // finds and retrieves supervisor name
@@ -59,10 +57,6 @@ Template.home.events({
   'click .teamTimesheets': function(event){
     event.preventDefault();
     FlowRouter.go('/teamTimesheets');
-  },
-  'click .reports': function(event){
-    event.preventDefault();
-    FlowRouter.go('/reports');
   },
   'click .employees': function(event){
     event.preventDefault();

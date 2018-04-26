@@ -92,32 +92,6 @@ FlowRouter.route('/newProject', {
   },
 });
 
-FlowRouter.route('/reports', {
-  name: 'reports',
-  action: function (params, queryParams) {
-    BlazeLayout.render('mainLayout', { main: 'reports' });
-  },
-});
-
-//Post report selections
-FlowRouter.route('/generatedReports/:reportType/:projectId', {
-  name: 'generatedReports',
-  action() {
-    BlazeLayout.render('mainLayout', { 
-      main: 'generatedReports', 
-    });
-  },
-});
-
-FlowRouter.route('/generatedReports/:reportType/:projectId/:from/:to', {
-  name: 'generatedReports',
-  action() {
-    BlazeLayout.render('mainLayout', { 
-      main: 'generatedReports', 
-    });
-  },
-});
-
 FlowRouter.route('/team', {
   name: 'team',
   action() {
